@@ -1,0 +1,31 @@
+:root {
+  --button-main: #E8511C;
+}
+
+.input-container:has(.icon-button) {
+  border-radius: 4px;
+  cursor: pointer !important;
+}
+
+.input-container .icon-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+  width: 90px;
+  height: 45px;
+}
+
+.input-container .icon-button.main {
+  background-color: var(--button-main);
+  color: var(--white);
+}
+
+.input-container .icon-button .svg-inline--fa {
+  font-size: 20px;
+  margin-left: 10px;
+}
+
+.input-container .icon-button.main .svg-inline--fa {
+  color: var(--white);
+}

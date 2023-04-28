@@ -1,0 +1,54 @@
+.header-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    /* padding: 0px 100px; */
+    height: fit-content;
+    padding-top: 30px;
+    width: 100%;
+}
+
+.header-container.home {
+    padding-bottom: 15px;
+}
+
+.header-container.home .logo-container img {
+    filter: brightness(1);
+}
+
+.header-container .logo-container img {
+    filter: brightness(.2);
+}
+
+.header-container.home .header-button {
+    color: white;
+}
+
+.header-container.home .logo-container p {
+    color: rgb(194, 194, 194);
+}
+
+.header-container .left-nav {
+    display: flex;
+    align-items: center;
+    margin-right: 70px;
+}
+
+.header-container .right-nav {
+    display: flex;
+    align-items: center;
+    margin-left: 70px;
+}
+
+.header-container .left-nav .logo-container {
+    margin-left: 20px;
+}
+
+.header-container .fa-pizza-slice {
+    margin-left: -5px;
+    margin-right: 1px;
+}

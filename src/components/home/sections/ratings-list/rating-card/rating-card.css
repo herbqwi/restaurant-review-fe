@@ -1,0 +1,101 @@
+.rating-card-container {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  background-color: white;
+  border-radius: 15px;
+  margin-left: 20px;
+  transition: .3s all;
+  cursor: default;
+}
+
+.rating-card-container:hover {
+  scale: 1.05;
+}
+
+.rating-card-container:nth-child(5),
+.rating-card-container:nth-child(2) {
+  transform: rotate(2deg);
+}
+
+.rating-card-container .rating-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 212px;
+  padding: 20px;
+}
+
+.rating-card-container .rating-card .header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.rating-card-container .rating-card .header .profile-img {
+  font-size: 45px;
+  transition: .3s all;
+}
+
+.rating-card-container .rating-card .header .profile-img:hover {
+  scale: 1.06;
+  rotate: -3deg;
+}
+
+.rating-card-container .rating-card .header>div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 2px;
+  margin-top: 2px;
+}
+
+.rating-card-container .rating-card .header .title {
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.rating-card-container .rating-card .header .subtitle {
+  position: relative;
+  top: -7px;
+  font-size: 13px;
+  color: gray;
+  text-decoration: underline;
+}
+
+.rating-card-container .rating-card .content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+}
+
+.rating-card-container .rating-card .content .title {
+  font-size: 15px;
+  color: rgb(81, 81, 81);
+  font-weight: 600;
+}
+
+.rating-card-container .rating-card .content .subtitle {
+  font-size: 13px;
+  color: rgb(75, 75, 75);
+  margin-top: 7px;
+}
+
+.rating-card-container .rating-card .footer .stars-list {
+  margin-top: 10px;
+}
+
+.rating-card-container .rating-card .footer .stars-list svg {
+  font-size: 27px;
+}
+
+.rating-card-container .rating-card .footer .stars-list>* {
+  transition: .3s all;
+}
+
+.rating-card-container .rating-card .footer .stars-list>*:hover {
+  color: gold;
+}

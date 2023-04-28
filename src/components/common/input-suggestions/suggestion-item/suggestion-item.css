@@ -1,0 +1,19 @@
+.suggestion-item {
+  display: flex;
+  align-items: center;
+  width: 98%;
+  border-radius: 4px;
+  padding: 4px 0px;
+  transition: .3s background-color;
+  cursor: pointer;
+}
+
+.suggestion-item:hover {
+  background-color: rgba(237, 150, 43, 0.2);
+}
+
+.suggestion-item .svg-inline--fa {
+  font-size: 18px;
+  margin-right: 10px;
+  margin-left: 7px;
+}

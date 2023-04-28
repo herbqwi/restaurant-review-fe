@@ -1,0 +1,100 @@
+.home-hero {
+  position: relative;
+  width: 100%;
+  height: 620px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: black;
+  background-image: url('../../../assets/hero-image.png');
+  background-size: cover;
+  transition: all 1s ease-in-out;
+}
+
+.home-hero .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: green;
+  opacity: 0;
+  transition: opacity .9s ease-in-out;
+}
+
+.home-hero.restaurants {
+  height: 320px;
+}
+
+.home-hero .heading {
+  transition: .9s all;
+}
+
+.home-hero.restaurants .heading {
+  opacity: 0;
+  transform: translateY(-80px);
+}
+
+.home-hero .content {
+  transition: .9s all;
+  transform: translateY(0px);
+}
+
+.home-hero.restaurants .content {
+  transform: translateY(-80px);
+}
+
+.home-hero .overlay {
+  background: linear-gradient(to bottom, #ffbc70 0%, #FFFBF6 100%);
+  opacity: 0;
+}
+
+.home-hero.restaurants .overlay {
+  opacity: 1;
+}
+
+.home-hero>* {
+  position: relative;
+  bottom: 25px;
+}
+
+.home-hero .heading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: var(--white);
+  margin-bottom: 28px;
+}
+
+.home-hero .heading img {
+  width: 150px;
+  margin-bottom: 25px;
+  filter: brightness(1.2);
+  filter: drop-shadow(3px 3px 4px rgba(0, 0, 0, 0.15));
+}
+
+.home-hero .heading p {
+  text-shadow: 3px 3px 4px rgba(0, 0, 0, 0.15);
+}
+
+.home-hero .content {
+  display: flex;
+}
+
+.home-hero .content>* {
+  margin: 0px 4px;
+}
+
+@keyframes loadOverlay {
+  0% {
+    background: #ffbc70;
+    opacity: 1;
+  }
+
+  100% {
+    background: linear-gradient(to bottom, #ffbc70 0%, #FFFBF6 100%);
+    opacity: 1;
+  }
+}
