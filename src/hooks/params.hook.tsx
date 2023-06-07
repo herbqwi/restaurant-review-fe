@@ -1,28 +1,33 @@
+import { useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
 
-
-const useParams = (key: string) => {
+const useParams = () => {
     const [params, setParams] = useSearchParams();
 
-    const setParam = (value: string) => {
-        if (value == '') {
-            params.delete(key)
-        } else {
-            params.set(key, value)
+    const myParams = useMemo(() => {
+        const searchTermsFromURL = params.get('searchTerms') || "";
+        const orderByFromURL = params.getAll('orderby') || [];
+        return { searchTermsFromURL, orderByFromURL };
+    }, [params]);
+
+    /**
+     * Set query string parameter.
+     * @param {string} name Parameter name.
+     * @param {string | string[] } value Parameter value.
+     */
+    const setParam = (name: string, value: string[]) => {
+        const newParams = new URLSearchParams(params);
+        newParams.delete(name);
+        if (Array.isArray(value)) {
+            value.forEach(item => newParams.append(name, item));
+        } else if (value) {
+            newParams.set(name, value);
         }
-        setParams(params);
+        setParams(newParams);
     };
 
-    const getParam = () => {
-        const value = params.get(key);
-        return value || ''
-    }
+    return { myParams, setParam };
 
-    const compare = (str?: string) => {
-        return str?.toLowerCase().includes(getParam().toLowerCase());
-    }
-
-    return [getParam(), setParam, compare] as const
-}
+};
 
 export default useParams;

@@ -20,12 +20,11 @@
 
 .restaurants-list .check-order {
   width: 100px;
-  background-color: red;
 }
 
 .restaurants-list .sort .order {
   display: inline-flex;
-  padding: 10px 14px;
+  padding: 5px 10px;
   border: 1px solid var(--outer-border);
   cursor: pointer;
   background-color: white;
