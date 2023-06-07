@@ -1,13 +1,31 @@
+import {  useState } from "react";
 import "./review-card.css";
-import { Star, Clock, CarSimple, Truck, ChatTeardropText } from "@phosphor-icons/react";
+import { Star, ChatTeardropText } from "@phosphor-icons/react";
+import { RestaurantData } from "../../../add-restaurant-form/add-restaurant-form";
 const ReviewCard = () => {
+  const [data, setRestaurant] = useState<RestaurantData>({
+    Name: 'مطهم زوار',
+    Address: 'الخليل',
+    Phone: '0599663037',
+    Description: 'مطعم مختص بالأكلات الشعبية ',
+    ResType: "شعبي",
+    Images: [],
+    Service: [{ ServiceName: "مغلق الان", ServiceIcon: "https://www.shutterstock.com/image-vector/wall-clock-displaying-900-oclock-260nw-1640714170.jpg"},
+      { ServiceName: "موقف للسيارات", ServiceIcon: "https://www.shutterstock.com/image-vector/wall-clock-displaying-900-oclock-260nw-1640714170.jpg" },
+      { ServiceName: "خدمة التوصيل", ServiceIcon: "https://www.shutterstock.com/image-vector/wall-clock-displaying-900-oclock-260nw-1640714170.jpg" }
+  ],
+    Location: 'الخليل',
+    clicked: false,
+    ImagePreviews: []
+  });
+
   return (
     <div className="card">
       <img src="https://media.istockphoto.com/id/1018141890/photo/two-empty-wine-glasses-sitting-in-a-restaurant-on-a-warm-sunny-afternoon.jpg?s=612x612&w=0&k=20&c=OccJv1oKWSTDqJ6Irw7iW1NEbL0muU2ylqP3EOhOyEg=" alt="" className="res-image" />
       <div className="content">
         <div className="name-rate">
           <div className="name">
-            <h1>مطعم زوار</h1>
+            <h1>{data.Name}</h1>
             <p>2.15كم</p>
           </div>
           <div className="rate">
@@ -23,22 +41,15 @@ const ReviewCard = () => {
         </div>
         <div className="border"></div>
         <div className="status">
-          <div className="case">
-            <Clock size={24} color="#050505" weight="fill" />
-            <span>مغلق الان</span>
-          </div>
-          <div className="case">
-            <CarSimple size={24} color="#050505" weight="fill" />
-            <span>موقف للسيارات</span>
-          </div>
-          <div className="case">
-            <Truck size={24} color="#050505" weight="fill" />
-            <span>خدمة التوصيل</span>
-          </div>
-          <div className="case">
-            <Truck size={24} color="#050505" weight="fill" />
-            <span>خدمة التوصيل</span>
-          </div>
+          {
+            data.Service.map((ser)=>{
+             return <div className="case">
+              <img src={ser.ServiceIcon} width={50} height={50}/>
+                <span>{ser.ServiceName}</span>
+              </div>
+            })
+          }
+         
         </div>
         <div className="feedback">
           <ChatTeardropText size={24} color="#050505" weight="thin" />
