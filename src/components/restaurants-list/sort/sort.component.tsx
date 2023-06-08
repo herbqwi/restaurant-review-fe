@@ -4,8 +4,7 @@ import './sort.css';
 import useParams from '../../../hooks/params.hook';
 import CheckBox from '../../checkbox/checkbox.component';
 const Sort = () => {
-  const { myParams,setParam } = useParams();  
-  console.log("gggg");
+  const { myParams, setParam } = useParams();
 
 
   return (
@@ -20,13 +19,9 @@ const Sort = () => {
                   key={order}
                   label={order}
                   value={order}
-                  checked={myParams.orderByFromURL.includes(order)}
-                  onChange={(e:any) => {
-                    const updated = e.target.checked
-                      ? [...myParams.orderByFromURL, order]
-                      : myParams.orderByFromURL.filter(orders => orders !== order);
-                    console.log("gggg",updated);
-                    setParam('order',updated);
+                  checked={myParams.orderByFromURL == order}
+                  onChange={(e: any) => {
+                    setParam('order', e.target.value);
                   }}
                 />
               </div>
@@ -34,7 +29,7 @@ const Sort = () => {
           })
         }
         <div className="review-cards">
-        <ReviewCard />
+          <ReviewCard />
         </div>
 
       </div>
