@@ -33,7 +33,7 @@ const HomeHero = () => {
   }
 
   return <>
-    {(pathname.includes(`/home`) || pathname.includes(`/restaurants`)) &&
+    {(pathname.includes(`/home`) || pathname == `/restaurants`) &&
       <div className={`home-hero${pathname.includes(`restaurants`) ? ` restaurants` : ``}`}>
         <div className="overlay"></div>
         <div className='heading'>

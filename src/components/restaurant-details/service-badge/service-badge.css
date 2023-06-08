@@ -1,0 +1,13 @@
+.service-badge {
+  display: flex;
+  align-items: center;
+  font-size: 17px;
+  font-weight: 400;
+  width: 50%;
+  height: fit-content;
+}
+
+.service-badge .svg-inline--fa {
+  margin-left: 9px;
+  font-size: 22px;
+}

@@ -9,7 +9,7 @@
   background-color: black;
   background-image: url('../../../assets/hero-image.png');
   background-size: cover;
-  transition: all 1s ease-in-out;
+  transition: all .6s ease-in-out;
 }
 
 .home-hero .overlay {
@@ -20,7 +20,7 @@
   bottom: 0;
   background-color: green;
   opacity: 0;
-  transition: opacity .9s ease-in-out;
+  transition: opacity .4s ease-in-out;
 }
 
 .home-hero.restaurants {
@@ -28,7 +28,7 @@
 }
 
 .home-hero .heading {
-  transition: .9s all;
+  transition: .4s all;
 }
 
 .home-hero.restaurants .heading {
@@ -37,7 +37,7 @@
 }
 
 .home-hero .content {
-  transition: .9s all;
+  transition: .4s all;
   transform: translateY(0px);
 }
 
@@ -46,7 +46,7 @@
 }
 
 .home-hero .overlay {
-  background: linear-gradient(to bottom, #ffbc70 0%, #FFFBF6 100%);
+  background: linear-gradient(to bottom, #ffbc70 0%, #fffdfc 100%);
   opacity: 0;
 }
 

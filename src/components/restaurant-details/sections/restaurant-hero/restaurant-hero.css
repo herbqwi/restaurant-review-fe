@@ -1,0 +1,103 @@
+.restaurant-details-page section.restaurant-hero .info {
+  display: flex;
+}
+
+.restaurant-details-page section.restaurant-hero .stars-rating {
+  margin-right: 15px;
+}
+
+.restaurant-details-page section.restaurant-hero h1 {
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.restaurant-details-page section.restaurant-hero p {
+  position: relative;
+  top: -9px;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--gray);
+}
+
+.restaurant-details-page section.restaurant-hero .images-hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 5px;
+  height: 500px;
+}
+
+.restaurant-details-page section.restaurant-hero .images-hero .img-container {
+  overflow: hidden;
+}
+
+.restaurant-details-page section.restaurant-hero .images-hero .img-container img {
+  object-fit: cover;
+  transition: .3s all;
+}
+
+.restaurant-details-page section.restaurant-hero .images-hero .img-container img:hover,
+.restaurant-details-page section.restaurant-hero .images-hero .img-container:has(img:hover) .img-cover {
+  scale: 1.03;
+}
+
+.restaurant-details-page section.restaurant-hero .images-hero>div:last-child {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 500px;
+  height: 500px;
+}
+
+.restaurant-details-page section.restaurant-hero .images-hero>div:last-child .img-container {
+  top: 5px;
+  position: relative;
+  width: 245px;
+  height: 245px;
+}
+
+.restaurant-details-page section.restaurant-hero .images-hero>div:last-child .img-container img {
+  width: 100%;
+  height: 100%;
+}
+
+.restaurant-details-page section.restaurant-hero .images-hero>div:last-child .img-container:first-child {
+  position: relative;
+  top: 0px;
+  width: 500px;
+  height: 245px;
+}
+
+.restaurant-details-page section.restaurant-hero .images-hero>div:last-child .img-container:last-child {
+  cursor: pointer;
+}
+
+.restaurant-details-page section.restaurant-hero .images-hero .img-cover {
+  pointer-events: none;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+  transition: .3s all;
+}
+
+.restaurant-details-page section.restaurant-hero .images-hero .img-cover p {
+  font-size: 20px;
+  color: white;
+}
+
+.restaurant-details-page section.restaurant-hero .images-hero>div {
+  width: 500px;
+  height: 500px;
+}
+
+.restaurant-details-page section.restaurant-hero .images-hero>div:first-child img {
+  width: 500px;
+  height: 500px;
+}

@@ -44,12 +44,12 @@ function AddRestaurantForm() {
         const serviceIndex = ServiceAvalibale.findIndex((service) => service.ServiceName === name);
 
         if (serviceIndex === -1) {
-            ServiceAvalibale.push({  ServiceName: name, ServiceIcon: icon });
+            ServiceAvalibale.push({ ServiceName: name, ServiceIcon: icon });
         } else {
             ServiceAvalibale.splice(serviceIndex, 1);
         }
 
-        setRestaurant({...restaurant,Service:ServiceAvalibale})
+        setRestaurant({ ...restaurant, Service: ServiceAvalibale })
         console.log(ServiceAvalibale);
     };
 
@@ -57,8 +57,8 @@ function AddRestaurantForm() {
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         setRestaurant({ ...restaurant, clicked: true });
         event.preventDefault();
-        const addRestuResponse =await CreateRestaurant(restaurant)
-          if (addRestuResponse)
+        const addRestuResponse = await CreateRestaurant(restaurant)
+        if (addRestuResponse)
             console.log('Submitted:', restaurant);
     };
 

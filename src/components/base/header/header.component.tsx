@@ -27,9 +27,9 @@ const Header = () => {
 
       <div className="left-nav">
         <ShowTimer timeout={0} animationType={AnimationType.FADE_IN}><Logo></Logo></ShowTimer>
-        <ShowTimer timeout={100} animationType={AnimationType.FADE_IN}><HeaderButton className={`${pathname.includes(`/home`) ? `selected` : ``}`} to="/home">الرئيسية</HeaderButton></ShowTimer>
-        <ShowTimer timeout={200} animationType={AnimationType.FADE_IN}><HeaderButton className={`${pathname.includes(`/restaurants`) ? `selected` : ``}`} to="/restaurants">قائمة المطاعم</HeaderButton></ShowTimer>
-        <ShowTimer timeout={300} animationType={AnimationType.FADE_IN}><HeaderButton className={`${pathname.includes(`/add-restaurant`) ? `selected` : ``}`} to="/add-restaurant">إضافة مطعم</HeaderButton></ShowTimer>
+        <ShowTimer timeout={100} animationType={AnimationType.FADE_IN}><HeaderButton className={`${pathname == `/home` ? `selected` : ``}`} to="/home">الرئيسية</HeaderButton></ShowTimer>
+        <ShowTimer timeout={200} animationType={AnimationType.FADE_IN}><HeaderButton className={`${pathname == `/restaurants` ? `selected` : ``}`} to="/restaurants">قائمة المطاعم</HeaderButton></ShowTimer>
+        <ShowTimer timeout={300} animationType={AnimationType.FADE_IN}><HeaderButton className={`${pathname == `/settings/restaurants` ? `selected` : ``}`} to="/settings/restaurants">إضافة مطعم</HeaderButton></ShowTimer>
       </div>
 
       <div className="right-nav">

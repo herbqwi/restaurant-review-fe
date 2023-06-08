@@ -21,7 +21,7 @@ const Notification = ({ content, type, removeNotification }: { content: string, 
             }
         </div>
         <div className='content'>
-            <p>{type == 1 ? `Success` : (type == 2 ? `Notice` : `Failed`)}</p>
+            <p>{type == 1 ? `نجاح العملية` : (type == 2 ? `ملاحظة` : `فشل العملية`)}</p>
             <p>{content}</p>
         </div>
     </div>

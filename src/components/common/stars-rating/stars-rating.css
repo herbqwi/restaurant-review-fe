@@ -1,0 +1,12 @@
+.stars-rating {
+  display: flex;
+  align-items: center;
+  position: relative;
+  height: 45px;
+}
+
+.stars-rating p {
+  position: relative;
+  top: 2px !important;
+  margin-right: 5px;
+}

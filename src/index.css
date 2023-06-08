@@ -18,6 +18,8 @@ section {
   --header-button-active: #f4a361a6;
 
   --outer-border: #C8C9CA;
+
+  --gray: #797979;
 }
 
 ::-webkit-scrollbar {
@@ -47,7 +49,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: rgba(255, 166, 0, 0.035);
+  background-color: rgba(255, 166, 0, 0.01);
   overflow-y: scroll;
 }
 

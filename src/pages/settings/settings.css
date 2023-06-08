@@ -1,0 +1,18 @@
+.settings-page {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.settings-page .settings-container {
+  display: flex;
+  justify-content: space-between;
+  width: 75%;
+  margin-top: 150px;
+  /* color: #0bf4c92e; */
+}
+
+.settings-page .settings-container .contents {
+  width: 73%;
+}

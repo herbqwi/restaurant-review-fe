@@ -1,0 +1,99 @@
+.sections-nav {
+  position: relative;
+  border: 1px solid var(--outer-border);
+  padding: 15px;
+  height: fit-content;
+  border-radius: 7px;
+  background-color: white;
+  overflow: hidden;
+}
+
+.sections-nav .secondary-menu {
+  position: absolute;
+  top: 15px;
+  left: calc(100% + 7px);
+  height: 190px;
+}
+
+.sections-nav .secondary-menu .scrollable::-webkit-scrollbar {
+  display: none;
+}
+
+.sections-nav .secondary-menu .scrollable {
+  position: relative;
+  overflow-y: scroll;
+  height: 152px;
+}
+
+.sections-nav .nav {
+  transition: .2s all;
+}
+
+.sections-nav.extended .nav {
+  transform: translateX(-110%);
+}
+
+.sections-nav .section {
+  width: 190px;
+  border-radius: 7px;
+  padding: 7px 12px;
+  margin-bottom: 4px;
+  font-size: 17px;
+  font-weight: 500;
+  color: rgb(8, 5, 5);
+  transition: .3s all;
+  cursor: pointer;
+}
+
+.sections-nav .section .error {
+  width: 20px;
+  height: 100%;
+  background-color: #f466615c;
+  text-align: center;
+  border-radius: 2px;
+  font-weight: 400;
+}
+
+.sections-nav hr {
+  border-top: 1px solid var(--outer-border);
+  margin-top: 40px;
+  width: 100%;
+}
+
+.sections-nav .section.logout {
+  background-color: #f466615c;
+  color: #522322;
+}
+
+.sections-nav .section.logout:hover {
+  background-color: #f466617c;
+}
+
+.sections-nav .section.logout:active {
+  background-color: #f466618d;
+}
+
+.sections-nav .section:last-child {
+  margin-bottom: 0px;
+}
+
+.sections-nav .section:hover {
+  background-color: #f4a3615c;
+}
+
+.sections-nav .section:active {
+  background-color: #f4a3617a;
+}
+
+.sections-nav .section.selected {
+  background-color: #f4a36144;
+  color: #62442b;
+}
+
+.sections-nav .section.selected:hover {
+  background-color: #f4a3615c;
+}
+
+.sections-nav .svg-inline--fa {
+  margin-left: 5px;
+}

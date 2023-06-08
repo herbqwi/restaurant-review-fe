@@ -1,0 +1,14 @@
+.stars-input>* {
+  color: rgb(210, 210, 210);
+  cursor: pointer;
+  transition: .1s all;
+}
+
+.stars-input .star-selected {
+  color: rgb(255, 165, 0);
+  scale: 1.05;
+}
+
+.stars-input:active .star-selected {
+  scale: 1.03;
+}

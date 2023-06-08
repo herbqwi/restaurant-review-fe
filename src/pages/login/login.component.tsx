@@ -32,17 +32,17 @@ function Login() {
   return (
     <div className="Login">
       <div className="Login-box">
-        <div className="Login-header">تسجيل الدخول</div>
+        <div className="Login-header">Login</div>
         <div className="inputs">
 
-          <input className="email" placeholder="أدخل البريد الإلكتروني" onChange={(e: any) => handleEmail(e)} />
+          <input className="email" placeholder="Enter your email" onChange={(e: any) => handleEmail(e)} />
 
-          <input className="password" placeholder="أدخل كلمة المرور" type="password" onChange={(e: any) => handlePassword(e)} />
+          <input className="password" placeholder="Enter your password" type="password" onChange={(e: any) => handlePassword(e)} />
         </div>
         <div className="button">
-          <button className="submit-button" onClick={handleClick}>تسجيل الدخول</button>
+          <button className="submit-button" onClick={handleClick}>Login</button>
         </div>
-        <div className="Sign">لا تملك حساباً؟ سجل الان!</div>
+        <div className="Sign">Don't have an account?Sign up</div>
       </div>
     </div>
   )
