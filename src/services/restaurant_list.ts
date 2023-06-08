@@ -1,21 +1,11 @@
 
-const getRestaurant = async () => {
-  try {
-    const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/restaurant-list`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+const getRestaurant = () => {  
+
+  return fetch(`http://localhost:8000/restaurant-list`,)
+  
+    .then((response) =>  response.json() )
+    .catch((error) => {
+      alert(error.toString());
     });
-
-    if (response.status === 201) {
-      return true;
-    } else {
-      return false;
-    }
-  } catch (error) {
-    console.error(error);
-    return false;
-  }
 };
-
-export default getRestaurant
-
+export default getRestaurant;
