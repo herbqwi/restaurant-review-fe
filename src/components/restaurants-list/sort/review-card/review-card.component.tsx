@@ -1,11 +1,11 @@
 import "./review-card.css";
 import { Star, ChatTeardropText, Spinner } from "@phosphor-icons/react";
-import { Slide } from 'react-slideshow-image';
 import useGetRestaurant from "../../../../services/restaurant-data";
+import HeroSlider, { Slide } from "hero-slider";
+
 const ReviewCard = () => {
   const { restaurantInfo, loading } = useGetRestaurant();
   console.log(restaurantInfo?.length);
-  
 
   return (
     <div >
@@ -19,14 +19,33 @@ const ReviewCard = () => {
         >
           <Spinner />
         </div>
-      ) : restaurantInfo?.length ? (
+      ) : restaurantInfo?.length && restaurantInfo?.length!== 10 ? (
         restaurantInfo.map((info) => {
-          return <div className="card">
+          return <div className="card" key={info._id}>
+            <HeroSlider
+              autoplay={{ autoplayDuration: 2000 }}
+              accessability={{ shouldDisplayButtons: false, shouldSlideOnArrowKeypress: false }}
+              width={200}
+              height={238}
+              controller={{
+                initialSlide: 1,
+                slidingDuration: 200,
+                slidingDelay: 100,
+
+              }}
+            >
               {
-                info.images.map((each,index)=>{
-            return <img src={each} alt="" className="res-image" key={index} />
+                info.images.map((each, index) => {
+                  return <Slide
+                    key={index}
+                    label="Giau Pass - Italy"
+                    background={{
+                      backgroundImageSrc: each,
+                    }}
+                  />
                 })
               }
+            </HeroSlider>
             <div className="content">
               <div className="name-rate">
                 <div className="name">

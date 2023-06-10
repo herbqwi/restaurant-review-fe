@@ -85,7 +85,7 @@ export namespace IRestaurant {
   }
 
   export interface RestaurantData {
-    _id?: string;
+    _id: string;
     name: string;
     description: string;
     address: string;

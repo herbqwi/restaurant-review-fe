@@ -1,7 +1,5 @@
 .card {
   display: flex;
-  justify-content: center;
-  align-items: center;
   box-sizing: border-box;
   height: 240px;
   background: #FFFFFF;
@@ -15,6 +13,7 @@
 }
 
 .card .content {
+  padding: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -22,11 +21,11 @@
   height: 200px;
 }
 
-.card .res-image {
+/* .card .res-image {
   width: 200px;
   height: 200px;
   border-radius: 7px;
-}
+} */
 
 .card .star {
   display: flex;
