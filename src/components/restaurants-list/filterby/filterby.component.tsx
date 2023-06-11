@@ -6,8 +6,8 @@ const FilterBy = () => {
       <h3 className='title'>تصفية النتائج</h3>
       <section className='money-filter'>
         <button>$</button>
-        <button>$$$</button>
         <button>$$</button>
+        <button>$$$</button>
         <button>$$$$</button>
       </section>
 

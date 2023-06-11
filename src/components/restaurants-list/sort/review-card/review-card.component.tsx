@@ -2,11 +2,10 @@ import "./review-card.css";
 import { Star, ChatTeardropText, Spinner } from "@phosphor-icons/react";
 import useGetRestaurant from "../../../../services/restaurant-data";
 import HeroSlider, { Slide } from "hero-slider";
-
+import { IRestaurant } from "../.../../../../../interfaces/restaurant.interface"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const ReviewCard = () => {
   const { restaurantInfo, loading } = useGetRestaurant();
-  console.log(restaurantInfo?.length);
-
   return (
     <div >
       {loading ? (
@@ -19,7 +18,7 @@ const ReviewCard = () => {
         >
           <Spinner />
         </div>
-      ) : restaurantInfo?.length && restaurantInfo?.length!== 10 ? (
+      ) : restaurantInfo?.length && restaurantInfo?.length !== 10 ? (
         restaurantInfo.map((info) => {
           return <div className="card" key={info._id}>
             <HeroSlider
@@ -31,7 +30,6 @@ const ReviewCard = () => {
                 initialSlide: 1,
                 slidingDuration: 200,
                 slidingDelay: 100,
-
               }}
             >
               {
@@ -50,7 +48,7 @@ const ReviewCard = () => {
               <div className="name-rate">
                 <div className="name">
                   <h1>{info.name}</h1>
-                  <p>2.15كم</p>
+                  <p></p>
                 </div>
                 <div className="rate">
                   <span className="share">مشاركة 125</span>
@@ -66,18 +64,17 @@ const ReviewCard = () => {
               <div className="border"></div>
               <div className="status">
                 {
-                  // info.services.map((ser) => {
-                  //   return <div className="case">
-                  //     <img src={ser.ServiceIcon} width={50} height={50} />
-                  //     <span>{ser.ServiceName}</span>
-                  //   </div>
-                  // })
+                  info.services?.map((ser, index) => {
+                    return <div className="case">
+                      <FontAwesomeIcon icon={IRestaurant.ServiceInfo[ser]?.icon}></FontAwesomeIcon>
+                      <span className="service-name">{IRestaurant.ServiceInfo[ser]?.name}</span>
+                    </div>
+                  })
                 }
-
               </div>
               <div className="feedback">
                 <ChatTeardropText size={24} color="#050505" weight="thin" />
-                <span>{info.phoneNumber}</span>
+                <p>{info.address}</p>
               </div>
             </div>
           </div>
