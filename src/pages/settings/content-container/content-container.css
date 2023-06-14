@@ -49,9 +49,12 @@
   color: gray;
 }
 
-.contents .content-container .header a {
+.contents .content-container .header button {
   font-size: 15px;
   color: rgb(159, 103, 0);
+  background: white;
+  border: none;
+  cursor: pointer;
 }
 
 .contents .content-container .body {
