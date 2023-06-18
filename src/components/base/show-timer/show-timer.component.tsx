@@ -18,10 +18,10 @@ interface IProps {
     elementRef?: any,
 }
 
-const ShowTimer = ({ children, timeout, animationType = AnimationType.FADE_UP, elementRef }: IProps) => {
+const ShowTimer = ({ children, timeout, animationType: animationtype = AnimationType.FADE_UP, elementRef }: IProps) => {
     const isInView = useScroll(elementRef);
     const shown = useTimer(timeout)
-    return React.cloneElement(children, { className: `${children?.props?.className} hidable${(!shown || (elementRef != null && !isInView)) ? ` ${animationType}` : ``}` })
+    return React.cloneElement(children, { className: `${children?.props?.className} hidable${(!shown || (elementRef != null && !isInView)) ? ` ${animationtype}` : ``}` })
 }
 
 export default ShowTimer;
