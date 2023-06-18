@@ -3,15 +3,19 @@ import './customer-review.css'
 import { faAngleDown, faBullseye, faFaceAngry, faFaceGrin, faStar, faUser } from '@fortawesome/free-solid-svg-icons';
 import useToggle from '../../../hooks/toggle.hook';
 import { useCustomerReview } from '../../../hooks/pages-logic/customer-review.hook';
-import { useContext, useRef } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import Button from '../../common/button/button.component';
 import { IModal, ModalContext, ModalType } from '../../../contexts/modal.context';
 import ConfirmCommentModal, { CommentConfirmType } from '../../modal/confirm-comment/confirm-comment.component';
 import { NotificationContext } from '../../base/notification/notification-container/notification-container.component';
 import { NotificationType } from '../../base/notification/notification-body/notification-body.component';
-import { UserContext } from '../../../contexts/login.context';
 import { IRestaurant } from '../../../interfaces/restaurant.interface';
 import restaurantController from '../../../controllers/restaurant.controller';
+import { UserContext } from '../../../contexts/user.context';
+import { IUser } from '../../../interfaces/user.interface';
+import userController from '../../../controllers/user.controller';
+import { AxiosResponse } from 'axios';
+import StarsRating from '../../common/stars-rating/stars-rating.component';
 
 interface IProps {
   review: IRestaurant.Review;
@@ -26,22 +30,26 @@ const CustomerReview = ({ review, fetchReviews, restaurantId }: IProps) => {
   const { pushNotification } = useContext(NotificationContext)
   const { content, positive, negative } = useCustomerReview(contentRef, positiveRef, negativeRef);
   const { setModalProps } = useContext(ModalContext)
-  const { userId, setUserId } = useContext(UserContext);
+  const { user } = useContext(UserContext);
+  const [reviewerName, setReviewerName] = useState('');
 
-  const isAdmin = false || review.userId == userId;
+  useEffect(() => {
+    userController.getUser(review.userId).then((res: AxiosResponse<IUser.UserData>) => {
+      if (res.status == 200) {
+        setReviewerName(`${res.data.firstName} ${res.data.lastName}`)
+      }
+    })
+  }, [])
+
+  const isAdmin = false || review.userId == user.value?._id as string;
 
   return <div className="customer-review">
     <div className='info'>
-      <div className="stars">
-        <FontAwesomeIcon icon={faStar} fontSize={23} color="orange" />
-        <FontAwesomeIcon icon={faStar} fontSize={23} color="orange" />
-        <FontAwesomeIcon icon={faStar} fontSize={23} color="orange" />
-        <FontAwesomeIcon icon={faStar} fontSize={23} color="orange" />
-        <FontAwesomeIcon icon={faStar} fontSize={23} color="orange" />
-      </div>
+      <StarsRating rating={review.starRating} showText={false} />
+
       <div className='icon-text user'>
         <FontAwesomeIcon icon={faUser}></FontAwesomeIcon>
-        <p>{review.userId}</p>
+        <p>{reviewerName}</p>
       </div>
       <div className='icon-text company'>
         <FontAwesomeIcon icon={faBullseye}></FontAwesomeIcon>
@@ -59,9 +67,7 @@ const CustomerReview = ({ review, fetchReviews, restaurantId }: IProps) => {
               pushNotification(NotificationType.Success, `تمت عملية ازالة التعليق بنجاح`);
               await restaurantController.deleteReview(restaurantId, review._id as string);
               await fetchReviews();
-              console.log(`remove comment`);
             } else {
-              console.log(`report comment`);
               pushNotification(NotificationType.Success, `تمت عملية الإبلاغ عن اساءة بنجاح`);
             }
           }
@@ -70,6 +76,7 @@ const CustomerReview = ({ review, fetchReviews, restaurantId }: IProps) => {
       }} className='options-comment' type="submit">{isAdmin ? "إزالة التعليق" : "إبلاغ عن اساءة"}</Button>
 
     </div>
+
     <div className='comment'>
       <p ref={contentRef} className={content.isMinimized.value ? `minimized` : ``} onClick={content.isMinimized.toggle}>“ {review.content} ”</p>
       {review.positive && <div className='icon-text like'>

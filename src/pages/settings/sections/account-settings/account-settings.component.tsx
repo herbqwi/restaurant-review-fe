@@ -5,16 +5,11 @@ import Input from '../../../../components/common/input/input.component';
 import './account-settings.css'
 import Button from '../../../../components/common/button/button.component';
 import ContentContainer from '../../content-container/content-container.component';
-import useAccountSettings from '../../../../hooks/pages-logic/account-settings.hook';
-import IAccountSettings from '../../../../interfaces/account-settings';
+import useAccountSettings from '../../../../hooks/pages/settings/account-settings';
 
 const AccountSettingsSection = () => {
-  const { user, handleInputField, loading, UpdateUser } = useAccountSettings();
 
-  const change = (data: any) => {
-    const result = UpdateUser(data);
-    return result;
-  }
+  const { firstName, lastName, email, password, handleSubmit } = useAccountSettings()
 
   return <section className="contents account-settings">
     <ShowTimer timeout={0}>
@@ -23,22 +18,17 @@ const AccountSettingsSection = () => {
       </div>
     </ShowTimer>
 
-    <ContentContainer
-      title="اعدادات حسابي"
-      subtitle="عرف الاخرين عن نفسك"
-      savable={true}
-      onSave={change}
-    >
+    <ContentContainer title="اعدادات حسابي" subtitle="عرف الاخرين عن نفسك" handleSubmit={handleSubmit} savable={true}>
       <div>
-        <Input label='الإسم الأول' onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputField('firstName', e.target.value)} value={user?.firstName} />
-        <Input label='الإسم الأخير' onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputField('lastName', e.target.value)} value={user?.lastName}></Input>
+        <Input controller={firstName} label='الإسم الأول'></Input>
+        <Input controller={lastName} label='الإسم الأخير'></Input>
       </div>
       <div>
-        <Input label='البريد الإلكتروني' onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputField('email', e.target.value)} value={user?.email}></Input>
-        <Input label='كلمة المرور' type="password" onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputField('password', e.target.value)} value={user?.password}></Input>
+        <Input controller={email} label='البريد الإلكتروني'></Input>
+        <Input controller={password} type='password' label='كلمة المرور'></Input>
       </div>
       <div className='footer'><p><FontAwesomeIcon icon={faExclamationCircle}></FontAwesomeIcon>تأكد من دقة معلوماتك الشخصية قبل حفظ النموذج</p></div>
-    </ContentContainer >
+    </ContentContainer>
     <Button>حذف الحساب</Button>
   </section>
 }

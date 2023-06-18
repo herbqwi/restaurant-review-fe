@@ -1,0 +1,41 @@
+section .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+section .header .actions {
+  display: flex;
+  align-items: center;
+}
+
+section .header .actions > * {
+  margin: 0;
+}
+
+section .header .actions > *:not(:last-child) {
+  margin-left: 5px;
+}
+
+section.restaurants .map-container {
+  height: 200px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+section.restaurants .input-container:has(.icon-select) {
+  height: 37.6px;
+  width: 48%;
+  border: 1px solid var(--outer-border);
+  filter: none;
+}
+
+section.restaurants .input-container .icon-select {
+  width: 100%;
+  filter: none;
+}
+
+section.restaurants .input-container .icon-select .svg-inline--fa {
+  top: 2px;
+}

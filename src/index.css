@@ -69,6 +69,10 @@ a {
   direction: rtl;
 }
 
+.hidden {
+  opacity: 0;
+}
+
 .clickable {
   cursor: pointer;
 }
@@ -79,6 +83,10 @@ a {
 
 .clickable:active {
   scale: 0.97;
+}
+
+.align-center {
+  text-align: center;
 }
 
 .border {

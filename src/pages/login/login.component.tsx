@@ -1,50 +1,22 @@
-import React, { useState } from "react";
-import { loginUser } from "../../services/users";
 import "./login.css";
+
+import { useContext } from "react";
+import ShowTimer from "../../components/base/show-timer/show-timer.component";
 import { useNavigate } from "react-router";
+import LoginForm from "../../components/login/login-form.component";
+import { UserContext } from "../../contexts/user.context";
 
-function Login() {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+const LoginPage = () => {
+  const { user } = useContext(UserContext);
   const navigate = useNavigate();
-
-  const handleEmail = (e: any) => {
-    setEmail(e.target.value);
-  }
-
-  const handlePassword = (e: any) => {
-    setPassword(e.target.value);
-  }
-
-  const handleClick = async () => {
-    if (email && password) {
-      const user = await loginUser(email, password);
-      localStorage.setItem('token', user.token);
-      if (user) {
-        alert("Email and Password are correct");
-        navigate(`/restaurants`);
-      } else {
-        alert("Email or Password are not correct! Please try again.");
-      }
-    }
-  }
+  // if (userId != null) navigate(`/home`)
   return (
-    <div className="Login">
-      <div className="Login-box">
-        <div className="Login-header">Login</div>
-        <div className="inputs">
-
-          <input className="email" placeholder="Enter your email" onChange={(e: any) => handleEmail(e)} />
-
-          <input className="password" placeholder="Enter your password" type="password" onChange={(e: any) => handlePassword(e)} />
-        </div>
-        <div className="button">
-          <button className="submit-button" onClick={handleClick}>Login</button>
-        </div>
-        <div className="Sign">Don't have an account?Sign up</div>
+    <ShowTimer timeout={0}>
+      <div className="login-page">
+        <LoginForm></LoginForm>
       </div>
-    </div>
-  )
-}
+    </ShowTimer>
+  );
+};
 
-export default Login
+export default LoginPage;

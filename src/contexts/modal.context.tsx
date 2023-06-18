@@ -37,11 +37,11 @@ const ModalProvider = ({ children }: IProps) => {
   const [modalProps, setModalProps] = useState<IModal | null>(null as any);
 
   const closeModal = () => {
-    document.querySelector(`.modal-container .modal.hidable`)?.classList.add(`hidden`)
-    document.querySelector(`.modal-container.hidable`)?.classList.add(`hidden-in`)
+    document.querySelector(`.modal-container`)?.classList.add(`hidden`)
+    // document.querySelector(`.modal-container.hidable`)?.classList.add(`hidden-in`)
     setTimeout(() => {
       setModalProps(null)
-    }, 300);
+    }, 100);
   }
 
   return <ModalContext.Provider value={{ modalProps, setModalProps, closeModal }}>

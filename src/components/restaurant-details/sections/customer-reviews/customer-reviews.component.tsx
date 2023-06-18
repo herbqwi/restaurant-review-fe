@@ -1,36 +1,25 @@
-import { useContext, useEffect } from 'react'
-import { hasReviewdRestaurant } from '../../../../services/restaurant-details.service'
 import ShowTimer from '../../../base/show-timer/show-timer.component'
 import PageSection from '../../../common/page-section/page-section.component'
 import CustomerReview from '../../customer-review/customer-review.component'
 import ReviewForm from '../../review-form/review-form.component'
 import './customer-reviews.css'
-import { UserContext } from '../../../../contexts/login.context'
 import { IRestaurant } from '../../../../interfaces/restaurant.interface'
-import restaurantController from '../../../../controllers/restaurant.controller'
+import useCustomerReviews from '../../../../hooks/pages/restaurant-details/customer-reviews'
 
 interface IProps {
-  restaurant: IRestaurant.RestaurantData,
-  setRestaurant: any,
+  restaurant: { value: IRestaurant.RestaurantData, set: any },
   addReview: (review: IRestaurant.Review) => void,
 }
 
-const CustomerReviewsSection = ({ restaurant, setRestaurant, addReview }: IProps) => {
-  const { userId, setUserId } = useContext(UserContext);
-  const hasReviewd = hasReviewdRestaurant(userId, restaurant.reviews);
-
-  const fetchReviews = async () => {
-    const reviews = await restaurantController.getReviews(restaurant._id as string);
-    setRestaurant({ ...restaurant, reviews: reviews.data })
-    console.log(`reviewwws`);
-  }
+const CustomerReviewsSection = ({ restaurant, addReview }: IProps) => {
+  const { functions, vars } = useCustomerReviews(restaurant);
 
   return <PageSection timeout={300} className='customer-reviews'>
     <p className='title'>اراء الزبائن</p>
-    {!hasReviewd && <ShowTimer timeout={300}><ReviewForm restaurantId={restaurant._id as string} fetchReviews={fetchReviews}></ReviewForm></ShowTimer>}
+    {!vars.hasReviewed && <ShowTimer timeout={300}><ReviewForm restaurantId={restaurant.value._id as string} fetchReviews={functions.fetchReviews}></ReviewForm></ShowTimer>}
     {
-      (restaurant.reviews && restaurant.reviews.length) ? <div className='customer-reviews'>
-        {restaurant?.reviews?.reverse().map(review => <ShowTimer timeout={350}><CustomerReview fetchReviews={fetchReviews} review={review} restaurantId={restaurant._id as string}></CustomerReview></ShowTimer>)}
+      (restaurant.value.reviews && restaurant.value.reviews.length) ? <div className='customer-reviews'>
+        {restaurant.value.reviews?.reverse().map(review => <ShowTimer timeout={350}><CustomerReview fetchReviews={functions.fetchReviews} review={review} restaurantId={restaurant.value._id as string}></CustomerReview></ShowTimer>)}
       </div> : null
     }
   </PageSection>

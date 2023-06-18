@@ -1,9 +1,18 @@
 import ShowTimer from '../../../components/base/show-timer/show-timer.component';
 import './content-container.css'
 
-const ContentContainer = ({ className, title, subtitle, savable, children, onSave }: { className?: string, title: string, subtitle: string, savable?: boolean, children: any, onSave?: Function }) => {
+interface IProps {
+  className?: string,
+  title: string,
+  subtitle: string,
+  savable?: boolean,
+  handleSubmit?: any,
+  children: any
+}
+
+const ContentContainer = ({ className, title, subtitle, savable, handleSubmit, children }: IProps) => {
   return <ShowTimer timeout={50}>
-    <form onSubmit={(e) => { onSave && onSave(e) }} className={`content-container ${className}`}>
+    <form onSubmit={handleSubmit} className={`content-container ${className}`}>
       <div className='header'>
         <div>
           <h1>{title}</h1>

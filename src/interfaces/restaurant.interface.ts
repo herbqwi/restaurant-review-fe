@@ -67,6 +67,16 @@ export namespace IRestaurant {
     images?: string[];
     starRating: number;
     userId: string;
+    restaurantId?: string,
+  }
+
+  export interface CardReview {
+    image: string,
+    name: string,
+    job: string,
+    title: string,
+    description: string
+    stars: number,
   }
 
   export interface MenuItem {

@@ -20,9 +20,9 @@ const Map = ({ location, clickable }) => {
       // Create map instance
       mapRef.current = L.map('map', {
         center: [51.505, -0.09],
-        zoom: 1,
+        zoom: 0,
         zoomControl: true,
-      }).setView([longitude, latitude], 17);
+      }).setView([longitude, latitude], 13);
 
       // Add initial marker at the selected location
       markerRef.current = L.marker([longitude, latitude], { icon }).addTo(mapRef.current);

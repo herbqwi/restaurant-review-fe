@@ -6,24 +6,23 @@ import ServiceBadge from '../../service-badge/service-badge.component';
 import './general-info.css'
 
 interface IProps {
-  restaurant: IRestaurant.RestaurantData,
+  restaurant: { value: IRestaurant.RestaurantData, set: any },
 }
 
 const GeneralInfoSection = ({ restaurant }: IProps) => {
-  console.log(`restt:`, restaurant.services);
 
   return <PageSection className='general-info' timeout={5}>
     <div className="location">
       <p className='title'>الموقع</p>
       <div className='content'>
-        <Map location={restaurant.location} clickable={false}></Map>
+        <Map location={restaurant.value.location} clickable={false}></Map>
       </div>
     </div>
 
     <div className="services">
       <p className='title'>الخدمات</p>
       <div className='content'>
-        {restaurant.services.map((service, i) => {console.log({service}); return <ShowTimer timeout={100 + (40 * i)}><ServiceBadge service={service}></ServiceBadge></ShowTimer>})}
+        {restaurant.value.services.map((service, i) => {console.log({service}); return <ShowTimer timeout={100 + (40 * i)}><ServiceBadge service={service}></ServiceBadge></ShowTimer>})}
       </div>
 
     </div>

@@ -9,6 +9,7 @@
   top: 0;
   left: 0;
   z-index: 2;
+  transition: .1s all;
 }
 
 .modal-container .svg-inline--fa {

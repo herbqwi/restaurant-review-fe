@@ -13,11 +13,14 @@ interface IProps {
 
 const ReviewForm = ({ restaurantId, fetchReviews }: IProps) => {
 
-  const { content, positive, negative, company, isDetailed, handleSubmit } = useReview(restaurantId);
+  const { content, positive, negative, company, isDetailed, starsReview, handleSubmit } = useReview(restaurantId);
 
-  return <form onSubmit={async (e: any) => { await handleSubmit(e); await fetchReviews(); }} className={`review-form details${isDetailed.value ? ` detailed` : ``}`}>
+  return <form onSubmit={async (e: any) => {
+    await handleSubmit(e);
+    await fetchReviews();
+  }} className={`review-form details${isDetailed.value ? ` detailed` : ``}`}>
     <div className="review-general-input">
-      <StarsInput></StarsInput>
+      <StarsInput controller={starsReview}></StarsInput>
       <select required value={company.value} onChange={(e) => { company.set(e.target.value == `0` ? IRestaurant.Company.FAMILY : IRestaurant.Company.FRIENDS) }} name="company" id="review-company">
         <option value={IRestaurant.Company.FAMILY}>مع العائلة</option>
         <option value={IRestaurant.Company.FRIENDS}>مع الأًصدقاء</option>

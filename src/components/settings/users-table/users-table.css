@@ -1,0 +1,30 @@
+.ant-pagination-item-link {
+  position: relative;
+  top: 2px;
+  margin: 0 !important;
+}
+
+.users-table * {
+  text-align: center !important;
+}
+
+.users-table .ant-table-cell {
+  padding: 10px !important;
+}
+
+.users-table .actions .svg-inline--fa {
+  margin: 0px 3px;
+  font-size: 17px;
+}
+
+.users-table .ant-table-content {
+  border: 1px solid var(--outer-border);
+  border-radius: 7px;
+  overflow: hidden;
+}
+
+.users-table .user-img {
+  height: 40px;
+  border-radius: 7px;
+  border: 1px solid var(--outer-border);
+}
