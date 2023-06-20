@@ -2,10 +2,11 @@ import "./review-card.css";
 import { Star, ChatTeardropText, Spinner } from "@phosphor-icons/react";
 import useGetRestaurant from "../../../../services/restaurant-data";
 import HeroSlider, { Slide } from "hero-slider";
-import { IRestaurant } from "../.../../../../../interfaces/restaurant.interface"
+import { IRestaurant} from "../.../../../../../interfaces/restaurant.interface";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const ReviewCard = () => {
   const { restaurantInfo, loading } = useGetRestaurant();
+
   return (
     <div >
       {loading ? (
@@ -73,8 +74,14 @@ const ReviewCard = () => {
                 }
               </div>
               <div className="feedback">
-                <ChatTeardropText size={24} color="#050505" weight="thin" />
-                <p>{info.address}</p>
+                <ChatTeardropText size={24} color="#050505" weight="thin" />                  
+
+                {
+                  
+                  info.reviews?.map((com)=>{                    
+                return <p>{com.content}</p>
+                  })
+                }
               </div>
             </div>
           </div>
