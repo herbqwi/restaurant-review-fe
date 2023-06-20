@@ -2,10 +2,12 @@ import "./review-card.css";
 import { Star, ChatTeardropText, Spinner } from "@phosphor-icons/react";
 import useGetRestaurant from "../../../../services/restaurant-data";
 import HeroSlider, { Slide } from "hero-slider";
-import { IRestaurant} from "../.../../../../../interfaces/restaurant.interface";
+import { IRestaurant } from "../.../../../../../interfaces/restaurant.interface";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useNavigate } from "react-router";
 const ReviewCard = () => {
   const { restaurantInfo, loading } = useGetRestaurant();
+  const navigate = useNavigate();
 
   return (
     <div >
@@ -21,7 +23,7 @@ const ReviewCard = () => {
         </div>
       ) : restaurantInfo?.length && restaurantInfo?.length !== 10 ? (
         restaurantInfo.map((info) => {
-          return <div className="card" key={info._id}>
+          return <div onClick={() => { navigate(`/restaurant-details/${info._id}`) }} className="card" key={info._id}>
             <HeroSlider
               autoplay={{ autoplayDuration: 2000 }}
               accessability={{ shouldDisplayButtons: false, shouldSlideOnArrowKeypress: false }}
@@ -74,12 +76,12 @@ const ReviewCard = () => {
                 }
               </div>
               <div className="feedback">
-                <ChatTeardropText size={24} color="#050505" weight="thin" />                  
+                <ChatTeardropText size={24} color="#050505" weight="thin" />
 
                 {
-                  
-                  info.reviews?.map((com)=>{                    
-                return <p>{com.content}</p>
+
+                  info.reviews?.map((com) => {
+                    return <p>{com.content}</p>
                   })
                 }
               </div>

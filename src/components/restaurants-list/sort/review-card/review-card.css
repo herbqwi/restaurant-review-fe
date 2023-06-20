@@ -5,7 +5,8 @@
   background: #FFFFFF;
   border: 1px solid #C8C9CA;
   border-radius: 7px;
-  margin: 15px
+  margin: 15px;
+  cursor: pointer;
 }
 
 .card .border {
