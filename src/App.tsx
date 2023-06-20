@@ -13,6 +13,7 @@ import ModalProvider from './contexts/modal.context';
 import SettingsPage from './pages/settings/settings.component';
 import UserProvider from './contexts/user.context';
 import { ConfigProvider } from 'antd';
+import ProtectedRoute from './components/base/protected-route/protected-route';
 
 function App() {
   return (
@@ -36,9 +37,9 @@ function App() {
                   <Route path="/home" element={<ShowTimer timeout={0}><HomePage /></ShowTimer>} />
                   <Route path="/restaurants" element={<ShowTimer timeout={0}><RestaurantsListPage /></ShowTimer>} />
                   <Route path="/restaurant-details/:id" element={<ShowTimer timeout={0}><RestaurantDetailsPage /></ShowTimer>} />
-                  <Route path="/add-restaurant" element={<ShowTimer timeout={0}><AddRestaurantPage /></ShowTimer>} />
+                  <Route path="/add-restaurant" element={<ShowTimer timeout={0}><ProtectedRoute><AddRestaurantPage /></ProtectedRoute></ShowTimer>} />
                   <Route path="/settings" element={<Navigate to="/settings/account-settings" replace />} />
-                  <Route path="/settings/:section" element={<ShowTimer timeout={0}><SettingsPage /></ShowTimer>} />
+                  <Route path="/settings/:section" element={<ShowTimer timeout={0}><ProtectedRoute><SettingsPage /></ProtectedRoute></ShowTimer>} />
                 </Routes>
               </NotificationProvider>
             </UserProvider>

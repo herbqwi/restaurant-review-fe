@@ -4,6 +4,8 @@ import userController from "../controllers/user.controller";
 import { IUser } from "../interfaces/user.interface";
 import { UserContext } from "../contexts/user.context";
 import { useNavigate } from 'react-router';
+import { NotificationContext } from "../components/base/notification/notification-container/notification-container.component";
+import { NotificationType } from "../components/base/notification/notification-body/notification-body.component";
 
 export const useLogin = () => {
   const navigate = useNavigate();
@@ -12,6 +14,7 @@ export const useLogin = () => {
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [confirmPassword, setConfirmPassword] = useState<string>('')
+  const { pushNotification } = useContext(NotificationContext);
 
   useEffect(() => {
     if (user.value) navigate(`/home`);
@@ -37,8 +40,11 @@ export const useLogin = () => {
     } else {
       const response = await userController.authUser({ credentials: { email, password } })
       if (response.status != 200) {
+        pushNotification(NotificationType.Failed, 'البيانات المدخلة غير صحيحة')
         console.log(`err`);
         return;
+      } else {
+        pushNotification(NotificationType.Success, `تم تسجيل الدخول بنجاح`)
       }
       user.set({ ...response.data._doc, token: response.data.token });
     }

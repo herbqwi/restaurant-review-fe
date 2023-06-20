@@ -1,11 +1,11 @@
 import "./header.css";
 import HeaderButton from "./header-button/header-button.component";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { NotificationContext } from "../notification/notification-container/notification-container.component";
 import { NotificationType } from "../notification/notification-body/notification-body.component";
 import Logo from "./logo/logo.component";
-import { faPizzaSlice, faSignature } from '@fortawesome/free-solid-svg-icons';
+import { faGear, faIceCream, faPizzaSlice, faSignature } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ShowTimer, { AnimationType } from "../show-timer/show-timer.component";
 import { UserContext } from "../../../contexts/user.context";
@@ -15,10 +15,12 @@ const Header = () => {
   const pathname = location.pathname;
   const { user } = useContext(UserContext);
   const { pushNotification } = useContext(NotificationContext)
+  const navigate = useNavigate();
 
   const logout = () => {
     pushNotification(NotificationType.Notice, `لقد قمت بتسجيل الخروج`)
     user.set(null)
+    navigate(`/login`)
   }
 
   return (
@@ -28,7 +30,6 @@ const Header = () => {
         <ShowTimer timeout={0} animationType={AnimationType.FADE_IN}><Logo></Logo></ShowTimer>
         <ShowTimer timeout={100} animationType={AnimationType.FADE_IN}><HeaderButton className={`${pathname == `/home` ? `selected` : ``}`} to="/home">الرئيسية</HeaderButton></ShowTimer>
         <ShowTimer timeout={200} animationType={AnimationType.FADE_IN}><HeaderButton className={`${pathname == `/restaurants` ? `selected` : ``}`} to="/restaurants">قائمة المطاعم</HeaderButton></ShowTimer>
-        <ShowTimer timeout={300} animationType={AnimationType.FADE_IN}><HeaderButton className={`${pathname == `/settings/restaurants` ? `selected` : ``}`} to="/settings/restaurants">إضافة مطعم</HeaderButton></ShowTimer>
       </div>
 
       <div className="right-nav">
@@ -39,10 +40,15 @@ const Header = () => {
 
 
         {user.value == null ?
-          <ShowTimer timeout={500} animationType={AnimationType.FADE_IN}><HeaderButton className={`${pathname.includes(`/login`) ? `selected` : ``}`} to="/login">تسجيل الدخول</HeaderButton></ShowTimer> :
-          <HeaderButton to="/login" onClick={() => { logout() }} animationType={AnimationType.FADE_IN}>تسجيل الخروج</HeaderButton>}
-
-        <ShowTimer timeout={600} animationType={AnimationType.FADE_IN}><HeaderButton className={`inverted ${pathname.includes(`/login`) ? `selected ` : ``}`} to="/login"><FontAwesomeIcon icon={faSignature} fontSize={18} color="white" /> انضم الان</HeaderButton></ShowTimer>
+          <>
+            <ShowTimer timeout={500} animationType={AnimationType.FADE_IN}><HeaderButton className={`${pathname.includes(`/login`) ? `selected` : ``}`} to="/login">تسجيل الدخول</HeaderButton></ShowTimer>
+            <ShowTimer timeout={600} animationType={AnimationType.FADE_IN}><HeaderButton className={`inverted ${pathname.includes(`/login`) ? `selected ` : ``}`} to="/login"><FontAwesomeIcon icon={faSignature} fontSize={18} color="white" /> انضم الان</HeaderButton></ShowTimer>
+          </> :
+          <>
+            <HeaderButton className={`${pathname.startsWith(`/settings`) ? `selected` : ``}`} to="/settings/account-settings"><FontAwesomeIcon icon={faGear}></FontAwesomeIcon></HeaderButton>
+            <HeaderButton to="/login" onClick={() => { logout() }} animationType={AnimationType.FADE_IN}>تسجيل الخروج</HeaderButton>
+          </>
+        }
       </div>
 
 

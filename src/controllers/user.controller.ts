@@ -29,9 +29,16 @@ const deleteUser = async (userId: string) => {
   return response;
 }
 
+const deleteOwnedAccount = async () => {
+  const response = await axios.delete(`http://localhost:8000/user`);
+  return response;
+}
+
 const updateUser = async (userId: string, userData: IUser.UserData) => {
+  console.log(`userData: `, userData);
   const response = await axios.put(`http://localhost:8000/user/${userId}`, userData);
   return response;
 }
 
-export default { authUser, createNewUser, getUser, getAllUsers, deleteUser, updateUser };
+
+export default { authUser, createNewUser, getUser, getAllUsers, deleteUser, deleteOwnedAccount, updateUser };
