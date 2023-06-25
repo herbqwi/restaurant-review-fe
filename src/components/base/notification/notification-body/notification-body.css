@@ -2,7 +2,7 @@
     --success: #57cc99;
     --failed: #d4454f;
     --notice: #8e9aaf;
-    
+
     --success-font: #48ac81;
     --failed-font: #b43740;
     --notice-font: #5b6678;
@@ -107,10 +107,6 @@
     padding: 15px 0px;
     width: 70%;
     margin-left: 20px;
-}
-
-.notification .content p {
-    text-align: left;
 }
 
 .notification .content p:first-child {

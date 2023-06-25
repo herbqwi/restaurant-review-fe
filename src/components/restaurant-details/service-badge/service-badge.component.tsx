@@ -8,8 +8,6 @@ interface IProps {
 
 const ServiceBadge = ({ service }: IProps) => {
   const serviceInfo = IRestaurant.ServiceInfo[service];
-  console.log({ service, serviceInfo });
-  console.log(IRestaurant.Service.DELIVERY);
   return <div className="service-badge">
     <FontAwesomeIcon icon={serviceInfo.icon} />
     <p>{serviceInfo.name}</p>

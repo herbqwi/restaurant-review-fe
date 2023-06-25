@@ -28,7 +28,6 @@ const getReviews = async (restaurantId: string) => {
 }
 
 const addReview = async (restaurantId: string, review: IRestaurant.Review) => {
-  console.log(review);
   const response = await axios.post(`http://localhost:8000/restaurant/review/${restaurantId}`, review);
   return response;
 };

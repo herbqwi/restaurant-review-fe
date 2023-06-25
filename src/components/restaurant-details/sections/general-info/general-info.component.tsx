@@ -22,7 +22,7 @@ const GeneralInfoSection = ({ restaurant }: IProps) => {
     <div className="services">
       <p className='title'>الخدمات</p>
       <div className='content'>
-        {restaurant.value.services.map((service, i) => {console.log({service}); return <ShowTimer timeout={100 + (40 * i)}><ServiceBadge service={service}></ServiceBadge></ShowTimer>})}
+        {restaurant.value.services.map((service, i) => <ShowTimer timeout={100 + (40 * i)}><ServiceBadge service={service}></ServiceBadge></ShowTimer>)}
       </div>
 
     </div>

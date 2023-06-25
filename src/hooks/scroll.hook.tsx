@@ -4,7 +4,6 @@ const useScroll = (elementRef: any) => {
   const [isInView, setIsInView] = useState(false);
 
   useEffect(() => {
-    console.log(`heyyy`, elementRef)
     const handleScroll = () => {
       if (isInView) return;
       const boundingRect = elementRef?.getBoundingClientRect();

@@ -11,7 +11,6 @@ const useRestaurantDetails = () => {
     if (id != null)
       restaurantController.getRestaurant(id as string).then(
         (res) => {
-          console.log({ status: res.status });
           if (res.status != 200) return;
           setRestaurant(res.data);
         }

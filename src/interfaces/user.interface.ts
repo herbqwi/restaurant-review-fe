@@ -20,6 +20,7 @@ export namespace IUser {
     image?: string;
     role: Role;
     token?: string,
+    googleToken?: string | null,
     createdAt?: Date;
     updatedAt?: Date;
   }

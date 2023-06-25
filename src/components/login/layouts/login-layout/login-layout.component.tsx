@@ -23,7 +23,7 @@ const LoginLayout = ({ credentials, functions, className }: IProps) => {
     <h1>المصادقة</h1>
     <h2>قم بإدخال بيانات حسابك للدخول</h2>
     <div className='content'>
-      <Input required={true} onChange={(e: any) => email.set(e.target.value)} value={email.value} label='البريد الالكتروني' placeholder='mohammad@example.com'></Input>
+      <Input style={{ textAlign: 'right', direction: 'ltr' }} required={true} onChange={(e: any) => email.set(e.target.value)} value={email.value} label='البريد الالكتروني' placeholder='mohammad@example.com'></Input>
       <Input required={true} onChange={(e: any) => password.set(e.target.value)} value={password.value} label='كلمة المرور' placeholder='********' type={`password`}></Input>
       <p>نسيت كلمة المرور؟</p>
       <Button className='submit-button' type={`submit`}>تسجيل الدخول</Button>
@@ -33,3 +33,4 @@ const LoginLayout = ({ credentials, functions, className }: IProps) => {
 }
 
 export default LoginLayout;
+

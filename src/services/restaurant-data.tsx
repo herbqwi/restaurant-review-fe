@@ -8,7 +8,6 @@ const useGetRestaurant = () => {
     const getRestaurants = async () => {
         setState({ ...state, loading: true });
         const data = await getRestaurant();
-        console.log(data);
         setState({ loading: false, restaurantInfo: data });
     };
     useEffect(() => {

@@ -12,8 +12,6 @@ const useCustomerReviews = (restaurant: IProps) => {
 
   const fetchReviews = async () => {
     const reviews = await restaurantController.getReviews(restaurant.value._id as string);
-    console.log(`restaurants: `, { ...restaurant, reviews: reviews.data });
-    // console.log(`fetched reviews: `, reviews);
     restaurant.set({ ...restaurant.value, reviews: reviews.data })
   }
 

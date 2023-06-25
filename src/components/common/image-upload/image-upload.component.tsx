@@ -16,10 +16,6 @@ const ImageUpload = () => {
     }
   };
 
-  useEffect(() => {
-    console.log({base64Image});
-  }, [base64Image]);
-
   return (
     <div>
       <input type="file" onChange={handleImageUpload} />

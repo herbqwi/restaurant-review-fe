@@ -11,7 +11,7 @@ import Select from '../../../../components/common/select/select.component';
 
 const AccountSettingsSection = () => {
 
-  const { firstName, lastName, email, password, handleSubmit, deleteAccount } = useAccountSettings()
+  const { firstName, lastName, email, oldPassword, newPassword, city, handleSubmit, deleteAccount } = useAccountSettings()
 
 
   return <section className="contents account-settings">
@@ -21,19 +21,25 @@ const AccountSettingsSection = () => {
       </div>
     </ShowTimer>
 
-    <ContentContainer title="اعدادات حسابي" subtitle="عرف الاخرين بنفسك" handleSubmit={handleSubmit} savable={true}>
+    <ContentContainer title="اعدادات حسابي" subtitle="عرف الاخرين بنفسك" handleSubmit={handleSubmit.handleAccountSubmit} savable={true}>
       <div>
         <Input controller={firstName} label='الإسم الأول'></Input>
         <Input controller={lastName} label='الإسم الأخير'></Input>
       </div>
       <div>
         <Input disabled controller={email} label='البريد الإلكتروني'></Input>
-        <Select id="city" label="المدينة" options={Object.keys(IRestaurant.CityInfo).map(city => ({ value: city, content: IRestaurant.CityInfo[city as unknown as IRestaurant.City].arabicName }))}></Select>
+        <Select controller={city} id="city" label="المدينة" options={Object.keys(IRestaurant.CityInfo).map(city => ({ value: city, content: IRestaurant.CityInfo[city as unknown as IRestaurant.City].arabicName }))}></Select>
         {/* <Input disabled controller={password} type='password' label='المدينة'></Input> */}
       </div>
       <div className='footer'><p><FontAwesomeIcon icon={faExclamationCircle}></FontAwesomeIcon>تأكد من دقة معلوماتك الشخصية قبل حفظ النموذج</p></div>
     </ContentContainer>
-    <Button onClick={deleteAccount}>حذف الحساب</Button>
+    <ContentContainer title="تحديث كلمة المرور" index={1} handleSubmit={handleSubmit.handlePasswordSubmit} savable={true}>
+      <div>
+        <Input placeholder="********" type='password' controller={oldPassword} label='كلمة المرور القديمة'></Input>
+        <Input placeholder="********" type='password' controller={newPassword} label='كلمة المرور الجديدة'></Input>
+      </div>
+    </ContentContainer>
+    <ShowTimer timeout={50 + (50 * 2)}><Button onClick={deleteAccount}>حذف الحساب</Button></ShowTimer>
   </section>
 }
 

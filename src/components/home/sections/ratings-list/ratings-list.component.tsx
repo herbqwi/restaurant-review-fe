@@ -73,12 +73,14 @@ const RatingsListSection = ({ className }: IProps) => {
 
   useEffect(() => {
     axios.get(`http://localhost:8000/restaurant/reviews`).then((res: AxiosResponse<IRestaurant.Review>) => {
+      console.log(`res: `, res);
+      const review = res.data;
       setRatings([...ratings, {
         image: "😃",
-        name: "توفيق السعيد",
-        job: "بيتزا المدينة",
+        name: `review.userId`,
+        job: `qweasdzxc`,
         title: "جودة طعام رائعة!",
-        description: "تناولت البيتزا في هذا المطعم وكانت لذيذة للغاية! الخدمة سريعة والأجواء جميلة.",
+        description: review.content,
         stars: 5
       }])
     })

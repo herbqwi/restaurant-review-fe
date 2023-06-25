@@ -5,7 +5,6 @@ const authUser = async ({ credentials, token }: { credentials?: { email: string,
   const payload: any = {}
   if (credentials) payload.credentials = credentials
   if (token) payload.token = token
-  console.log(`before response`)
   try {
     const response = await axios.post(`http://localhost:8000/user/auth`, { credentials, token });
     return response;
@@ -24,8 +23,13 @@ const createNewUser = async (user: IUser.UserData) => {
 }
 
 const isEmailAvailable = async (email: string) => {
-  const response = await axios.get(`http://localhost:8000/user/email/${email}`);
-  return response;
+  try {
+    const response = await axios.get(`http://localhost:8000/user/email/${email}`);
+    if (response.status == 200) return true;
+    else return false;
+  } catch {
+    return false;
+  }
 }
 
 const getUser = async (userId: string) => {
@@ -49,7 +53,6 @@ const deleteOwnedAccount = async () => {
 }
 
 const updateUser = async (userId: string, userData: IUser.UserData) => {
-  console.log(`userData: `, userData);
   const response = await axios.put(`http://localhost:8000/user/${userId}`, userData);
   return response;
 }

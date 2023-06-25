@@ -8,7 +8,6 @@ import useRestaurantDetails from '../../hooks/pages/restaurant-details/restauran
 const RestaurantDetailsPage = () => {
 
   const { restaurant, functions } = useRestaurantDetails();
-  console.log(`restaurant: `, restaurant);
 
   return <>{
     restaurant.value != null && <div className="restaurant-details-page">

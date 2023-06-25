@@ -9,7 +9,6 @@ interface IProps {
 }
 
 const StarsRating = ({ rating, count, showText }: IProps) => {
-  console.log(`starsssss: `, rating);
   return <div className="stars-rating">
     <FontAwesomeIcon className={rating >= 1 ? `star-selected` : ``} icon={faStar} fontSize={23} color="orange" />
     <FontAwesomeIcon className={rating >= 2 ? `star-selected` : ``} icon={faStar} fontSize={23} color="orange" />

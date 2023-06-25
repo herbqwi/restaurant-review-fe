@@ -21,7 +21,6 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [authStatus, setAuthStatus] = useState<AUTH_STATUS>(AUTH_STATUS.CHECKING);
 
   const changeAxiosToken = (token: string) => {
-    console.log(`access token updated to: `, token);
     axios.defaults.headers.common['Authorization'] = token;
   }
 
@@ -47,7 +46,6 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   useEffect(() => {
-    console.log(`user updated: `, user);
     if (user && user.token) {
       localStorage.setItem(`access_token`, user.token);
     } else {

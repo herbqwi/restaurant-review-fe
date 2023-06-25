@@ -18,7 +18,7 @@ const LoginForm = () => {
       <img className='login-drawing' src={pizzaSketch} alt="" />
       <LoginLayout className={layout.value == ILogin.LAYOUT.LOGIN ? `zero` : (layout.value == ILogin.LAYOUT.REGISTER ? `n100` : `n200`)} credentials={credentials} functions={functions}></LoginLayout>
       <RegisterLayout className={layout.value == ILogin.LAYOUT.LOGIN ? `p100` : (layout.value == ILogin.LAYOUT.REGISTER ? `zero` : `n100`)} credentials={credentials} functions={functions}></RegisterLayout>
-      <AccountInfoLayout className={layout.value == ILogin.LAYOUT.LOGIN ? `p200` : (layout.value == ILogin.LAYOUT.REGISTER ? `p100` : `zero`)} accountInfo={accountInfo}></AccountInfoLayout>
+      <AccountInfoLayout className={layout.value == ILogin.LAYOUT.LOGIN ? `p200` : (layout.value == ILogin.LAYOUT.REGISTER ? `p100` : `zero`)} accountInfo={accountInfo} functions={functions}></AccountInfoLayout>
     </form></>
 }
 

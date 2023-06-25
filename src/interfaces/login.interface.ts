@@ -7,13 +7,13 @@ export namespace ILogin {
 
   export const LayoutInfo = {
     [LAYOUT.LOGIN]: {
-      height: '433px'
+      height: '430px'
     },
     [LAYOUT.REGISTER]: {
-      height: '476px'
+      height: '470px'
     },
     [LAYOUT.ACCOUNT_INFO]: {
-      height: '515px'
+      height: '535px'
     }
   }
 }

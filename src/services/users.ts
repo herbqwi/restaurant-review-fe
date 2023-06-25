@@ -18,7 +18,6 @@ const loginUser = (email: string, password: string) => {
       return await response.json();
     })
     .catch((error) => {
-      console.log(error.toString());
       alert(error.toString());
     });
 };

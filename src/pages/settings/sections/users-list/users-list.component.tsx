@@ -31,12 +31,9 @@ const UsersListSection = () => {
           if (response.status != 200) failed = true;
           else newUsers = newUsers.filter(user => user._id != userId);
         }
-        if (failed) {
-          console.log(`failed`);
+        if (failed)
           return;
-        }
         setUsers(newUsers);
-        console.log(`success`)
       }
     }
     setModalProps(modalProps)

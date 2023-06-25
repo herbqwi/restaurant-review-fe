@@ -50,7 +50,6 @@ function formatDate(date: Date): string {
 
 
 var date = new Date();
-console.log(formatDate(date));
 
 
 const restaurantsListElement = document.querySelector(".restaurants-page");

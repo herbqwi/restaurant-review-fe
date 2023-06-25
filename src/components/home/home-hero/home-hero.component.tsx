@@ -18,8 +18,6 @@ const HomeHero = () => {
   const navigate = useNavigate();
   const pathname = location.pathname;
 
-  console.log(`pathname: `, pathname.includes(`/home`));
-
   const selects = [
     <IconSelect icon={faCity} id="restaurant-city" options={[{ value: "hebron", content: "الخليل" }, { value: "hebron", content: "الخليل" }]}></IconSelect>,
     <IconSelect icon={faUtensils} id="restaurant-food-type" options={[{ value: "sh3bi", content: "شعبي" }, { value: "sh3bi", content: "شعبي" }]}></IconSelect>

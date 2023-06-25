@@ -38,7 +38,6 @@ const Map = ({ location, clickable }) => {
         // set a new marker
         markerRef.current = L.marker(latlng, { icon }).addTo(mapRef.current);
 
-        console.log('Clicked location:', event.latlng);
       };
 
       // Bind the click event

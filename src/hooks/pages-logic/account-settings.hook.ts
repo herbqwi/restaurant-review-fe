@@ -44,7 +44,6 @@ const useAccountSettings = () => {
     return updateUserInfo(user).then(item => {
     }).catch(error => {
       alert("Error updating the item");
-      console.log(error);
     });
   };
   return { ...state, setState, handleInputField ,UpdateUser };

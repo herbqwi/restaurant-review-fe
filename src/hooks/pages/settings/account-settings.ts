@@ -4,33 +4,53 @@ import { IUser } from '../../../interfaces/user.interface';
 import userController from '../../../controllers/user.controller';
 import { NotificationContext } from '../../../components/base/notification/notification-container/notification-container.component';
 import { NotificationType } from '../../../components/base/notification/notification-body/notification-body.component';
+import { IRestaurant } from '../../../interfaces/restaurant.interface';
 
 const useAccountSettings = () => {
   const { user } = useContext(UserContext);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('1234567890');
+  const [oldPassword, setOldPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [city, setCity] = useState<IRestaurant.City | null>(null)
   const { pushNotification } = useContext(NotificationContext);
 
   useEffect(() => {
-    console.log(`user2: `, user);
     if (user.value != null) {
       setFirstName(user.value?.firstName ?? '');
       setLastName(user.value?.lastName ?? '');
       setEmail(user.value?.email ?? '');
+      setCity(user.value?.city ? user.value.city as IRestaurant.City : IRestaurant.City.HEBRON);
     }
   }, [])
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleAccountSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const payload: any = {};
     if (firstName !== '') payload.firstName = firstName
     if (lastName !== '') payload.lastName = lastName
-    if (email !== '') payload.email = email
+    payload.city = city
     if (user != null) user.set((oldUser) => ({ ...oldUser, ...payload }));
+    setTimeout(async () => {
+      const response = await userController.updateUser(user.value?._id as string, { ...user.value, ...payload } as IUser.UserData);
+      if (response.status == 200) {
+        pushNotification(NotificationType.Success, 'تم تحديث معلومات الحساب بنجاح')
+      } else {
+        pushNotification(NotificationType.Failed, 'فشل تحديث معلومات الحساب')
+      }
+    }, 100);
+  }
+
+  const handlePasswordSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (user.value?.password != oldPassword) {
+      pushNotification(NotificationType.Failed, 'كلمة المرور القديمة خاطئة')
+      return;
+    }
     setTimeout(() => {
-      userController.updateUser(user.value?._id as string, { ...user.value, ...payload } as IUser.UserData);
+      userController.updateUser(user.value?._id as string, { ...user.value, password: newPassword } as IUser.UserData);
+      pushNotification(NotificationType.Success, 'تم تحديث كلمة المرور بنجاح')
     }, 100);
   }
 
@@ -44,8 +64,10 @@ const useAccountSettings = () => {
     firstName: { value: firstName, set: setFirstName },
     lastName: { value: lastName, set: setLastName },
     email: { value: email, set: setEmail },
-    password: { value: password, set: setPassword },
-    handleSubmit,
+    oldPassword: { value: oldPassword, set: setOldPassword },
+    newPassword: { value: newPassword, set: setNewPassword },
+    city: { value: city, set: setCity },
+    handleSubmit: { handleAccountSubmit, handlePasswordSubmit },
     deleteAccount
   }
 }
