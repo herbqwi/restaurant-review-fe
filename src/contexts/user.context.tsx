@@ -30,7 +30,7 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
     if (localAccessToken != null) {
       changeAxiosToken(localAccessToken);
       userController.authUser({ token: localAccessToken }).then(res => {
-        if (res.status === 200) {
+        if (res != null) {
           setUser({ ...res.data._doc, token: res.data.token });
         } else {
           setUser(null);

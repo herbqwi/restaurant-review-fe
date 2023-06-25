@@ -16,7 +16,7 @@ const RestaurantsSection = () => {
       </div>
     </ShowTimer>
 
-    <ContentContainer title="اعدادات مطاعمي المتاحة" subtitle="عرف الاخرين عن نفسك" savable={true}>
+    <ContentContainer title="اعدادات مطاعمي المتاحة" subtitle="عرف الاخرين بمطعمك" savable={true}>
       <div className='map-container'>
         <Map location={{ longitude: 25.1972, latitude: 55.2744 }} clickable={true}></Map>
       </div>

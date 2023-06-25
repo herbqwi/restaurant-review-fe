@@ -1,0 +1,54 @@
+.passwd-strength {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    font-size: 15px;
+    padding: 12px;
+    z-index: 10;
+    transform: translateX(-365px) translateY(55px);
+    padding-left: 15px;
+    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
+    width: 250px;
+    border-radius: 7px;
+}
+
+.passwd-strength .requirement {
+    margin-bottom: 6px;
+    color: #bc4749;
+    transition: .2s all;
+}
+
+.passwd-strength .requirement.satisfied {
+    margin-bottom: 6px;
+    color: rgb(61, 61, 61);
+}
+
+.strength-bar {
+    margin-top: 13px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.strength-bar .bar-container {
+    position: relative;
+    background-color: rgb(170, 170, 170);
+    border-radius: 2px;
+    width: calc((100%/3) - 5px);
+    height: 7px;
+    overflow: hidden
+}
+
+.strength-bar .bar {
+    width: 100%;
+    height: 100%;
+    background-color: red;
+    transform: translateX(100%);
+    transition: .2s all;
+}
+
+.strength-bar .bar.filled {
+    transform: translateX(0%);
+}

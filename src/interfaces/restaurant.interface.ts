@@ -3,6 +3,14 @@ import { ReactImageGalleryItem } from "react-image-gallery";
 
 export namespace IRestaurant {
 
+  export enum SortedBy {
+    BEST_MATCH,
+    MOST_SERVICES,
+    CLOSEST_DISTANCE,
+    LOWEST_RATED,
+    HIGHEST_RATED,
+  }
+
   export enum Service {
     DELIVERY,
     FREE_WIFI,
@@ -10,6 +18,15 @@ export namespace IRestaurant {
     PARKING,
     BUFFET,
     SUITABLE_FOR_SPECIAL_NEEDS,
+  }
+
+  export enum City {
+    HEBRON,
+    NABLUS,
+    JENIN,
+    RAMALLAH,
+    BETHLEHEM,
+    GAZA,
   }
 
   export enum Cuisine {
@@ -52,6 +69,27 @@ export namespace IRestaurant {
       icon: faChair,
     },
   };
+
+  export const CityInfo = {
+    [City.BETHLEHEM]: {
+      arabicName: 'بيت لحم',
+    },
+    [City.GAZA]: {
+      arabicName: 'غزة',
+    },
+    [City.HEBRON]: {
+      arabicName: 'الخليل',
+    },
+    [City.JENIN]: {
+      arabicName: 'جنين',
+    },
+    [City.NABLUS]: {
+      arabicName: 'نابلس',
+    },
+    [City.RAMALLAH]: {
+      arabicName: 'رام الله',
+    }
+  }
 
   export const CompanyInfo = {
     [Company.FAMILY]: `مع العائلة`,

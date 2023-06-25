@@ -5,12 +5,26 @@ const authUser = async ({ credentials, token }: { credentials?: { email: string,
   const payload: any = {}
   if (credentials) payload.credentials = credentials
   if (token) payload.token = token
-  const response = await axios.post(`http://localhost:8000/user/auth`, { credentials, token });
-  return response;
+  console.log(`before response`)
+  try {
+    const response = await axios.post(`http://localhost:8000/user/auth`, { credentials, token });
+    return response;
+  } catch {
+    return null;
+  }
 }
 
 const createNewUser = async (user: IUser.UserData) => {
-  const response = await axios.post(`http://localhost:8000/user`, user);
+  try {
+    const response = await axios.post(`http://localhost:8000/user`, user);
+    return response;
+  } catch {
+    return null;
+  }
+}
+
+const isEmailAvailable = async (email: string) => {
+  const response = await axios.get(`http://localhost:8000/user/email/${email}`);
   return response;
 }
 
@@ -41,4 +55,4 @@ const updateUser = async (userId: string, userData: IUser.UserData) => {
 }
 
 
-export default { authUser, createNewUser, getUser, getAllUsers, deleteUser, deleteOwnedAccount, updateUser };
+export default { authUser, createNewUser, isEmailAvailable, getUser, getAllUsers, deleteUser, deleteOwnedAccount, updateUser };
