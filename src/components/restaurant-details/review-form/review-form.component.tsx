@@ -21,9 +21,8 @@ const ReviewForm = ({ restaurantId, fetchReviews }: IProps) => {
   }} className={`review-form details${isDetailed.value ? ` detailed` : ``}`}>
     <div className="review-general-input">
       <StarsInput controller={starsReview}></StarsInput>
-      <select required value={company.value} onChange={(e) => { company.set(e.target.value == `0` ? IRestaurant.Company.FAMILY : IRestaurant.Company.FRIENDS) }} name="company" id="review-company">
-        <option value={IRestaurant.Company.FAMILY}>مع العائلة</option>
-        <option value={IRestaurant.Company.FRIENDS}>مع الأًصدقاء</option>
+      <select required value={company.value} onChange={(e) => { company.set(e.target.value as unknown as IRestaurant.Company) }} name="company" id="review-company">
+        {Object.keys(IRestaurant.CompanyInfo).map(company => <option value={company}>{IRestaurant.CompanyInfo[company as unknown as IRestaurant.Company]}</option>)}
       </select>
       <Button className='submit-comment' type="submit">إضافة تعليق</Button>
     </div>

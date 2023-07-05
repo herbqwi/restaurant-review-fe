@@ -38,35 +38,20 @@ export namespace IRestaurant {
 
   export enum Company {
     FAMILY,
-    FRIENDS
-  }
-
-  export enum Sutable {
-    FAMILY,
     CHILDREN,
     STUDY,
     SPECIAL_OCCASIONS,
     BIG_GROUPS
-
   }
 
-  export const SutableInfo = {
-    [Sutable.FAMILY]: {
-      name: "عائلات",
-    },
-    [Sutable.CHILDREN]: {
-      name: "أطفال",
-    },
-    [Sutable.STUDY]: {
-      name: "دراسة",
-    },
-    [Sutable.SPECIAL_OCCASIONS]: {
-      name: "مناسبات خاصة",
-    },
-    [Sutable.BIG_GROUPS]: {
-      name: "مجموعات كبيرة",
-    },
+  export const CompanyInfo = {
+    [Company.FAMILY]: "عائلات",
+    [Company.CHILDREN]: "أطفال",
+    [Company.STUDY]: "دراسة",
+    [Company.SPECIAL_OCCASIONS]: "مناسبات خاصة",
+    [Company.BIG_GROUPS]: "مجموعات كبيرة",
   };
+
 
   export const CuisineInfo = {
     [Cuisine.FAST_FOOD]: {
@@ -152,11 +137,6 @@ export namespace IRestaurant {
       arabicName: 'رام الله',
     }
   }
-
-  export const CompanyInfo = {
-    [Company.FAMILY]: `مع العائلة`,
-    [Company.FRIENDS]: `مع الأصدقاء`
-  };
 
   export interface Review {
     _id?: string;

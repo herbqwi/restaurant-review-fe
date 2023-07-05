@@ -73,7 +73,7 @@ const FilterBy = () => {
       <section className='suitable-for'>
         <p className='section-title'>مناسب ل</p>
         {
-          Object.keys(IRestaurant.SutableInfo).map((sut) => {
+          Object.keys(IRestaurant.CompanyInfo).map((sut) => {
             return (
               <div className='check'>
                 <input
@@ -87,7 +87,7 @@ const FilterBy = () => {
                     setParam('companies', updated);
                   }}
                 />
-                <label >{IRestaurant.SutableInfo[sut as unknown as IRestaurant.Sutable].name}</label>
+                <label >{IRestaurant.CompanyInfo[sut as unknown as IRestaurant.Company]}</label>
               </div>
             )
           })
