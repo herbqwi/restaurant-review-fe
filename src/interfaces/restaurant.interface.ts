@@ -3,14 +3,6 @@ import { ReactImageGalleryItem } from "react-image-gallery";
 
 export namespace IRestaurant {
 
-  export enum SortedBy {
-    BEST_MATCH,
-    MOST_SERVICES,
-    CLOSEST_DISTANCE,
-    LOWEST_RATED,
-    HIGHEST_RATED,
-  }
-
   export enum Service {
     DELIVERY,
     FREE_WIFI,
@@ -55,7 +47,7 @@ export namespace IRestaurant {
     STUDY,
     SPECIAL_OCCASIONS,
     BIG_GROUPS
-  
+
   }
 
   export const SutableInfo = {
@@ -139,7 +131,7 @@ export namespace IRestaurant {
       name: 'أكثر الخدمات',
     },
   };
-  
+
   export const CityInfo = {
     [City.BETHLEHEM]: {
       arabicName: 'بيت لحم',

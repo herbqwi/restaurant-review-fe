@@ -12,7 +12,7 @@ const Sort = () => {
     <div className='restaurants-list'>
       <span className='title'>أفضل المطاعم الشعبية في مدينة الخليل</span>
 
-      <div className="sort">      
+      <div className="sort">
         {
           Object.keys(IRestaurant.SortedByInfo).map((order) => {
             return (
@@ -21,7 +21,7 @@ const Sort = () => {
                   key={order}
                   label={IRestaurant.SortedByInfo[order as unknown as IRestaurant.SortedBy].name}
                   value={order}
-                  checked={myParams.orderByFromURL.includes(order)}
+                  checked={myParams.orderByURL.includes(order)}
                   onChange={(e: any) => {
                     setParam('sortedBy', e.target.value);
                   }}

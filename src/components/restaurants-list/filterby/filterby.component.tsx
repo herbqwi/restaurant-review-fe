@@ -1,7 +1,6 @@
 
 import './filterby.css';
 import useParams from '../../../hooks/params.hook';
-import React from 'react';
 
 import { IRestaurant } from '../../../interfaces/restaurant.interface';
 
@@ -28,14 +27,14 @@ const FilterBy = () => {
                 <input
                   type='checkbox'
                   value={adv}
-                  checked={myParams.orderByAdvFromURL.includes(adv)}
+                  checked={myParams.servicesURL.includes(adv)}
                   onChange={(e: any) => {
-                     const updated = e.target.checked
-                      ? [...myParams.orderByAdvFromURL, adv]
-                      : myParams.orderByAdvFromURL.filter(orders => orders !== adv);
+                    const updated = e.target.checked
+                      ? [...myParams.servicesURL, adv]
+                      : myParams.servicesURL.filter(orders => orders !== adv);
                     setParam('services', updated);
                   }}
-                  ></input>
+                ></input>
                 <label >{IRestaurant.ServiceInfo[adv as unknown as IRestaurant.Service].name}</label>
               </div>
             );
@@ -51,16 +50,16 @@ const FilterBy = () => {
           Object.keys(IRestaurant.CuisineInfo).map((kit) => {
             return (
               <div className='check'>
-                <input 
+                <input
                   type="checkbox"
                   value={kit}
-                  checked={myParams.orderByKitFromURL.includes(kit)}
+                  checked={myParams.cuisinesURL.includes(kit)}
                   onChange={(e: any) => {
                     const updated = e.target.checked
-                     ? [...myParams.orderByKitFromURL, kit]
-                     : myParams.orderByKitFromURL.filter(orders => orders !== kit);
-                   setParam('cuisines', updated);
-                 }}
+                      ? [...myParams.cuisinesURL, kit]
+                      : myParams.cuisinesURL.filter(orders => orders !== kit);
+                    setParam('cuisines', updated);
+                  }}
 
                 />
                 <label >{IRestaurant.CuisineInfo[kit as unknown as IRestaurant.Cuisine].name}</label>
@@ -77,16 +76,16 @@ const FilterBy = () => {
           Object.keys(IRestaurant.SutableInfo).map((sut) => {
             return (
               <div className='check'>
-                <input 
+                <input
                   type="checkbox"
                   value={sut}
-                  checked={myParams.orderBySutFromURL.includes(sut)}
+                  checked={myParams.companiesURL.includes(sut)}
                   onChange={(e: any) => {
                     const updated = e.target.checked
-                     ? [...myParams.orderBySutFromURL, sut]
-                     : myParams.orderBySutFromURL.filter(orders => orders !== sut);
-                   setParam('companies', updated);
-                 }}
+                      ? [...myParams.companiesURL, sut]
+                      : myParams.companiesURL.filter(orders => orders !== sut);
+                    setParam('companies', updated);
+                  }}
                 />
                 <label >{IRestaurant.SutableInfo[sut as unknown as IRestaurant.Sutable].name}</label>
               </div>
