@@ -3,6 +3,14 @@ import getRestaurant from "./restaurant_list";
 import { IRestaurant } from "../interfaces/restaurant.interface";
 import useParams from "../hooks/params.hook";
 
+interface RestaurantFilters {
+    name?: string;
+    services: string[];
+    cuisines: string[];
+    companies: string[];
+    city?: string;
+    sortedBy?: string;
+  }
 
 const useGetRestaurant = () => {
     const [state, setState] = useState<{ restaurantInfo: IRestaurant.RestaurantData[], loading: boolean }>({ restaurantInfo: [], loading: true });
@@ -15,8 +23,9 @@ const useGetRestaurant = () => {
         console.log(data);
         setState({ loading: false, restaurantInfo: data });
     };
+ 
     useEffect(() => {
-        getRestaurants();
+        getRestaurants({ services: [], cuisines: [], companies: [], name: '', city: '', sortedBy: '' });
     }, [myParams]);
     return { ...state, getRestaurants };
 };

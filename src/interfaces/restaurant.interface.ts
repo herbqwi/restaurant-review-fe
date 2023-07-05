@@ -49,6 +49,55 @@ export namespace IRestaurant {
     FRIENDS
   }
 
+  export enum Sutable {
+    FAMILY,
+    CHILDREN,
+    STUDY,
+    SPECIAL_OCCASIONS,
+    BIG_GROUPS
+  
+  }
+
+  export const SutableInfo = {
+    [Sutable.FAMILY]: {
+      name: "عائلات",
+    },
+    [Sutable.CHILDREN]: {
+      name: "أطفال",
+    },
+    [Sutable.STUDY]: {
+      name: "دراسة",
+    },
+    [Sutable.SPECIAL_OCCASIONS]: {
+      name: "مناسبات خاصة",
+    },
+    [Sutable.BIG_GROUPS]: {
+      name: "مجموعات كبيرة",
+    },
+  };
+
+  export const CuisineInfo = {
+    [Cuisine.FAST_FOOD]: {
+      name: "وجبات سريعة",
+    },
+    [Cuisine.HEALTHY]: {
+      name: "مأكولات صحية",
+    },
+    [Cuisine.ITALIAN]: {
+      name: "ايطالي",
+    },
+    [Cuisine.JAPANESE]: {
+      name: "ياباني",
+    },
+    [Cuisine.SEA_FOOD]: {
+      name: "مأكولات بحرية",
+    },
+    [Cuisine.CHINESE]: {
+      name: "صيني",
+    },
+  };
+
+
   export const ServiceInfo = {
     [Service.FREE_WIFI]: {
       name: 'انترنت مجاني',

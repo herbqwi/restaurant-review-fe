@@ -5,9 +5,23 @@ const useParams = () => {
   const [params, setParams] = useSearchParams();
 
   const myParams = useMemo(() => {
+    const searchTermsFromURL = params.get('searchTerms') || "";
+    const orderByFromURL = params.getAll('order') || [];
+    const orderByAdvFromURL = params.getAll('services') || [];
+    const orderByKitFromURL = params.getAll('cuisines') || [];
+    const orderBySutFromURL = params.getAll('companies') || [];
     const orderByFromURL = params.getAll('sortedBy') || '';
-    return { orderByFromURL };
+  
+    return {
+      searchTermsFromURL,
+      orderByFromURL,
+      orderByAdvFromURL,
+      orderByKitFromURL,
+      orderBySutFromURL,
+      orderByFromURL
+    };
   }, [params]);
+
 
   /**
    * Set query string parameter.
