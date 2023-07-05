@@ -5,9 +5,8 @@ const useParams = () => {
   const [params, setParams] = useSearchParams();
 
   const myParams = useMemo(() => {
-    const searchTermsFromURL = params.get('searchTerms') || "";
-    const orderByFromURL = params.get('order') || "";
-    return { searchTermsFromURL, orderByFromURL };
+    const orderByFromURL = params.getAll('sortedBy') || '';
+    return { orderByFromURL };
   }, [params]);
 
   /**
@@ -15,7 +14,7 @@ const useParams = () => {
    * @param {string} name Parameter name.
    * @param {string | string[] } value Parameter value.
    */
-  const setParam = (name: string, value: string) => {
+  const setParam = (name: string, value: string[]) => {
     const newParams = new URLSearchParams(params);
     newParams.delete(name);
     if (Array.isArray(value)) {

@@ -1,7 +1,7 @@
 
-const getRestaurant = () => {  
+const getRestaurant = (order:Number) => {  
 
-  return fetch(`http://localhost:8000/restaurant-list`,)
+  return fetch(`http://localhost:8000/restaurant?sortedBy=${order}`,)
   
     .then((response) =>  response.json() )
     .catch((error) => {

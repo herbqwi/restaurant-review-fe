@@ -37,6 +37,12 @@ export namespace IRestaurant {
     ITALIAN,
     JAPANESE,
   }
+  export enum SortedBy {
+    MOST_SERVICES,
+    CLOSEST_DISTANCE,
+    LOWEST_RATED,
+    HIGHEST_RATED,
+  }
 
   export enum Company {
     FAMILY,
@@ -70,6 +76,21 @@ export namespace IRestaurant {
     },
   };
 
+  export const SortedByInfo = {
+    [SortedBy.CLOSEST_DISTANCE]: {
+      name: 'أقرب مسافة',
+    },
+    [SortedBy.HIGHEST_RATED]: {
+      name: 'أعلى تقييم',
+    },
+    [SortedBy.LOWEST_RATED]: {
+      name: 'أقل تقييم',
+    },
+    [SortedBy.MOST_SERVICES]: {
+      name: 'أكثر الخدمات',
+    },
+  };
+  
   export const CityInfo = {
     [City.BETHLEHEM]: {
       arabicName: 'بيت لحم',

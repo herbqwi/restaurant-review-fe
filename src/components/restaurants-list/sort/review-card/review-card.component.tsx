@@ -5,6 +5,9 @@ import HeroSlider, { Slide } from "hero-slider";
 import { IRestaurant } from "../.../../../../../interfaces/restaurant.interface";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router";
+import StarsRating from "../../../common/stars-rating/stars-rating.component";
+import { calculateAvgStars } from "../../../../services/pages/restaurant-details/restaurant-details.service";
+import TextPrinter from "../../../printText/print-text.component";
 const ReviewCard = () => {
   const { restaurantInfo, loading } = useGetRestaurant();
   const navigate = useNavigate();
@@ -54,13 +57,9 @@ const ReviewCard = () => {
                   <p></p>
                 </div>
                 <div className="rate">
-                  <span className="share">مشاركة 125</span>
                   <div className="star">
-                    <Star size={30} color="#FFA500" weight="fill" />
-                    <Star size={30} color="#FFA500" weight="fill" />
-                    <Star size={30} color="#FFA500" weight="fill" />
-                    <Star size={30} color="#FFA500" weight="fill" />
-                    <Star size={30} color="#FFA500" weight="fill" />
+                    <StarsRating rating={calculateAvgStars(info)} count={info.reviews?.length || 0} showText={true}></StarsRating>
+
                   </div>
                 </div>
               </div>
@@ -77,13 +76,7 @@ const ReviewCard = () => {
               </div>
               <div className="feedback">
                 <ChatTeardropText size={24} color="#050505" weight="thin" />
-
-                {
-
-                  info.reviews?.map((com) => {
-                    return <p>{com.content}</p>
-                  })
-                }
+                <TextPrinter reviews={info.reviews || []} />
               </div>
             </div>
           </div>

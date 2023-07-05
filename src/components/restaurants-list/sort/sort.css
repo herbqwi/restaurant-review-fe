@@ -24,21 +24,14 @@
 
 .restaurants-list .sort .order {
   display: inline-flex;
-  padding: 5px 10px;
   border: 1px solid var(--outer-border);
   cursor: pointer;
   background-color: white;
+  padding: 5px 30px;
+  margin: 0 30px;
+  border-radius: 5px;
 }
 
-.restaurants-list .sort .order:first-child {
-  border-top-right-radius: 7px;
-  border-bottom-right-radius: 7px;
-}
-
-.restaurants-list .sort .order:nth-child(6) {
-  border-top-left-radius: 7px;
-  border-bottom-left-radius: 7px;
-}
 
 .restaurants-list .review-cards {
   margin-top: 15px;
