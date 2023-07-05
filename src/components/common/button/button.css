@@ -5,4 +5,14 @@
     border: 1px solid var(--outer-border);
     border-radius: 4px;
     height: 35px;
+    transition: .2s all;
+}
+
+.button:disabled {
+    filter: grayscale(.3);
+    cursor: default !important;
+}
+
+.button:disabled:active {
+    scale: 1 !important;
 }

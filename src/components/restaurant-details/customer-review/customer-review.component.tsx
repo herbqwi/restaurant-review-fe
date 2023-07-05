@@ -16,6 +16,8 @@ import { IUser } from '../../../interfaces/user.interface';
 import userController from '../../../controllers/user.controller';
 import { AxiosResponse } from 'axios';
 import StarsRating from '../../common/stars-rating/stars-rating.component';
+import reportController from '../../../controllers/report.controller';
+import { IReport } from '../../../interfaces/report.interface';
 
 interface IProps {
   review: IRestaurant.Review;
@@ -32,6 +34,8 @@ const CustomerReview = ({ review, fetchReviews, restaurantId }: IProps) => {
   const { setModalProps } = useContext(ModalContext)
   const { user } = useContext(UserContext);
   const [reviewerName, setReviewerName] = useState('');
+  const [reports, setReports] = useState<IReport.ReportData[]>([]);
+  const [hasReported, setHasReported] = useState(false);
 
   useEffect(() => {
     userController.getUser(review.userId).then((res: AxiosResponse<IUser.UserData>) => {
@@ -39,7 +43,15 @@ const CustomerReview = ({ review, fetchReviews, restaurantId }: IProps) => {
         setReviewerName(`${res.data.firstName} ${res.data.lastName}`)
       }
     })
+
+    reportController.getAllReports().then((res: AxiosResponse<IReport.ReportData[]>) => {
+      setReports(res.data.filter(report => report.restaurantId == restaurantId));
+    })
   }, [])
+
+  useEffect(() => {
+    setHasReported(reports.find(report => report.commentId == review._id) != null)
+  }, [reports])
 
   const isAdmin = false || review.userId == user.value?._id as string;
 
@@ -55,7 +67,7 @@ const CustomerReview = ({ review, fetchReviews, restaurantId }: IProps) => {
         <FontAwesomeIcon icon={faBullseye}></FontAwesomeIcon>
         <p>{IRestaurant.CompanyInfo[review.company]}</p>
       </div>
-      <Button onClick={() => {
+      <Button disabled={hasReported} onClick={() => {
         const modalProps: IModal = {
           header: {
             title: `تأكيد الأمر`,
@@ -68,12 +80,14 @@ const CustomerReview = ({ review, fetchReviews, restaurantId }: IProps) => {
               await restaurantController.deleteReview(restaurantId, review._id as string);
               await fetchReviews();
             } else {
+              await reportController.createNewReport({ restaurantId, commentId: review._id as string, fullName: `${user.value?.firstName} ${user.value?.lastName}` })
+              setHasReported(true)
               pushNotification(NotificationType.Success, `تمت عملية الإبلاغ عن اساءة بنجاح`);
             }
           }
         }
         setModalProps(modalProps)
-      }} className='options-comment' type="submit">{isAdmin ? "إزالة التعليق" : "إبلاغ عن اساءة"}</Button>
+      }} className='options-comment' type="submit">{isAdmin ? "إزالة التعليق" : (hasReported ? "تم الإبلاغ" : "إبلاغ عن اساءة")}</Button>
 
     </div>
 

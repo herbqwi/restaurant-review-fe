@@ -1,17 +1,20 @@
 .restaurant-details-page section.restaurant-hero .header {
   display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
 }
 
 .restaurant-details-page section.restaurant-hero .stars-rating {
+  margin-top: 7px;
   margin-right: 15px;
 }
 
-.restaurant-details-page section.restaurant-hero h1 {
+.restaurant-details-page section.restaurant-hero .title h1 {
   font-size: 24px;
   font-weight: 400;
 }
 
-.restaurant-details-page section.restaurant-hero p {
+.restaurant-details-page section.restaurant-hero .title p {
   position: relative;
   top: -9px;
   font-size: 13px;

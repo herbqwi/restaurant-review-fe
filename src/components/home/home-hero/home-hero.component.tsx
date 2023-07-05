@@ -10,6 +10,7 @@ import ShowTimer from '../../base/show-timer/show-timer.component';
 import { useLocation, useNavigate } from 'react-router';
 import { useEffect, useState } from 'react';
 import { smoothScrollTo } from '../../../services/general.utils';
+import { IRestaurant } from '../../../interfaces/restaurant.interface';
 
 const HomeHero = () => {
 

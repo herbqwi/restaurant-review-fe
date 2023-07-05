@@ -8,10 +8,11 @@ import ContentContainer from '../../content-container/content-container.componen
 import useAccountSettings from '../../../../hooks/pages/settings/account-settings';
 import { IRestaurant } from '../../../../interfaces/restaurant.interface';
 import Select from '../../../../components/common/select/select.component';
+import ImageEditor from '../../../../components/settings/image-editor/image-editor.component';
 
 const AccountSettingsSection = () => {
 
-  const { firstName, lastName, email, oldPassword, newPassword, city, handleSubmit, deleteAccount } = useAccountSettings()
+  const { firstName, lastName, email, oldPassword, newPassword, city, image, handleSubmit, deleteAccount } = useAccountSettings()
 
 
   return <section className="contents account-settings">
@@ -23,11 +24,14 @@ const AccountSettingsSection = () => {
 
     <ContentContainer title="اعدادات حسابي" subtitle="عرف الاخرين بنفسك" handleSubmit={handleSubmit.handleAccountSubmit} savable={true}>
       <div>
+        <ImageEditor controller={image}></ImageEditor>
+      </div>
+      <div>
         <Input controller={firstName} label='الإسم الأول'></Input>
         <Input controller={lastName} label='الإسم الأخير'></Input>
       </div>
       <div>
-        <Input disabled controller={email} label='البريد الإلكتروني'></Input>
+        <Input disabled LTRContent controller={email} label='البريد الإلكتروني'></Input>
         <Select controller={city} id="city" label="المدينة" options={Object.keys(IRestaurant.CityInfo).map(city => ({ value: city, content: IRestaurant.CityInfo[city as unknown as IRestaurant.City].arabicName }))}></Select>
         {/* <Input disabled controller={password} type='password' label='المدينة'></Input> */}
       </div>

@@ -20,6 +20,12 @@
     border-radius: 7px;
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
     transition: .3s all;
+    text-align: right;
+}
+
+.input-group>input.ltr-content {
+    text-align: right !important;
+    direction: ltr !important;
 }
 
 .input-group>label {

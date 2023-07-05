@@ -5,10 +5,11 @@ interface IProps {
   label: string;
   required?: boolean;
   controller?: { value: string, set: any },
+  LTRContent?: boolean,
   [key: string]: any;
 }
 
-const Input = ({ label, required, controller, ...props }: IProps) => {
+const Input = ({ label, required, controller, LTRContent, ...props }: IProps) => {
 
   return (
     <div className="input-group">
@@ -20,7 +21,7 @@ const Input = ({ label, required, controller, ...props }: IProps) => {
           </label>
         ) : null
       }
-      {controller ? <input value={controller.value} onChange={(e) => controller.set(e.target.value)} {...props} />
+      {controller ? <input className={LTRContent ? 'ltr-content' : ''} value={controller.value} onChange={(e) => controller.set(e.target.value)} {...props} />
         : <input {...props} />}
     </div>
   );

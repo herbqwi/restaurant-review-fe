@@ -14,6 +14,7 @@ const useAccountSettings = () => {
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [city, setCity] = useState<IRestaurant.City | null>(null)
+  const [image, setImage] = useState<string | null>(null);
   const { pushNotification } = useContext(NotificationContext);
 
   useEffect(() => {
@@ -21,15 +22,18 @@ const useAccountSettings = () => {
       setFirstName(user.value?.firstName ?? '');
       setLastName(user.value?.lastName ?? '');
       setEmail(user.value?.email ?? '');
+      setImage(user.value?.image ?? null);
       setCity(user.value?.city ? user.value.city as IRestaurant.City : IRestaurant.City.HEBRON);
     }
   }, [])
 
   const handleAccountSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    console.log(`my image: `, image);
     e.preventDefault();
     const payload: any = {};
     if (firstName !== '') payload.firstName = firstName
     if (lastName !== '') payload.lastName = lastName
+    payload.image = image ?? null;
     payload.city = city
     if (user != null) user.set((oldUser) => ({ ...oldUser, ...payload }));
     setTimeout(async () => {
@@ -67,6 +71,7 @@ const useAccountSettings = () => {
     oldPassword: { value: oldPassword, set: setOldPassword },
     newPassword: { value: newPassword, set: setNewPassword },
     city: { value: city, set: setCity },
+    image: { value: image, set: setImage },
     handleSubmit: { handleAccountSubmit, handlePasswordSubmit },
     deleteAccount
   }

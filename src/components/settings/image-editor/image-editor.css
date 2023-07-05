@@ -1,0 +1,56 @@
+.image-editor {
+  display: flex;
+}
+
+.image-editor .image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 84px;
+  height: 84px;
+  border: 1px solid rgb(153, 153, 153);
+  border-radius: 6px;
+}
+
+.image-editor .image-wrapper {
+  width: 80px;
+  height: 80px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.image-editor img,
+.image-editor svg {
+  width: 100%;
+  height: 100%;
+  transition: .2s all;
+}
+
+.image-editor .image-container:hover img {
+  scale: 1.06;
+}
+
+.image-editor .actions {
+  display: flex;
+  align-items: center;
+  margin-right: 25px;
+}
+
+.image-editor .actions .button {
+  margin-top: 0px;
+  background-color: white;
+  border: 1px solid var(--gray);
+  color: black;
+}
+
+.image-editor .actions .button:has(.svg-inline--fa) {
+  position: relative;
+  top: 1px;
+  width: 37px !important;
+  height: 37px !important;
+  border: none;
+}
+
+.image-editor .actions .button:not(:first-child) {
+  margin-right: 3px;
+}

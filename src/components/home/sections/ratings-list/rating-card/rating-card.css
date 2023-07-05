@@ -79,10 +79,17 @@
 }
 
 .rating-card-container .rating-card .content .subtitle {
-  font-size: 13px;
+  font-size: 14px;
   color: rgb(75, 75, 75);
   margin-top: 7px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  /* Show only 2 lines */
+  -webkit-box-orient: vertical;
 }
+
 
 .rating-card-container .rating-card .footer .stars-list {
   margin-top: 10px;

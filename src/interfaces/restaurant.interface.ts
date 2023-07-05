@@ -100,21 +100,14 @@ export namespace IRestaurant {
     _id?: string;
     company: Company,
     content: string,
-    positive: string,
-    negative: string,
+    positive?: string,
+    negative?: string,
     images?: string[];
     starRating: number;
     userId: string;
     restaurantId?: string,
-  }
-
-  export interface CardReview {
-    image: string,
-    name: string,
-    job: string,
-    title: string,
-    description: string
-    stars: number,
+    userName?: string;
+    restaurantName?: string;
   }
 
   export interface MenuItem {

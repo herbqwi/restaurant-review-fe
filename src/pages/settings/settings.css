@@ -8,6 +8,7 @@
 .settings-page .settings-container {
   display: flex;
   justify-content: space-between;
+  max-width: 1115px;
   width: 75%;
   margin-top: 150px;
   /* color: #0bf4c92e; */
