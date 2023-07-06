@@ -65,7 +65,7 @@ const CustomerReview = ({ review, fetchReviews, restaurantId }: IProps) => {
       </div>
       <div className='icon-text company'>
         <FontAwesomeIcon icon={faBullseye}></FontAwesomeIcon>
-        {/* <p>{IRestaurant.ServiceInfo[review.company]}</p> */}
+        <p>{IRestaurant.CompanyInfo[review.company]}</p>
       </div>
       <Button disabled={hasReported} onClick={() => {
         const modalProps: IModal = {

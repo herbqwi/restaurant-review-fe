@@ -11,29 +11,34 @@ import { useLocation, useNavigate } from 'react-router';
 import { useEffect, useState } from 'react';
 import { smoothScrollTo } from '../../../services/general.utils';
 import { IRestaurant } from '../../../interfaces/restaurant.interface';
+import useParams from '../../../hooks/params.hook';
 
 const HomeHero = () => {
 
-  const [search, setSearch] = useState(``);
-  const location = useLocation();
-  const navigate = useNavigate();
-  const pathname = location.pathname;
+  const { myParams, setParam } = useParams();
 
-  const selects = [
-    <IconSelect icon={faCity} id="restaurant-city" options={[{ value: "hebron", content: "الخليل" }, { value: "hebron", content: "الخليل" }]}></IconSelect>,
-    <IconSelect icon={faUtensils} id="restaurant-food-type" options={[{ value: "sh3bi", content: "شعبي" }, { value: "sh3bi", content: "شعبي" }]}></IconSelect>
-  ]
-
-  const doSearch = () => {
-    if (search != ``) {
-      navigate('/restaurants');
+  const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (myParams.searchTermsURL != ``) {
+      console.log()
+      navigate(`/restaurants${location.search}`);
       smoothScrollTo(320, pathname.includes(`/home`) ? 1000 : 400);
     }
   }
 
+  const location = useLocation();
+  const navigate = useNavigate();
+  const pathname = location.pathname;
+
+
+  const selects = [
+    <IconSelect value={Number(myParams.cityURL) as IRestaurant.City} onChange={(e: any) => setParam('city', `${e.target.value}`)} icon={faCity} id="restaurant-city" options={Object.keys(IRestaurant.CityInfo).map((cityInfo) => ({ value: cityInfo, content: IRestaurant.CityInfo[Number(cityInfo) as IRestaurant.City]?.arabicName }))}></IconSelect>,
+    <IconSelect value={Number(myParams.cuisinesURL.length ? myParams.cuisinesURL[0] : 0) as IRestaurant.Cuisine} onChange={(e: any) => setParam('cuisines', `${e.target.value}`)} icon={faUtensils} id="restaurant-food-type" options={Object.keys(IRestaurant.CuisineInfo).map((cuisineInfo) => ({ value: cuisineInfo, content: IRestaurant.CuisineInfo[Number(cuisineInfo) as IRestaurant.City].name }))}></IconSelect>,
+  ]
+
   return <>
     {(pathname.includes(`/home`) || pathname == `/restaurants`) &&
-      <div className={`home-hero${pathname.includes(`restaurants`) ? ` restaurants` : ``}`}>
+      <form onSubmit={submitHandler} className={`home-hero${pathname.includes(`restaurants`) ? ` restaurants` : ``}`}>
         <div className="overlay"></div>
         <div className='heading'>
           <ShowTimer timeout={0}><img src={tasitfyMinimal} alt="" /></ShowTimer>
@@ -41,10 +46,10 @@ const HomeHero = () => {
         </div>
         <div className="content">
           <ShowTimer timeout={70}><MultiInput elements={selects}></MultiInput></ShowTimer>
-          <ShowTimer timeout={110}><IconInput input={search} setInput={setSearch} icon={faMagnifyingGlass}>ابحث عن: مطعم, وجبة, مدينة ..</IconInput></ShowTimer>
-          <ShowTimer timeout={150}><IconButton onClick={doSearch} icon={faPizzaSlice} main>ابحث</IconButton></ShowTimer>
+          <ShowTimer timeout={110}><IconInput input={myParams.searchTermsURL} setInput={(e: string) => setParam('searchTerms', e)} icon={faMagnifyingGlass}>ابحث عن: مطعم, وجبة, مدينة ..</IconInput></ShowTimer>
+          <ShowTimer timeout={150}><IconButton type='submit' icon={faPizzaSlice} main>ابحث</IconButton></ShowTimer>
         </div>
-      </div>}</>
+      </form>}</>
 }
 
 export default HomeHero;

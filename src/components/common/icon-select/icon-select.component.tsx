@@ -8,13 +8,15 @@ interface IProps {
   options: {
     value: string,
     content: string,
-  }[]
+  }[],
+  value?: any,
+  onChange?: any,
 }
 
-const IconSelect = ({ icon, id, options }: IProps) => {
+const IconSelect = ({ icon, id, options, value, onChange }: IProps) => {
   return <div className='icon-select'>
     <FontAwesomeIcon icon={icon}></FontAwesomeIcon>
-    <select className='' name={id} id={id}>
+    <select value={value} onChange={onChange} className='' name={id} id={id}>
       {options.map(option => <option value={option.value}>{option.content}</option>)}
     </select>
   </div>

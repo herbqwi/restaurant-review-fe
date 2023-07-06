@@ -9,6 +9,7 @@ export namespace ISearchInput {
 
   export interface FilteredSearchItem {
     name: string,
+    value: string,
     type: SearchType,
   }
 }

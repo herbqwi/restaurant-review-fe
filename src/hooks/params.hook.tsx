@@ -6,6 +6,7 @@ const useParams = () => {
 
   const myParams = useMemo(() => {
     const searchTermsURL = params.get('searchTerms') || '';
+    const cityURL = params.getAll('city') || [];
     const servicesURL = params.getAll('services') || [];
     const cuisinesURL = params.getAll('cuisines') || [];
     const companiesURL = params.getAll('companies') || [];
@@ -13,6 +14,7 @@ const useParams = () => {
 
     return {
       searchTermsURL,
+      cityURL,
       servicesURL,
       cuisinesURL,
       companiesURL,
@@ -27,16 +29,18 @@ const useParams = () => {
    * @param {string | string[] } value Parameter value.
    */
   const setParam = (name: string, value: string | string[]) => {
-    const newParams = new URLSearchParams(params);
-    newParams.delete(name);
-    if (Array.isArray(value)) {
-      for (const item of value) {
-        newParams.append(name, item);
+    setParams(oldParams => {
+      const newParams = new URLSearchParams(oldParams);
+      newParams.delete(name);
+      if (Array.isArray(value)) {
+        for (const item of value) {
+          newParams.append(name, item);
+        }
+      } else if (value) {
+        newParams.set(name, value);
       }
-    } else if (value) {
-      newParams.set(name, value);
-    }
-    setParams(newParams);
+      return newParams;
+    });
   };
 
 
