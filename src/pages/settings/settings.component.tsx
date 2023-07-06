@@ -4,6 +4,7 @@ import AccountSettingsSection from './sections/account-settings/account-settings
 import SectionsNav from '../../components/settings/sections-nav/sections-nav.componnet';
 import RestaurantsSection from './sections/restaurants/restaurants.component';
 import UsersListSection from './sections/users-list/users-list.component';
+import ReportsListSection from './sections/reports/reports-list.component';
 
 const SettingsPage = () => {
   const { section } = useParams();
@@ -13,6 +14,7 @@ const SettingsPage = () => {
       {section == `account-settings` && <AccountSettingsSection />}
       {section == `restaurants` && <RestaurantsSection />}
       {section == `users` && <UsersListSection />}
+      {section == `reports` && <ReportsListSection />}
     </div>
   </div>
 }

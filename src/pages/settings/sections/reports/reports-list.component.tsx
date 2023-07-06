@@ -1,4 +1,3 @@
-import './users-list.css'
 import { faExclamationCircle, faTrash, faUtensils } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ShowTimer from '../../../../components/base/show-timer/show-timer.component';
@@ -10,10 +9,12 @@ import { IModal, ModalContext, ModalType } from '../../../../contexts/modal.cont
 import ConfirmDeleteUserModal from '../../../../components/modal/confirm-delete-user/confirm-delete-user.component';
 import { IUser } from '../../../../interfaces/user.interface';
 import userController from '../../../../controllers/user.controller';
+import ReportsTable from '../../../../components/settings/reports-table/reports-table.component';
+import { IReport } from '../../../../interfaces/report.interface';
 
-const UsersListSection = () => {
-  const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
-  const [users, setUsers] = useState<IUser.UserData[]>([])
+const ReportsListSection = () => {
+  const [selectedReports, setSelectedReports] = useState<string[]>([]);
+  const [reports, setReports] = useState<IReport.ReportData[]>([])
   const { setModalProps } = useContext(ModalContext)
 
   const deleteUsers = (usersId: string[]) => {
@@ -25,7 +26,7 @@ const UsersListSection = () => {
       body: <ConfirmDeleteUserModal count={usersId.length} />,
       submit: async () => {
         let failed = false;
-        let newUsers = users;
+        let newUsers = reports;
         for (const userId of usersId) {
           const response = await userController.deleteUser(userId);
           if (response.status != 200) failed = true;
@@ -33,7 +34,7 @@ const UsersListSection = () => {
         }
         if (failed)
           return;
-        setUsers(newUsers);
+        setReports(newUsers);
       }
     }
     setModalProps(modalProps)
@@ -42,14 +43,14 @@ const UsersListSection = () => {
   return <section className="contents restaurants">
     <ShowTimer timeout={0}>
       <div className='header'>
-        <h1>قائمة المستخدمين</h1>
+        <h1>قائمة الإبلاغات</h1>
         <div className="actions">
-          {selectedUsers.length != 0 && <Button onClick={() => { deleteUsers(selectedUsers) }} ><FontAwesomeIcon icon={faTrash}></FontAwesomeIcon></Button>}
+          {selectedReports.length != 0 && <Button onClick={() => { deleteUsers(selectedReports) }} ><FontAwesomeIcon icon={faTrash}></FontAwesomeIcon></Button>}
         </div>
       </div>
     </ShowTimer>
-    <ShowTimer timeout={50}><UsersTable users={{ value: users, set: setUsers }} selectedUsers={{ value: selectedUsers, set: setSelectedUsers }} deleteUsers={deleteUsers} /></ShowTimer>
+    <ShowTimer timeout={50}><ReportsTable reports={{ value: reports, set: setReports }} /></ShowTimer>
   </section>
 }
 
-export default UsersListSection;
+export default ReportsListSection;

@@ -1,9 +1,8 @@
-
 interface IProps {
    count?: number
 }
 
-const ConfirmDeleteModal = ({ count = 1 }: IProps) => {
+const ConfirmDeleteUserModal = ({ count = 1 }: IProps) => {
    return <div className="body confirm">
       <div className='content'>
          {count == 1 ? <p>هل أنت متأكد من رغبتك في حذف هذا الحساب؟</p> : <p>هل أنت متأكد من رغبتك في حذف هذه الحسابات؟</p>}
@@ -11,4 +10,4 @@ const ConfirmDeleteModal = ({ count = 1 }: IProps) => {
    </div>
 }
 
-export default ConfirmDeleteModal;
+export default ConfirmDeleteUserModal;
