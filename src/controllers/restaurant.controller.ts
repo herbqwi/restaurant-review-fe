@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { IRestaurant } from "../interfaces/restaurant.interface";
 
 
@@ -23,7 +23,7 @@ const updateRestaurant = async (restaurantId: string, restaurantData: IRestauran
 }
 
 const getReviews = async (restaurantId: string) => {
-  const response = await axios.get(`http://localhost:8000/restaurant/reviews/${restaurantId}`);
+  const response = await axios.get(`http://localhost:8000/restaurant/reviews/${restaurantId}`) as AxiosResponse<IRestaurant.Review[]>;
   return response;
 }
 

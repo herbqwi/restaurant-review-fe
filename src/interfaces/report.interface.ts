@@ -4,6 +4,7 @@ export namespace IReport {
     _id?: string;
     restaurantId: string,
     commentId: string,
+    content?: string,
     fullName: string,
     createdAt?: Date;
     updatedAt?: Date;
