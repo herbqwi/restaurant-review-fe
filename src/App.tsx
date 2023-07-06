@@ -38,8 +38,7 @@ function App() {
                   <Route path="/restaurants" element={<ShowTimer timeout={0}><RestaurantsListPage /></ShowTimer>} />
                   <Route path="/restaurant-details/:id" element={<ShowTimer timeout={0}><RestaurantDetailsPage /></ShowTimer>} />
                   <Route path="/settings" element={<Navigate to="/settings/account-settings" replace />} />
-                  <Route path="/settings/:section/:id" element={<ShowTimer timeout={0}><SettingsPage /></ShowTimer>} />
-                  <Route path="/settings/:section/:id/:selectedElement" element={<ShowTimer timeout={0}><ProtectedRoute><SettingsPage /></ProtectedRoute></ShowTimer>} />
+                  <Route path="/settings/:section?/:id?/:selectedElement?" element={<ShowTimer timeout={0}><ProtectedRoute><SettingsPage /></ProtectedRoute></ShowTimer>} />
                 </Routes>
               </NotificationProvider>
             </UserProvider>
