@@ -1,5 +1,17 @@
-const Locations=["الخليل","بيت لحم","نابلس","رام الله","دورا","يافا","عكا","اريحا"]
+const Locations = ["الخليل", "بيت لحم", "نابلس", "رام الله", "دورا", "يافا", "عكا", "اريحا"]
 const restaurantTypes = ["إيطالي", "صيني", "مكسيكي", "فرنسي", "ياباني", "هندي", "أمريكي"];
+const foodCategories = [
+  { english: "Meat", arabic: "لحوم" },
+  { english: "Seafood", arabic: "مأكولات بحرية" },
+  { english: "Bakery", arabic: "مخبوزات" },
+  { english: "Snacks", arabic: "وجبات خفيفة" },
+  { english: "Beverages", arabic: "مشروبات" },
+  { english: "Soups", arabic: "شوربات" },
+  { english: "Salads", arabic: "سلطات" },
+  { english: "Sweets", arabic: "حلويات" },
+];
+
+
 const services = [
   {
     serviceName: "توصيل",
@@ -22,10 +34,6 @@ const services = [
     serviceIcon: "🍴",
   },
   {
-    serviceName: "التوصيل السريع",
-    serviceIcon: "🛵",
-  },
-  {
     serviceName: "الدفع الإلكتروني",
     serviceIcon: "💳",
   },
@@ -41,7 +49,8 @@ const services = [
 
 
 export {
-    Locations,
-    restaurantTypes,
-    services
+  Locations,
+  restaurantTypes,
+  services,
+  foodCategories
 }

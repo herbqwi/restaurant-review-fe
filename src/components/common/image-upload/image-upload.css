@@ -1,0 +1,51 @@
+.uploaded-image {
+    width: 100px;
+    height: 90px;
+    border: 1px black solid;
+    padding: 4px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.img-master:hover{
+    transform: translateY(-5px);
+   
+}
+.uploaded-images {
+    display: flex;
+    overflow-x: auto;
+    max-width: 457px;
+    margin-top: 7px;
+    padding: 12px;
+    align-items: center;
+
+}
+
+.x-button {
+    height: 18px;
+    width: 0px;
+    border-radius: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    left: 89%;
+    top: -18px;
+}
+
+.img-master {
+    display: flex;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.file-upload-label{
+    display: flex;
+    cursor: pointer;
+    border: 2px gray solid ;
+    padding: 33px;
+    align-items: center;
+    border-radius:10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.file-upload-label:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}

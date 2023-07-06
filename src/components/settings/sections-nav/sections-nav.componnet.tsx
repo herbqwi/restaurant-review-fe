@@ -1,13 +1,21 @@
-import { faAngleLeft, faAngleRight, faArchive, faCog, faExchangeAlt, faHeadset, faIndustry, faPizzaSlice, faRightFromBracket, faTableColumns, faUserCog } from '@fortawesome/free-solid-svg-icons';
+import { faAdd, faAngleLeft, faAngleRight, faArchive, faCog, faEdit, faExchangeAlt, faHeadset, faIndustry, faPizzaSlice, faRightFromBracket, faTableColumns, faUserCog } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useState } from 'react';
-import { useNavigate, useParams } from 'react-router';
+import { useContext, useEffect, useState } from 'react';
+import { useNavigate, useParams,useLocation } from 'react-router';
 import ShowTimer from '../../base/show-timer/show-timer.component';
 import './sections-nav.css'
 import useSectionsNav from '../../../hooks/pages-logic/sections-nav.hook';
+import userController from '../../../controllers/user.controller';
 import { ISettings } from '../../../interfaces';
+import restaurantController from '../../../controllers/restaurant.controller';
+import { IRestaurant } from '../../../interfaces/restaurant.interface';
+import { UserContext } from '../../../contexts/user.context';
+import { IUser } from '../../../interfaces/user.interface';
+import React from 'react';
+import { json } from 'stream/consumers';
 
 const SectionItem = ({ sectionType, onClick }: { sectionType: ISettings.SectionType, onClick?: any }) => {
+
   const { helpers } = useSectionsNav();
   const clickHandler = () => { helpers.navigateToSection(sectionType) };
   const isSectionSelectedText = helpers.isSectionSelectedText(sectionType);
@@ -26,6 +34,23 @@ const DetailedSectionItem = ({ sectionName, sectionIcon, sectionType, isSelected
 }
 
 const SectionsNav = () => {
+  const { user } = useContext(UserContext);
+  const loc =  useLocation()
+  const nav =  useNavigate()
+  const [Restaurant, setRestaurant] = useState<[IRestaurant.RestaurantData]>()
+  useEffect(() => {
+
+    getdata()
+
+
+  }, [user])
+  const getdata = async () => {
+    const restinfo = await restaurantController.getRestauranByOwnerID(user.value?._id || "").then(res => {
+      setRestaurant(res.data||[])
+    })
+
+  }
+
   const { isExtendedView } = useSectionsNav();
 
   return <ShowTimer timeout={0}>
@@ -39,17 +64,15 @@ const SectionsNav = () => {
       </div>
 
       <div className='nav secondary-menu'>
+
         <DetailedSectionItem sectionName='الرجوع للخلف' sectionIcon={faAngleRight} sectionType={ISettings.SectionType.RESTAURANTS_LIST} isSelected={() => false} onClick={() => { isExtendedView.set(false) }}></DetailedSectionItem>
         <div className="scrollable">
-          <DetailedSectionItem sectionName='مطعم الخليل' sectionIcon={faPizzaSlice} sectionType={ISettings.SectionType.RESTAURANTS_LIST} isSelected={() => true}></DetailedSectionItem>
-          <DetailedSectionItem sectionName='مطعم الخليل' sectionIcon={faPizzaSlice} sectionType={ISettings.SectionType.RESTAURANTS_LIST} isSelected={() => false}></DetailedSectionItem>
-          <DetailedSectionItem sectionName='مطعم الخليل' sectionIcon={faPizzaSlice} sectionType={ISettings.SectionType.RESTAURANTS_LIST} isSelected={() => false}></DetailedSectionItem>
-          <DetailedSectionItem sectionName='مطعم الخليل' sectionIcon={faPizzaSlice} sectionType={ISettings.SectionType.RESTAURANTS_LIST} isSelected={() => false}></DetailedSectionItem>
-          <DetailedSectionItem sectionName='مطعم الخليل' sectionIcon={faPizzaSlice} sectionType={ISettings.SectionType.RESTAURANTS_LIST} isSelected={() => false}></DetailedSectionItem>
-          <DetailedSectionItem sectionName='مطعم الخليل' sectionIcon={faPizzaSlice} sectionType={ISettings.SectionType.RESTAURANTS_LIST} isSelected={() => false}></DetailedSectionItem>
-          <DetailedSectionItem sectionName='مطعم الخليل' sectionIcon={faPizzaSlice} sectionType={ISettings.SectionType.RESTAURANTS_LIST} isSelected={() => false}></DetailedSectionItem>
-          <DetailedSectionItem sectionName='مطعم الخليل' sectionIcon={faPizzaSlice} sectionType={ISettings.SectionType.RESTAURANTS_LIST} isSelected={() => false}></DetailedSectionItem>
-          <DetailedSectionItem sectionName='مطعم الخليل' sectionIcon={faPizzaSlice} sectionType={ISettings.SectionType.RESTAURANTS_LIST} isSelected={() => false}></DetailedSectionItem>
+          {Array.isArray(Restaurant)  && Restaurant.map((r) => {
+            return <DetailedSectionItem key={r.name || ""} sectionName={r.name || ""} sectionIcon={faEdit} sectionType={ISettings.SectionType.RESTAURANTS_LIST} isSelected={() => (loc.pathname.includes(`/settings/restaurants/${r.ownerId}/${r._id}`) ? true : false)} onClick={()=>{window.location.href=(`/settings/restaurants/${r.ownerId}/${r._id}`)}}></DetailedSectionItem>
+          })
+          }
+          <DetailedSectionItem sectionName='اضافة مطعم جديد' sectionIcon={faAdd} sectionType={ISettings.SectionType.RESTAURANTS_LIST} isSelected={() => (loc.pathname ===(`/settings/restaurants/${user.value?._id}`) ? true : false)} onClick={()=>{window.location.href=(`/settings/restaurants/${user.value?._id}`)}}></DetailedSectionItem>
+
         </div>
       </div>
 

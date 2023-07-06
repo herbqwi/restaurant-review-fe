@@ -14,10 +14,11 @@
 }
 
 .card .content {
-  padding: 10px 0;
+  padding: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  margin-right: 20px;
   height: 200px;
 }
 
@@ -67,10 +68,6 @@
 
 .card .case {
   margin-left: 35px;
-    display: flex;
-    align-items: center;
-    margin-top: 8px;
-    margin-right: 5px;
 }
 
 .card .status {
@@ -110,20 +107,4 @@
 }
 .service-name{
   margin: -6px 6px;
-  font-size: 15px;
 }
-.pre , .next{
-  border: 0;
-  position: static;
-  background-color: red;
-}
-.next:hover{
-  cursor: pointer;
-}
-
-
-
-
-
-
-

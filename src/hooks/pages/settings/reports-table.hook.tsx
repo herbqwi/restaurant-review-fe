@@ -1,63 +1,56 @@
-import { useContext, useEffect } from "react"
+import { useEffect, useState } from "react"
+import userController from "../../../controllers/user.controller"
 import { ColumnsType } from 'antd/es/table';
-import { message } from 'antd';
+import { Tag } from 'antd';
+import { IUser } from "../../../interfaces/user.interface";
 import { formatDate } from "../../../services/general.utils";
-import { IReport } from "../../../interfaces/report.interface";
-import reportController from "../../../controllers/report.controller";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEraser, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { IModal, ModalContext, ModalType } from "../../../contexts/modal.context";
-import ConfirmDeleteReportModal from "../../../components/modal/confirm-delete-comment/confirm-delete-comment.component";
+import { faAngleDoubleDown, faAngleDoubleUp, faUserXmark } from "@fortawesome/free-solid-svg-icons";
 
 interface DataType {
   key: string,
-  content: string,
   full_name: string,
-  reported_at: string,
-  action: IReport.ReportData
+  email: string,
+  created_at: string,
+  user_type: IUser.Role,
+  action: IUser.UserData
 }
 
 interface IProps {
-  reports: { value: IReport.ReportData[], set: any },
+  selectedReports: { value: string[], set: any },
+  reports: { value: IUser.UserData[], set: any },
+  deleteReports: any,
 }
 
-const useReportsTable = ({ reports }: IProps) => {
-  const { setModalProps } = useContext(ModalContext);
-
-  const confirmReport = (reportId: string) => {
-    const modalProps: IModal = {
-      header: {
-        title: `تأكيد الأمر`,
-      },
-      modalType: ModalType.CONFIRM,
-      body: <ConfirmDeleteReportModal />,
-      submit: async () => {
-        const response = await reportController.confirmReport(reportId)
-        if (response.status != 200)
-          return;
-        let newReports = reports.value.filter(report => report._id != reportId);
-        reports.set(newReports);
-      }
-    }
-    setModalProps(modalProps)
-  }
+const useReportsTable = ({ selectedReports, reports, deleteReports }: IProps) => {
 
   useEffect(() => {
-    reportController.getAllReports().then(res => {
+    userController.getAllUsers().then(res => {
       if (res.status != 200) {
-        message.error(`حدث خطأ اثناء نقل البيانات`)
+        // Error message
         return;
       }
-      reports.set(res.data);
+      // users.set(res.data);
     })
   }, [])
 
   const columns: ColumnsType<DataType> = [
     {
-      title: 'المحتوى',
-      dataIndex: 'content',
-      key: 'content',
-      render: (text) => text,
+      title: 'الصورة',
+      dataIndex: 'image',
+      key: 'image',
+      render: (base64) => base64 != `` ? <img className="user-img" src={base64} /> : <svg className="user-img" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 512 512" fill="none">
+        <g clip-path="url(#clip0_1765_7055)">
+          <path d="M0 0H512V512H0V0Z" fill="#222D3A" />
+          <path d="M330.085 110.955C311.299 90.672 285.059 79.5024 256.097 79.5024C226.981 79.5024 200.655 90.6044 181.955 110.762C163.053 131.141 153.843 158.838 156.005 188.746C160.292 247.751 205.192 295.75 256.097 295.75C307.003 295.75 351.826 247.76 356.18 188.765C358.371 159.128 349.103 131.489 330.085 110.955Z" fill="#B3BAC0" />
+          <path d="M53.9275 511.997H458.333C459 503 458.206 483.499 456.333 473.141C448.185 427.941 422.757 389.972 382.789 363.327C347.282 339.675 302.305 326.642 256.13 326.642C209.956 326.642 164.978 339.666 129.471 363.327C89.5038 389.982 64.0754 427.951 55.9275 473.15C54.0546 483.509 53.5001 504.5 53.9275 511.997Z" fill="#B3BAC0" />
+        </g>
+        <defs>
+          <clipPath id="clip0_1765_7055">
+            <rect width="512" height="512" fill="white" />
+          </clipPath>
+        </defs>
+      </svg>
     },
     {
       title: 'اسم المستخدم',
@@ -66,33 +59,56 @@ const useReportsTable = ({ reports }: IProps) => {
       render: (text) => text,
     },
     {
-      title: 'تاريخ الإبلاغ',
-      dataIndex: 'reported_at',
-      key: 'reported_at',
+      title: 'البريد الالكتروني',
+      dataIndex: 'email',
+      key: 'email',
       render: (text) => text,
+    },
+    {
+      title: 'تاريخ الإنشاء',
+      dataIndex: 'created_at',
+      key: 'created_at',
+      render: (text) => text,
+    },
+    {
+      title: 'نوع المستخدم',
+      dataIndex: 'user_type',
+      key: 'user_type',
+      render: (role) => <Tag color={IUser.RoleInfo[role as IUser.Role].color}>{IUser.RoleInfo[role as IUser.Role].arabicName}</Tag>,
     },
     {
       title: 'عملية',
       dataIndex: 'action',
       key: 'action',
-      render: (report) => <div className="actions">
-        <FontAwesomeIcon onClick={() => { confirmReport(report._id) }} className="clickable" icon={faEraser} />
-        <FontAwesomeIcon onClick={() => { reportController.deleteReport(report._id) }} className="clickable" icon={faTrash} />
+      render: (user) => <div className="actions">
+        {/* <FontAwesomeIcon onClick={() => { updateUserRole(user) }} className="clickable" icon={user.role == IUser.Role.DEFAULT ? faAngleDoubleUp : faAngleDoubleDown} /> */}
+        {/* <FontAwesomeIcon onClick={() => { deleteUsers([user._id]) }} className="clickable" icon={faUserXmark} /> */}
       </div>,
     },
   ];
 
-  const data: DataType[] | null = reports.value.map(report => {
+  const data: DataType[] | null = reports.value.map((report, i) => {
     return {
       key: report._id as string,
-      content: report.content as string,
-      full_name: report.fullName,
-      reported_at: formatDate((new Date(report.createdAt as Date))),
+      image: report.image,
+      full_name: `${report.firstName} ${report.lastName}`,
+      email: report.email,
+      created_at: formatDate((new Date(report.createdAt as Date))),
+      user_type: report.role,
       action: report
     }
   });
 
-  return { columns, data }
+  const rowSelection = {
+    onChange: (selectedRowKeys: React.Key[], selectedRows: DataType[]) => {
+      // selectedUsers.set(selectedRows.map(selectedItem => selectedItem.key))
+    },
+    getCheckboxProps: (user: DataType) => ({
+      id: user.key,
+    }),
+  };
+
+  return { columns, data, rowSelection }
 }
 
 export default useReportsTable;

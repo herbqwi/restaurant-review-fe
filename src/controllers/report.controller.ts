@@ -21,9 +21,4 @@ const deleteReport = async (reportId: string) => {
   return response;
 }
 
-const confirmReport = async (reportId: string) => {
-  const response = await axios.delete(`http://localhost:8000/report/confirm/${reportId}`);
-  return response;
-}
-
-export default { createNewReport, getReport, getAllReports, confirmReport, deleteReport };
+export default { createNewReport, getReport, getAllReports, deleteReport };

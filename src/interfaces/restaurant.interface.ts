@@ -153,20 +153,44 @@ export namespace IRestaurant {
   }
 
   export interface MenuItem {
+    _id?: string;
     name: string;
     description: string;
     ingredients: (string | null)[];
-    image: string;
+    RestaurantID: string;
+    images: string[];
     price: number;
     calories: number;
     category: string;
   }
 
   export interface Location {
-    longitude: number,
-    latitude: number,
+    lng: number,
+    lat: number,
   }
 
+  export interface Iservices {
+    ServiceName: string,
+    ServiceIcon: string,
+  }
+  export interface RestaurantData1 {
+    _id?: string;
+    name: string;
+    description: string;
+    address: string;
+    restaurantType: string;
+    location: any[];
+    place: string;
+    phoneNumber: string;
+    images: string[];
+    cuisine?: Cuisine;
+    services: IRestaurant.Service[];
+    reviews?: Review[];
+    menuItems?: MenuItem[],
+    ownerId: String;
+    createdAt?: Date;
+    updatedAt?: Date;
+  }
   export interface RestaurantData {
     _id: string;
     name: string;

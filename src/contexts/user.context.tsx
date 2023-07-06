@@ -7,14 +7,13 @@ interface IContext {
   user: { value: IUser.UserData | null, set: React.Dispatch<React.SetStateAction<IUser.UserData | null>> },
 }
 
+export const UserContext = React.createContext<IContext>({
+  user: { value: null, set: () => { } }
+});
 enum AUTH_STATUS {
   CHECKING,
   DONE
 }
-
-export const UserContext = React.createContext<IContext>({
-  user: { value: null, set: () => { } }
-});
 
 const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<IUser.UserData | null>(null);

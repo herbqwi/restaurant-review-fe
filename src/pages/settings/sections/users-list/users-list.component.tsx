@@ -7,7 +7,7 @@ import UsersTable from '../../../../components/settings/users-table/users-table.
 import Button from '../../../../components/common/button/button.component';
 import { useContext, useState } from 'react';
 import { IModal, ModalContext, ModalType } from '../../../../contexts/modal.context';
-import ConfirmDeleteUserModal from '../../../../components/modal/confirm-delete-user/confirm-delete-user.component';
+import ConfirmDeleteModal from '../../../../components/modal/confirm-delete/confirm-delete.component';
 import { IUser } from '../../../../interfaces/user.interface';
 import userController from '../../../../controllers/user.controller';
 
@@ -22,7 +22,7 @@ const UsersListSection = () => {
         title: `تأكيد الأمر`,
       },
       modalType: ModalType.CONFIRM,
-      body: <ConfirmDeleteUserModal count={usersId.length} />,
+      body: <ConfirmDeleteModal count={usersId.length} />,
       submit: async () => {
         let failed = false;
         let newUsers = users;

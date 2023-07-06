@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { IRestaurant } from '../../interfaces/restaurant.interface';
-import './print-text.css';
+
 interface IProps {
   reviews: IRestaurant.Review[];
 }
@@ -20,7 +20,7 @@ const TextPrinter = (props: IProps) => {
   }, [currentIndex, props.reviews]);
 
   return (
-    <p className='feed'>{props.reviews[currentIndex]?.content || ''}</p>
+    <p>{props.reviews[currentIndex]?.content || ''}</p>
   );
 };
 

@@ -65,10 +65,6 @@
   margin-top: 12px;
 }
 
-.restaurant-details-page section.customer-reviews .customer-review {
-  margin-top: 40px;
-}
-
 .restaurant-details-page .customer-review:first-child {
   margin-top: 15px;
 }

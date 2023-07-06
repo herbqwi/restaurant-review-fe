@@ -9,6 +9,7 @@ import { faGear, faIceCream, faPizzaSlice, faSignature } from '@fortawesome/free
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ShowTimer, { AnimationType } from "../show-timer/show-timer.component";
 import { UserContext } from "../../../contexts/user.context";
+import { IUser } from "../../../interfaces/user.interface";
 
 const Header = () => {
   const location = useLocation();
@@ -30,6 +31,7 @@ const Header = () => {
         <ShowTimer timeout={0} animationType={AnimationType.FADE_IN}><Logo></Logo></ShowTimer>
         <ShowTimer timeout={100} animationType={AnimationType.FADE_IN}><HeaderButton className={`${pathname == `/home` ? `selected` : ``}`} to="/home">الرئيسية</HeaderButton></ShowTimer>
         <ShowTimer timeout={200} animationType={AnimationType.FADE_IN}><HeaderButton className={`${pathname == `/restaurants` ? `selected` : ``}`} to="/restaurants">قائمة المطاعم</HeaderButton></ShowTimer>
+        {(user.value?.role !== IUser.Role.ADMIN && user.value !== null) && <ShowTimer timeout={300} animationType={AnimationType.FADE_IN}>{<HeaderButton className={`${pathname.includes(`/settings/restaurants/`) ? `selected` : ``}`} to={`/settings/restaurants/${user.value?._id}`}>إضافة مطعم</HeaderButton>}</ShowTimer>}
       </div>
 
       <div className="right-nav">

@@ -2,10 +2,13 @@ import './map.css';
 import React, { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
 
-const Map = ({ location, clickable }) => {
-  const { longitude, latitude } = location;
+const Map = ({ location, clickable, gps, prev }) => {
+  const { latitude, longitude } = location;
+
+console.log(longitude);
+
   const mapRef = useRef();
-  const markerRef = useRef(); // NEW - hold a ref to the marker
+  const markerRef = useRef(null); // NEW - hold a ref to the marker
   const accessToken = 'sk.eyJ1Ijoib21hcmhlcmJhd2kxOSIsImEiOiJjbGgxZDR6dWUxMjQ1M3NxdnhxMGE1bm9jIn0.hxApiX1mA_l5lZzLQabK8g';
   const mapStyle = 'mapbox/streets-v11';
 
@@ -17,15 +20,19 @@ const Map = ({ location, clickable }) => {
 
   useEffect(() => {
     if (!mapRef.current) {
-      // Create map instance
+      // Create map istance
+   
       mapRef.current = L.map('map', {
         center: [51.505, -0.09],
-        zoom: 0,
+        zoom: 0.5,
         zoomControl: true,
-      }).setView([longitude, latitude], 13);
+        
+      }).setView([latitude, longitude], 7);
 
-      // Add initial marker at the selected location
-      markerRef.current = L.marker([longitude, latitude], { icon }).addTo(mapRef.current);
+   
+
+        markerRef.current = L.marker([latitude,longitude], { icon }).addTo(mapRef.current);
+ 
 
       const handleClick = (event) => {
         const { latlng } = event;
@@ -37,6 +44,7 @@ const Map = ({ location, clickable }) => {
 
         // set a new marker
         markerRef.current = L.marker(latlng, { icon }).addTo(mapRef.current);
+        gps(event.latlng)
 
       };
 
@@ -61,7 +69,7 @@ const Map = ({ location, clickable }) => {
         mapRef.current = null;
       }
     };
-  }, []);
+  }, [prev]);
 
   return <div id="map" style={{ height: '100%', width: '100%' }} />;
 };

@@ -4,7 +4,6 @@ import './sort.css';
 import useParams from '../../../hooks/params.hook';
 import CheckBox from '../../checkbox/checkbox.component';
 import { IRestaurant } from '../../../interfaces/restaurant.interface';
-
 const Sort = () => {
   const { myParams, setParam } = useParams();
 

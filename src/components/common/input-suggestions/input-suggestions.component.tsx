@@ -12,7 +12,7 @@ const InputSuggestions = ({ searchFilters, setSearch }: IProps) => {
   return <>
     {
       searchFilters.length != 0 && <div className="input-suggestions">
-        {searchFilters.map(item => (<SuggestionItem icon={item.type == ISearchInput.SearchType.RESTAURANT ? faShop : (item.type == ISearchInput.SearchType.CITY) ? faCity : faBurger} item={item} setSearch={setSearch}></SuggestionItem>))}
+        {searchFilters.map(item => (<SuggestionItem icon={item.type == ISearchInput.SearchType.RESTAURANT ? faShop : (item.type == ISearchInput.SearchType.CITY) ? faCity : faBurger} content={item.name} setSearch={setSearch}></SuggestionItem>))}
       </div>
     }
   </>

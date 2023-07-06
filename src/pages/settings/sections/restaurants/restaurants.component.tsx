@@ -1,40 +1,63 @@
-import './restaurants.css'
-import { faAdd, faCity, faExclamationCircle, faUtensils } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import ShowTimer from '../../../../components/base/show-timer/show-timer.component';
-import Input from '../../../../components/common/input/input.component';
-import Button from '../../../../components/common/button/button.component';
-import ContentContainer from '../../content-container/content-container.component';
-import Map from '../../../../components/restaurant-details/map/map.component';
-import IconSelect from '../../../../components/common/icon-select/icon-select.component';
+import './restaurants.css';
+import Restaurant from '../addresturant/Restaurant';
+import AddFood from '../food/add-food/add-food-comp';
+import Viewfood from '../food/view-food/view-food-comp';
+import { useContext, useEffect, useMemo, useState } from 'react';
+import { useLocation } from "react-router-dom"
+import { Routes, Route, useParams } from 'react-router-dom';
+import { UserContext } from '../../../../contexts/user.context';
+import UpdateRestaurant from '../../../update-Restaurant/update.resturant.comp';
+import restaurantController from '../../../../controllers/restaurant.controller';
+import UpdateFood from '../../../Update-Food/update-food-comp';
+import { log } from 'console';
+
 
 const RestaurantsSection = () => {
-  return <section className="contents restaurants">
-    <ShowTimer timeout={0}>
-      <div className='header'>
-        <h1>اعدادات مطاعمي المتاحة</h1>
-      </div>
-    </ShowTimer>
+  const [base64Image, setBase64Image] = useState([]);
+  const [sections, setSection] = useState(0)
+  const [val, setval] = useState()
+  const { user } = useContext(UserContext);
+  const loc = useLocation()
+  const { section, id, selectedElement } = useParams();
 
-    <ContentContainer title="اعدادات مطاعمي المتاحة" subtitle="عرف الاخرين بمطعمك" savable={true}>
-      <div className='map-container'>
-        <Map location={{ longitude: 25.1972, latitude: 55.2744 }} clickable={true}></Map>
-      </div>
-      <hr />
-      <div>
-        <Input label='اسم المطعم'></Input>
-        <Input label='وصف المطعم'></Input>
-      </div>
-      <div>
-        <Input label='العنوان'></Input>
-        <Input label='رقم الهاتف'></Input>
-      </div>
-      <div>
-        <div className="input-container"><IconSelect icon={faCity} id="hey" options={[{ value: `hebron`, content: `الخليل` }, { value: `qwe2`, content: `qwe2` }]}></IconSelect></div>
-        <div className="input-container"><IconSelect icon={faUtensils} id="hey" options={[{ value: `sh3bi`, content: `شعبي` }, { value: `qwe2`, content: `qwe2` }]}></IconSelect></div>
-      </div>
-      <div className='footer'><p><FontAwesomeIcon icon={faExclamationCircle}></FontAwesomeIcon>تأكد من دقة المعلومات قبل حفظ النموذج</p></div>
-    </ContentContainer>
+  useEffect(() => {
+
+
+  }, [val, sections])
+
+  const handleUpdated = (value: any) => {
+
+    setval(value)
+    setSection(value[0].sec)
+
+  }
+
+
+
+
+
+  return <section className="contents restaurants">
+    {
+      loc.pathname === `/settings/restaurants/${user.value?._id}/${selectedElement?.toString()}` ?
+        <div className='button-header'>
+          <h3>اعدادات المطعم المحدد</h3>
+          <button className='food-button' type='button' onClick={() => setSection(1)}>وجبات</button>
+          <button className='food-button' type='button' onClick={() => setSection(2)}>عرض وجبات</button>
+          <button className='food-button' type='button' onClick={() => setSection(0)}>المطعم</button>
+        </div>
+        : <></>}
+    {
+      loc.pathname.includes(`restaurants/${user.value?._id}/${selectedElement}`) ?
+        <>
+          {sections !== 2 && <>
+            {sections === 0 && <UpdateRestaurant ></UpdateRestaurant>}
+            {sections === 3 ? <UpdateFood Foodinfo={val}></UpdateFood> : sections === 1 && <AddFood></AddFood>}</>}
+        </> : sections !== 2 && <>
+          {sections === 0 && <Restaurant></Restaurant>}
+
+        </>
+    }
+    {sections === 2 && <Viewfood handleUpdated={handleUpdated}></Viewfood>}
   </section>
 }
 

@@ -20,7 +20,7 @@ const CustomerReviewsSection = ({ restaurant, addReview }: IProps) => {
     {
       (restaurant.value.reviews && restaurant.value.reviews.length) ? <div className='customer-reviews'>
         {restaurant.value.reviews?.reverse().map(review => <ShowTimer timeout={350}><CustomerReview fetchReviews={functions.fetchReviews} review={review} restaurantId={restaurant.value._id as string}></CustomerReview></ShowTimer>)}
-      </div> : <p className='align-center'>لا توجد تعليقات</p>
+      </div> : null
     }
   </PageSection>
 }
