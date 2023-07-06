@@ -10,13 +10,13 @@ interface IProps {
 
 const StarsRating = ({ rating, count, showText }: IProps) => {
   console.log(`rating: `, rating);
-  return <div className="stars-rating">
+  return <div className="stars-rating">    
+  {showText && <p>{count} مشاركة</p>}
     <FontAwesomeIcon className={rating >= 1 ? `star-selected` : ``} icon={faStar} fontSize={23} color="#d2d2d2" />
     <FontAwesomeIcon className={rating >= 2 ? `star-selected` : ``} icon={faStar} fontSize={23} color="#d2d2d2" />
     <FontAwesomeIcon className={rating >= 3 ? `star-selected` : ``} icon={faStar} fontSize={23} color="#d2d2d2" />
     <FontAwesomeIcon className={rating >= 4 ? `star-selected` : ``} icon={faStar} fontSize={23} color="#d2d2d2" />
     <FontAwesomeIcon className={rating >= 5 ? `star-selected` : ``} icon={faStar} fontSize={23} color="#d2d2d2" />
-    {showText && <p>{count} مشاركة</p>}
   </div>
 }
 
