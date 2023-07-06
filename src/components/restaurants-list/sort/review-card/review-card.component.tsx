@@ -1,5 +1,5 @@
 import "./review-card.css";
-import { Star, ChatTeardropText, Spinner } from "@phosphor-icons/react";
+import { Star, ChatTeardropText, Spinner, CaretLeft, CaretRight } from "@phosphor-icons/react";
 import useGetRestaurant from "../../../../services/restaurant-data";
 import HeroSlider, { Slide } from "hero-slider";
 import { IRestaurant } from "../.../../../../../interfaces/restaurant.interface";
@@ -8,10 +8,16 @@ import { useNavigate } from "react-router";
 import StarsRating from "../../../common/stars-rating/stars-rating.component";
 import { calculateAvgStars } from "../../../../services/pages/restaurant-details/restaurant-details.service";
 import TextPrinter from "../../../printText/print-text.component";
+import { useState } from "react";
 const ReviewCard = () => {
   const { restaurantInfo, loading } = useGetRestaurant();
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 3;
   const navigate = useNavigate();
-
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = restaurantInfo?.slice(indexOfFirstItem, indexOfLastItem);  
+  
   return (
     <div >
       {loading ? (
@@ -24,25 +30,24 @@ const ReviewCard = () => {
         >
           <Spinner />
         </div>
-      ) : restaurantInfo?.length && restaurantInfo?.length !== 10 ? (
-        restaurantInfo.map((info) => {
+      ) : restaurantInfo?.length ? (
+        currentItems.map((info) => {
           return <div onClick={() => { navigate(`/restaurant-details/${info._id}`) }} className="card" key={info._id}>
             <HeroSlider
-              autoplay={{ autoplayDuration: 2000 }}
+              key={info._id + '-slider'}
+              autoplay={{ autoplayDuration: 1000, autoplayDebounce: 0 }}
               accessability={{ shouldDisplayButtons: false, shouldSlideOnArrowKeypress: false }}
-              width={200}
-              height={238}
+              width={190}
+              height={190}
+              style={{borderRadius:"5px",margin:"20px"}}
               controller={{
                 initialSlide: 1,
-                slidingDuration: 200,
-                slidingDelay: 100,
               }}
             >
               {
                 info.images.map((each, index) => {
                   return <Slide
                     key={index}
-                    label="Giau Pass - Italy"
                     background={{
                       backgroundImageSrc: each,
                     }}
@@ -59,7 +64,6 @@ const ReviewCard = () => {
                 <div className="rate">
                   <div className="star">
                     <StarsRating rating={calculateAvgStars(info)} count={info.reviews?.length || 0} showText={true}></StarsRating>
-
                   </div>
                 </div>
               </div>
@@ -67,8 +71,8 @@ const ReviewCard = () => {
               <div className="status">
                 {
                   info.services?.map((ser, index) => {
-                    return <div className="case">
-                      <FontAwesomeIcon icon={IRestaurant.ServiceInfo[ser]?.icon}></FontAwesomeIcon>
+                    return <div className="case" key={index}>
+                      <FontAwesomeIcon icon={IRestaurant.ServiceInfo[ser]?.icon} size="lg"></FontAwesomeIcon>
                       <span className="service-name">{IRestaurant.ServiceInfo[ser]?.name}</span>
                     </div>
                   })
@@ -81,12 +85,29 @@ const ReviewCard = () => {
             </div>
           </div>
         })
+        
       ) : (
         <div className="no-results">
           <p>No results found</p>
         </div>
       )
       }
+      <div className="pagination">
+        <button
+          onClick={() => setCurrentPage(prevPage => prevPage - 1)}
+          disabled={currentPage === 1}
+          className="pre"
+        >
+          <CaretRight size={25} weight="thin" />
+        </button>
+        <button
+          onClick={() => setCurrentPage(prevPage => prevPage + 1)}
+          disabled={indexOfLastItem >= restaurantInfo?.length}
+          className="next"
+        >
+          <CaretLeft size={25} weight="thin" />
+        </button>
+      </div>
     </div>
   )
 }
