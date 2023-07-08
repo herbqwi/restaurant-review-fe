@@ -7,6 +7,7 @@
   border-radius: 7px;
   margin: 15px;
   cursor: pointer;
+  width: 745px;
 }
 
 .card .border {
@@ -14,11 +15,10 @@
 }
 
 .card .content {
-  padding: 10px;
+  padding: 10px 0;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  margin-right: 20px;
+  justify-content: space-evenly;
   height: 200px;
 }
 
@@ -63,11 +63,15 @@
 .card .name-rate {
   display: flex;
   justify-content: space-between;
-  width: 95%;
+  width: 495px;
 }
 
 .card .case {
   margin-left: 35px;
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+    margin-right: 5px;
 }
 
 .card .status {
@@ -107,4 +111,20 @@
 }
 .service-name{
   margin: -6px 6px;
+  font-size: 15px;
 }
+.pre , .next{
+  border: 0;
+  position: static;
+  background-color: red;
+}
+.next:hover{
+  cursor: pointer;
+}
+
+
+
+
+
+
+

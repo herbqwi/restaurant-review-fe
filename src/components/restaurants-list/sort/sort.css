@@ -24,12 +24,9 @@
 
 .restaurants-list .sort .order {
   display: inline-flex;
-  border: 1px solid var(--outer-border);
   cursor: pointer;
   background-color: white;
-  padding: 5px 30px;
   margin: 0 30px;
-  border-radius: 5px;
 }
 
 

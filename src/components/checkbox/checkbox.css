@@ -20,14 +20,15 @@
 
 .checkbox-group>label {
   display: block;
-  font-size: 12px;
-  font-weight: bold;
-  text-transform: uppercase;
-  color: #666;
-  letter-spacing: 0.5px;
-  padding: 8px 10px;
-  cursor: pointer;
-  /* color: #627cd1; */
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #666;
+    letter-spacing: 0.5px;
+    padding: 8px 30px;
+    border-radius: 7px;
+    cursor: pointer;
+    border: 1px solid #e1cbc4;
 }
 
 .checkbox-group>label>span:nth-child(2) {
