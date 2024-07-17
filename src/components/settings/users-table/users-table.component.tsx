@@ -14,7 +14,7 @@ const UsersTable = ({ selectedUsers, users, deleteUsers, className }: IProps) =>
   const { columns, data, rowSelection } = useUsersTable({ selectedUsers, users, deleteUsers });
   return (
     <Table
-      className={`users-table${className ? ` ${className}` : ``}`}
+      className={`users-table${className ? ` ${className}` : ''}`}
       rowSelection={rowSelection}
       columns={columns}
       dataSource={data}

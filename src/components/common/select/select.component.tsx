@@ -8,13 +8,16 @@ interface IProps {
   options: {
     value: string,
     content: string,
-  }[]
+  }[],
+  defaultValue?: string,
+  [key: string]: any;
 }
 
-const Select = ({ id, label, controller, options }: IProps) => {
+const Select = ({ id, label, controller, options, defaultValue, ...props }: IProps) => {
   return <div className='input-group'>
     {label && <label><span>{label}</span>&nbsp;</label>}
-    <select value={controller?.value} onChange={(e) => controller?.set(e.target.value)} name={id} id={id}>
+    <select {...props} value={controller?.value || defaultValue} onChange={(e) => controller?.set(e.target.value)} name={id} id={id}>
+      {defaultValue && <option selected disabled value={defaultValue}>{defaultValue}</option>}
       {options.map(option => <option value={option.value}>{option.content}</option>)}
     </select>
   </div>

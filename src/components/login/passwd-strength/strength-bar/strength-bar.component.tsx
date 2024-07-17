@@ -10,13 +10,13 @@ const StrengthBar = () => {
 
     return <div className='strength-bar'>
         <div className='bar-container'>
-            <div style={{ backgroundColor: colors[strength] }} className={`bar ${strength >= 1 ? `filled` : ``}`}></div>
+            <div style={{ backgroundColor: colors[strength] }} className={`bar ${strength >= 1 ? `filled` : ''}`}></div>
         </div>
         <div className='bar-container'>
-            <div style={{ backgroundColor: colors[strength] }} className={`bar ${strength >= 2 ? `filled` : ``}`}></div>
+            <div style={{ backgroundColor: colors[strength] }} className={`bar ${strength >= 2 ? `filled` : ''}`}></div>
         </div>
         <div className='bar-container'>
-            <div style={{ backgroundColor: colors[strength] }} className={`bar ${strength >= 3 ? `filled` : ``}`}></div>
+            <div style={{ backgroundColor: colors[strength] }} className={`bar ${strength >= 3 ? `filled` : ''}`}></div>
         </div>
     </div>
 }

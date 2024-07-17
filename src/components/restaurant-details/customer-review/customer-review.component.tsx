@@ -53,7 +53,7 @@ const CustomerReview = ({ review, fetchReviews, restaurantId }: IProps) => {
     setHasReported(reports.find(report => report.commentId == review._id) != null)
   }, [reports])
 
-  const isAdmin = false || review.userId == user.value?._id as string;
+  const isAdmin = user.value?.role == IUser.Role.ADMIN || review.userId == user.value?._id as string;
 
   return <div className="customer-review">
     <div className='info'>
@@ -80,7 +80,8 @@ const CustomerReview = ({ review, fetchReviews, restaurantId }: IProps) => {
               await restaurantController.deleteReview(restaurantId, review._id as string);
               await fetchReviews();
             } else {
-              await reportController.createNewReport({ restaurantId, commentId: review._id as string, fullName: `${user.value?.firstName} ${user.value?.lastName}` })
+              const commentUser = ((await userController.getUser(review.userId)).data as IUser.UserData);
+              await reportController.createNewReport({ restaurantId, commentId: review._id as string, userId: user.value?._id as string, fullName: `${commentUser.firstName} ${commentUser.lastName}` })
               setHasReported(true)
               pushNotification(NotificationType.Success, `تمت عملية الإبلاغ عن اساءة بنجاح`);
             }
@@ -92,14 +93,14 @@ const CustomerReview = ({ review, fetchReviews, restaurantId }: IProps) => {
     </div>
 
     <div className='comment'>
-      <p ref={contentRef} className={content.isMinimized.value ? `minimized` : ``} onClick={content.isMinimized.toggle}>“ {review.content} ”</p>
+      <p ref={contentRef} className={content.isMinimized.value ? `minimized` : ''} onClick={content.isMinimized.toggle}>“ {review.content} ”</p>
       {review.positive && <div className='icon-text like'>
         <FontAwesomeIcon icon={faFaceGrin} />
-        <p ref={positiveRef} className={positive.isMinimized.value ? `minimized` : ``} onClick={positive.isMinimized.toggle}>{review.positive}</p>
+        <p ref={positiveRef} className={positive.isMinimized.value ? `minimized` : ''} onClick={positive.isMinimized.toggle}>{review.positive}</p>
       </div>}
       {review.negative && <div className='icon-text dislike'>
         <FontAwesomeIcon icon={faFaceAngry} />
-        <p ref={negativeRef} className={negative.isMinimized.value ? `minimized` : ``} onClick={negative.isMinimized.toggle}>{review.negative}</p>
+        <p ref={negativeRef} className={negative.isMinimized.value ? `minimized` : ''} onClick={negative.isMinimized.toggle}>{review.negative}</p>
       </div>}
     </div>
   </div>

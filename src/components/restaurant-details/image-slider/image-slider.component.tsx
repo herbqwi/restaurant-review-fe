@@ -10,8 +10,8 @@ interface IProps {
 const ImageSlider = ({ images, className, setSliderShown }: IProps) => {
     const sliderImages = images.map(image => ({ original: image, thumbnail: image }))
     return <>
-        <div onClick={() => { setSliderShown(false) }} className={`modal-background-opacity${className ? ` ${className}` : ``}`}></div>
-        <div className={`image-slider${className ? ` ${className}` : ``}`}>
+        <div onClick={() => { setSliderShown(false) }} className={`modal-background-opacity${className ? ` ${className}` : ''}`}></div>
+        <div className={`image-slider${className ? ` ${className}` : ''}`}>
             <ReactImageGallery items={sliderImages} />
         </div>
     </>

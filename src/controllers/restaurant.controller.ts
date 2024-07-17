@@ -2,7 +2,12 @@ import axios from "axios";
 import { IRestaurant } from "../interfaces/restaurant.interface";
 
 
+<<<<<<< HEAD
 const createNewRestaurant = async (restaurant: IRestaurant.RestaurantData1) => {
+=======
+const createNewRestaurant = async (restaurant: IRestaurant.RestaurantData) => {
+  console.log(`Created: `, restaurant);
+>>>>>>> development
   const response = await axios.post(`http://localhost:8000/restaurant`, restaurant);
   return response;
 }
@@ -24,7 +29,17 @@ const getRestauranByOwnerIDandName = async (OwnerID: string,restaurantId: string
 }
 
 
-const deleteRestaurat = async (restaurantId: string) => {
+const getRestaurantByOwnerIDandName = async (ownerID: string, restaurantId: string) => {
+  const response = await axios.get(`http://localhost:8000/restaurant/${ownerID}/${restaurantId}`);
+  return response;
+}
+
+const getRestaurantsByOwnerID = async (ownerID: string) => {
+  const response = await axios.get(`http://localhost:8000/restaurant/owner/${ownerID}`);
+  return response;
+}
+
+const deleteRestaurant = async (restaurantId: string) => {
   const response = await axios.delete(`http://localhost:8000/restaurant/${restaurantId}`);
   return response;
 }
@@ -50,4 +65,8 @@ const deleteReview = async (restaurantId: string, reviewId: string) => {
   return response;
 };
 
+<<<<<<< HEAD
 export default { createNewRestaurant,getRestauranByOwnerIDandName,getRestauranByOwnerID, getRestaurant, deleteRestaurat, updateRestaurant, getReviews, addReview, deleteReview };
+=======
+export default { createNewRestaurant, getRestaurant, getRestaurantByOwnerIDandName, getRestaurantsByOwnerID, deleteRestaurant, updateRestaurant, getReviews, addReview, deleteReview };
+>>>>>>> development

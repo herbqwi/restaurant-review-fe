@@ -1,0 +1,21 @@
+.restaurants .service-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.restaurants .service-container .flex-service {
+  display: flex;
+}
+
+.restaurants .service-container .flex-service .div-check {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.restaurants .service-container .flex-service .div-check:first-child input {
+  margin-right: 0px;
+}
+
+.restaurants .service-container .flex-service .div-check input {
+  margin: 0px 10px;
+}

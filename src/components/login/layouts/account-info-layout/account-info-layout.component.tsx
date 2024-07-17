@@ -33,7 +33,7 @@ interface IProps {
 const AccountInfoLayout = ({ accountInfo, functions, className }: IProps) => {
   const { img, firstName, lastName, phoneNumber, city } = accountInfo;
 
-  return <div className={`form-contents${className ? ` ${className}` : ``}`}>
+  return <div className={`form-contents${className ? ` ${className}` : ''}`}>
     <h1>البيانات الشخصية</h1>
     <h2>قم بإدخال بياناتك الشخصية للمتابعة</h2>
     <div className='content'>

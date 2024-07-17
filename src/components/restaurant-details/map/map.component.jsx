@@ -1,12 +1,21 @@
 import './map.css';
 import React, { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
+import { IRestaurant } from '../../../interfaces/restaurant.interface';
 
+const Map = ({ location, clickable, gps, prev }) => {
+  const { latitude, longitude } = location;
+
+  console.log(longitude);
+
+<<<<<<< HEAD
 const Map = ({ location, clickable, gps, prev }) => {
   const { latitude, longitude } = location;
 
 console.log(longitude);
 
+=======
+>>>>>>> development
   const mapRef = useRef();
   const markerRef = useRef(null); // NEW - hold a ref to the marker
   const accessToken = 'sk.eyJ1Ijoib21hcmhlcmJhd2kxOSIsImEiOiJjbGgxZDR6dWUxMjQ1M3NxdnhxMGE1bm9jIn0.hxApiX1mA_l5lZzLQabK8g';
@@ -21,11 +30,16 @@ console.log(longitude);
   useEffect(() => {
     if (!mapRef.current) {
       // Create map istance
+<<<<<<< HEAD
    
+=======
+
+>>>>>>> development
       mapRef.current = L.map('map', {
         center: [51.505, -0.09],
         zoom: 0.5,
         zoomControl: true,
+<<<<<<< HEAD
         
       }).setView([latitude, longitude], 7);
 
@@ -33,6 +47,15 @@ console.log(longitude);
 
         markerRef.current = L.marker([latitude,longitude], { icon }).addTo(mapRef.current);
  
+=======
+
+      }).setView([latitude, longitude], 7);
+
+
+
+      markerRef.current = L.marker([latitude, longitude], { icon }).addTo(mapRef.current);
+
+>>>>>>> development
 
       const handleClick = (event) => {
         const { latlng } = event;
@@ -44,7 +67,13 @@ console.log(longitude);
 
         // set a new marker
         markerRef.current = L.marker(latlng, { icon }).addTo(mapRef.current);
+<<<<<<< HEAD
         gps(event.latlng)
+=======
+        console.log(`latlng: `, { latitude: latlng.lat, longitude: latlng.lng });
+        const lt = { latitude: latlng.lat, longitude: latlng.lng };
+        gps(lt)
+>>>>>>> development
 
       };
 

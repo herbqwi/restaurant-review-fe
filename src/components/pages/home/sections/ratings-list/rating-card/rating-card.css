@@ -91,18 +91,10 @@
 }
 
 
-.rating-card-container .rating-card .footer .stars-list {
+.rating-card-container .rating-card .footer .stars-rating {
   margin-top: 10px;
 }
 
-.rating-card-container .rating-card .footer .stars-list svg {
+.rating-card-container .rating-card .footer .stars-rating svg {
   font-size: 27px;
-}
-
-.rating-card-container .rating-card .footer .stars-list>* {
-  transition: .3s all;
-}
-
-.rating-card-container .rating-card .footer .stars-list>*:hover {
-  color: gold;
 }

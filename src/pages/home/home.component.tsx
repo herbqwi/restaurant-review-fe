@@ -1,18 +1,10 @@
 import ShowTimer from '../../components/base/show-timer/show-timer.component';
-import HomeHero from '../../components/home/home-hero/home-hero.component';
-import RatingsListSection from '../../components/home/sections/ratings-list/ratings-list.component';
-import './home.css'
+import RatingsListSection from '../../components/pages/home/sections/ratings-list/ratings-list.component';
 
-interface IProps {
-  className?: string,
+export default function HomePage() {
+  return (
+    <main>
+      <ShowTimer timeout={150}><RatingsListSection /></ShowTimer>
+    </main>
+  )
 }
-
-const HomePage = ({ className }: IProps) => {
-  return <div className={`home-page ${className ? ` ${className}` : ``}`}>
-    <div className="body">
-      <ShowTimer timeout={150}><RatingsListSection></RatingsListSection></ShowTimer>
-    </div>
-  </div>
-}
-
-export default HomePage;

@@ -9,6 +9,7 @@ import { NotificationType } from "../components/base/notification/notification-b
 import { ILogin } from "../interfaces/login.interface";
 import { IRestaurant } from "../interfaces/restaurant.interface";
 import { useGoogleLogin } from "@react-oauth/google"
+import { AxiosResponse } from "axios";
 
 export const useLogin = () => {
   const navigate = useNavigate();
@@ -16,6 +17,8 @@ export const useLogin = () => {
   const [isRegisterLayout, setRegisterLayout] = useSParams<boolean>(`register`);
   const [layout, setLayout] = useState<ILogin.LAYOUT>(isRegisterLayout ? ILogin.LAYOUT.REGISTER : ILogin.LAYOUT.LOGIN);
   const { pushNotification } = useContext(NotificationContext);
+
+  const [registeredUser, setRegisteredUser] = useState<IUser.UserData>();
 
   const [googleToken, setGoogleToken] = useState<string | null>(null);
   const [email, setEmail] = useState<string>('')
@@ -26,6 +29,8 @@ export const useLogin = () => {
   const [lastName, setLastName] = useState<string>('')
   const [phoneNumber, setPhoneNumber] = useState<string>('')
   const [city, setCity] = useState<IRestaurant.City | null>(null)
+  const [securityQuestion, setSecurityQuestion] = useState<IUser.SecurityQuestion | null>(null);
+  const [securityAnswer, setSecurityAnswer] = useState<string>('');
 
 
   useEffect(() => {
@@ -42,6 +47,8 @@ export const useLogin = () => {
     setEmail('');
     setPassword('');
     setConfirmPassword('');
+    setSecurityQuestion(null);
+    setSecurityAnswer('');
     setGoogleToken(null);
   }
 
@@ -89,17 +96,41 @@ export const useLogin = () => {
         return;
       }
       setLayout(ILogin.LAYOUT.ACCOUNT_INFO);
-    } else {
+    } else if (layout == ILogin.LAYOUT.ACCOUNT_INFO) {
       console.log(`city: `, city);
       const response = await userController.createNewUser({ email, password, firstName, lastName, phoneNumber, city, role: IUser.Role.DEFAULT, googleToken })
       if (!response) {
         pushNotification(NotificationType.Failed, 'حدث خطأ اثناء عملية التسجيل')
         return;
       }
+      setRegisteredUser(response.data);
       pushNotification(NotificationType.Success, 'تم التسجيل بنجاح')
       clearFields();
+      setLayout(ILogin.LAYOUT.SECURITY_QUESTION);
+    } else if (layout == ILogin.LAYOUT.FORGOT_PASSWORD) {
+      const response = await userController.getUserByEmail(email) as AxiosResponse<IUser.UserData>;
+      const { securityQuestion: userSecurityQuestion, securityAnswer: userSecurityAnswer } = response.data;
+      console.log(`response: `, response);
+      console.log({ userSecurityQuestion, userSecurityAnswer })
+      if (userSecurityQuestion == securityQuestion && userSecurityAnswer == securityAnswer) {
+        setLayout(ILogin.LAYOUT.NEW_PASSWORD);
+        clearFields();
+      } else {
+        pushNotification(NotificationType.Failed, 'المعلومات المدخلة غير صحيحة')
+      }
+    } else if (layout == ILogin.LAYOUT.NEW_PASSWORD) {
+      clearFields();
       setLayout(ILogin.LAYOUT.LOGIN);
-      // user.set({ ...response.data._doc, token: response.data.token });
+    } else {
+      if (!securityQuestion || securityAnswer == '') {
+        pushNotification(NotificationType.Failed, 'جميع الحقول مطلوبة')
+        return;
+      }
+      if (registeredUser) {
+        const response = await userController.updateUser(registeredUser._id as string, { ...registeredUser, securityQuestion, securityAnswer })
+        console.log(`updated: `, response);
+      }
+      setLayout(ILogin.LAYOUT.LOGIN);
     }
   }
 
@@ -117,6 +148,10 @@ export const useLogin = () => {
       phoneNumber: { value: phoneNumber, set: setPhoneNumber },
       city: { value: city, set: setCity }
     },
+    securityQuestion: {
+      securityQuestion: { value: securityQuestion, set: setSecurityQuestion },
+      securityAnswer: { value: securityAnswer, set: setSecurityAnswer },
+    },
     layout: { value: layout, set: setLayout },
     functions: {
       toggleLayout,
@@ -125,3 +160,17 @@ export const useLogin = () => {
     }
   }
 }
+
+
+
+    //   console.log(`city: `, city);
+    //   const response = await userController.createNewUser({ email, password, firstName, lastName, phoneNumber, city, role: IUser.Role.DEFAULT, googleToken })
+    //   if (!response) {
+    //     pushNotification(NotificationType.Failed, 'حدث خطأ اثناء عملية التسجيل')
+    //     return;
+    //   }
+    //   pushNotification(NotificationType.Success, 'تم التسجيل بنجاح')
+    //   clearFields();
+    //   setLayout(ILogin.LAYOUT.LOGIN);
+    //   // user.set({ ...response.data._doc, token: response.data.token });
+    // }

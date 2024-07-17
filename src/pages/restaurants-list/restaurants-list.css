@@ -7,7 +7,7 @@
   margin-top: 20px;
 }
 
-.restaurants-list-page > .content {
+.restaurants-list-page>.content {
   display: flex;
   width: 80%;
   justify-content: space-around;

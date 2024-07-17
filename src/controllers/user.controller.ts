@@ -24,7 +24,7 @@ const createNewUser = async (user: IUser.UserData) => {
 
 const isEmailAvailable = async (email: string) => {
   try {
-    const response = await axios.get(`http://localhost:8000/user/email/${email}`);
+    const response = await axios.get(`http://localhost:8000/user/reserve-email/${email}`);
     if (response.status == 200) return true;
     else return false;
   } catch {
@@ -34,6 +34,11 @@ const isEmailAvailable = async (email: string) => {
 
 const getUser = async (userId: string) => {
   const response = await axios.get(`http://localhost:8000/user/${userId}`);
+  return response;
+}
+
+const getUserByEmail = async (email: string) => {
+  const response = await axios.get(`http://localhost:8000/user/email/${email}`);
   return response;
 }
 
@@ -58,4 +63,4 @@ const updateUser = async (userId: string, userData: IUser.UserData) => {
 }
 
 
-export default { authUser, createNewUser, isEmailAvailable, getUser, getAllUsers, deleteUser, deleteOwnedAccount, updateUser };
+export default { authUser, createNewUser, isEmailAvailable, getUser, getUserByEmail, getAllUsers, deleteUser, deleteOwnedAccount, updateUser };

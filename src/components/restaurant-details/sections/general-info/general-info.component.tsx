@@ -15,7 +15,11 @@ const GeneralInfoSection = ({ restaurant }: IProps) => {
     <div className="location">
       <p className='title'>الموقع</p>
       <div className='content'>
+<<<<<<< HEAD
         <Map location={restaurant.value.location} clickable={false} gps={undefined} prev={undefined}></Map>
+=======
+        <Map location={restaurant.value.location} gps={() => { }} clickable={false} prev={restaurant.value.location}></Map>
+>>>>>>> development
       </div>
     </div>
 

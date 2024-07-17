@@ -1,4 +1,4 @@
-import { faChair, faParking, faSatellite, faStarHalfStroke, faVanShuttle, faWifi } from "@fortawesome/free-solid-svg-icons";
+import { faChair, faParking, faPizzaSlice, faSatellite, faStarHalfStroke, faTruck, faUtensils, faVanShuttle, faWheelchair, faWifi } from "@fortawesome/free-solid-svg-icons";
 import { ReactImageGalleryItem } from "react-image-gallery";
 
 export namespace IRestaurant {
@@ -22,12 +22,12 @@ export namespace IRestaurant {
   }
 
   export enum Cuisine {
-    SEA_FOOD,
-    FAST_FOOD,
+    TRADITIONAL,
     HEALTHY,
+    SEA_FOOD,
     CHINESE,
-    ITALIAN,
     JAPANESE,
+    ITALIAN,
   }
   export enum SortedBy {
     MOST_SERVICES,
@@ -54,23 +54,23 @@ export namespace IRestaurant {
 
 
   export const CuisineInfo = {
-    [Cuisine.FAST_FOOD]: {
-      name: "وجبات سريعة",
+    [Cuisine.TRADITIONAL]: {
+      name: "شعبي",
     },
     [Cuisine.HEALTHY]: {
-      name: "مأكولات صحية",
+      name: "صحي",
     },
-    [Cuisine.ITALIAN]: {
-      name: "ايطالي",
+    [Cuisine.SEA_FOOD]: {
+      name: "بحري",
+    },
+    [Cuisine.CHINESE]: {
+      name: "صيني",
     },
     [Cuisine.JAPANESE]: {
       name: "ياباني",
     },
-    [Cuisine.SEA_FOOD]: {
-      name: "مأكولات بحرية",
-    },
-    [Cuisine.CHINESE]: {
-      name: "صيني",
+    [Cuisine.ITALIAN]: {
+      name: "ايطالي",
     },
   };
 
@@ -86,19 +86,19 @@ export namespace IRestaurant {
     },
     [Service.OUTSIDE_SEATS]: {
       name: 'مقاعد خارجية',
-      icon: faSatellite,
+      icon: faChair,
     },
     [Service.DELIVERY]: {
       name: 'خدمة التوصيل',
-      icon: faVanShuttle,
+      icon: faTruck,
     },
     [Service.BUFFET]: {
       name: 'بوفيه',
-      icon: faStarHalfStroke,
+      icon: faUtensils,
     },
     [Service.SUITABLE_FOR_SPECIAL_NEEDS]: {
       name: 'مناسب لذوي الاحتياجات الخاصة',
-      icon: faChair,
+      icon: faWheelchair,
     },
   };
 
@@ -157,7 +157,11 @@ export namespace IRestaurant {
     name: string;
     description: string;
     ingredients: (string | null)[];
+<<<<<<< HEAD
     RestaurantID: string;
+=======
+    restaurantId: string;
+>>>>>>> development
     images: string[];
     price: number;
     calories: number;
@@ -192,7 +196,7 @@ export namespace IRestaurant {
     updatedAt?: Date;
   }
   export interface RestaurantData {
-    _id: string;
+    _id?: string;
     name: string;
     description: string;
     address: string;
@@ -200,7 +204,9 @@ export namespace IRestaurant {
     phoneNumber: string;
     images: string[];
     cuisine: Cuisine;
+    companies?: IRestaurant.Company[];
     services: Service[];
+    city?: City,
     reviews?: Review[];
     menuItems?: MenuItem[],
     ownerId: String;

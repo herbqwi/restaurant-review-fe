@@ -15,6 +15,7 @@ const ReviewForm = ({ restaurantId, fetchReviews }: IProps) => {
 
   const { content, positive, negative, company, isDetailed, starsReview, handleSubmit } = useReview(restaurantId);
 
+<<<<<<< HEAD
   return <form onSubmit={async (e: any) => {
     await handleSubmit(e);
     await fetchReviews();
@@ -31,6 +32,19 @@ const ReviewForm = ({ restaurantId, fetchReviews }: IProps) => {
       <div>
         <FontAwesomeIcon icon={faFaceGrin}></FontAwesomeIcon>
         <input value={positive.value} onChange={(e) => positive.set(e.target.value)} type="text" placeholder='ماذا أحببت؟' />
+=======
+  return <>
+    {user.value && <form onSubmit={async (e: any) => {
+      await handleSubmit(e);
+      await fetchReviews();
+    }} className={`review-form details${isDetailed.value ? ` detailed` : ''}`}>
+      <div className="review-general-input">
+        <StarsInput controller={starsReview}></StarsInput>
+        <select required value={company.value} onChange={(e) => { company.set(e.target.value as unknown as IRestaurant.Company) }} name="company" id="review-company">
+          {Object.keys(IRestaurant.CompanyInfo).map(company => <option value={company}>{IRestaurant.CompanyInfo[company as unknown as IRestaurant.Company]}</option>)}
+        </select>
+        <Button className='submit-comment' type="submit">إضافة تعليق</Button>
+>>>>>>> development
       </div>
       <div>
         <FontAwesomeIcon icon={faFaceAngry}></FontAwesomeIcon>

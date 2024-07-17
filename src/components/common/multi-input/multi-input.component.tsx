@@ -6,7 +6,7 @@ interface IProps {
 }
 
 const MultiInput = ({ elements, className }: IProps) => {
-  return <div className={`input-container${className? ` ${className}` : ``}`}>
+  return <div className={`input-container${className? ` ${className}` : ''}`}>
     {elements.map(
       element => element
     )}

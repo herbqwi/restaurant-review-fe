@@ -5,7 +5,16 @@ import { Tag } from 'antd';
 import { IUser } from "../../../interfaces/user.interface";
 import { formatDate } from "../../../services/general.utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+<<<<<<< HEAD
 import { faAngleDoubleDown, faAngleDoubleUp, faUserXmark } from "@fortawesome/free-solid-svg-icons";
+=======
+import { faEraser, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { IModal, ModalContext, ModalType } from "../../../contexts/modal.context";
+import ConfirmDeleteRestaurantModal from "../../../components/modal/confirm-delete-comment/confirm-delete-restaurant";
+import { UserContext } from "../../../contexts/user.context";
+import { IUser } from "../../../interfaces/user.interface";
+import { AxiosResponse } from "axios";
+>>>>>>> development
 
 interface DataType {
   key: string,
@@ -22,20 +31,65 @@ interface IProps {
   deleteReports: any,
 }
 
+<<<<<<< HEAD
 const useReportsTable = ({ selectedReports, reports, deleteReports }: IProps) => {
+=======
+const useReportsTable = ({ reports }: IProps) => {
+  const { setModalProps } = useContext(ModalContext);
+  const { user } = useContext(UserContext);
+
+  const confirmReport = (reportId: string) => {
+    const modalProps: IModal = {
+      header: {
+        title: `تأكيد الأمر`,
+      },
+      modalType: ModalType.CONFIRM,
+      body: <ConfirmDeleteRestaurantModal />,
+      submit: async () => {
+        const response = await reportController.confirmReport(reportId)
+        if (response.status != 200)
+          return;
+        let newReports = reports.value.filter(report => report._id != reportId);
+        reports.set(newReports);
+      }
+    }
+    setModalProps(modalProps)
+  }
+>>>>>>> development
+
+  const deleteReport = async (reportId: string) => {
+    await reportController.deleteReport(reportId)
+    const filteredReports = reports.value.filter(report => report._id != reportId);
+    reports.set(filteredReports);
+  }
 
   useEffect(() => {
+<<<<<<< HEAD
     userController.getAllUsers().then(res => {
+=======
+    reportController.getAllReports().then((res: AxiosResponse<IReport.ReportData[]>) => {
+>>>>>>> development
       if (res.status != 200) {
         // Error message
         return;
       }
+<<<<<<< HEAD
       // users.set(res.data);
+=======
+      if (user.value?.role == IUser.Role.ADMIN) {
+        reports.set(res.data);
+      } else {
+        const filteredReports = res.data.filter(report => report.userId == user.value?._id)
+        console.log(`filteredReports: `, filteredReports);
+        reports.set(filteredReports)
+      }
+>>>>>>> development
     })
   }, [])
 
   const columns: ColumnsType<DataType> = [
     {
+<<<<<<< HEAD
       title: 'الصورة',
       dataIndex: 'image',
       key: 'image',
@@ -51,6 +105,12 @@ const useReportsTable = ({ selectedReports, reports, deleteReports }: IProps) =>
           </clipPath>
         </defs>
       </svg>
+=======
+      title: 'المحتوى',
+      dataIndex: 'content',
+      key: 'content',
+      render: (text) => <p>{text}</p>,
+>>>>>>> development
     },
     {
       title: 'اسم المستخدم',
@@ -80,10 +140,21 @@ const useReportsTable = ({ selectedReports, reports, deleteReports }: IProps) =>
       title: 'عملية',
       dataIndex: 'action',
       key: 'action',
+<<<<<<< HEAD
       render: (user) => <div className="actions">
         {/* <FontAwesomeIcon onClick={() => { updateUserRole(user) }} className="clickable" icon={user.role == IUser.Role.DEFAULT ? faAngleDoubleUp : faAngleDoubleDown} /> */}
         {/* <FontAwesomeIcon onClick={() => { deleteUsers([user._id]) }} className="clickable" icon={faUserXmark} /> */}
       </div>,
+=======
+      render: (report: IReport.ReportData) => <>
+        {user.value?.role == IUser.Role.ADMIN ? <div className="actions">
+          <FontAwesomeIcon onClick={() => { confirmReport(report._id as string) }} className="clickable" icon={faEraser} />
+          <FontAwesomeIcon onClick={() => { reportController.deleteReport(report._id as string) }} className="clickable" icon={faTrash} />
+        </div> : <div className="actions">
+          <FontAwesomeIcon onClick={() => { deleteReport(report._id as string) }} className="clickable" icon={faTrash} />
+        </div>}
+      </>,
+>>>>>>> development
     },
   ];
 

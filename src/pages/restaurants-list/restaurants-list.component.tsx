@@ -7,7 +7,7 @@ interface IProps {
 }
 
 const RestaurantsListPage = ({ className }: IProps) => {
-  return <div className={`restaurants-list-page${className ? ` ${className}` : ``}`}>
+  return <div className={`restaurants-list-page${className ? ` ${className}` : ''}`}>
     <div className="content">
       <FilterBy />
       <Sort />

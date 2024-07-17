@@ -33,13 +33,13 @@ interface IProps {
 const RegisterLayout = ({ credentials, functions, className }: IProps) => {
   const { email, password, confirmPassword, googleToken } = credentials;
   const isVerified = googleToken.value != null;
-  return <div className={`form-contents${className ? ` ${className}` : ``}`}>
+  return <div className={`form-contents${className ? ` ${className}` : ''}`}>
     <h1>التسجيل</h1>
     <h2>أدخل البيانات المطلوبة لإنشاء حساب</h2>
     <div className='content'>
       <div className='verify-container'>
         <Input style={{ textAlign: 'right', direction: 'ltr' }} disabled={false} required={true} onChange={(e: any) => { email.set(e.target.value); googleToken.set(null) }} value={email.value} label='البريد الالكتروني' placeholder='mohammad@example.com'></Input>
-        <button type="button" onClick={functions.googleVerification} disabled={isVerified} className={`verify-button${isVerified ? ` verified` : ``}`}>
+        <button type="button" onClick={functions.googleVerification} disabled={isVerified} className={`verify-button${isVerified ? ` verified` : ''}`}>
           <DoubleIcon defaultIcon={faGoogle} activeIcon={faCheck} active={isVerified}></DoubleIcon>
           التحقق
         </button>

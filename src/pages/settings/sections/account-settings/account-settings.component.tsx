@@ -1,4 +1,5 @@
 import './account-settings.css'
+import { useContext } from 'react';
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ShowTimer from '../../../../components/base/show-timer/show-timer.component';
@@ -9,10 +10,35 @@ import useAccountSettings from '../../../../hooks/pages/settings/account-setting
 import { IRestaurant } from '../../../../interfaces/restaurant.interface';
 import Select from '../../../../components/common/select/select.component';
 import ImageEditor from '../../../../components/settings/image-editor/image-editor.component';
+import { IModal, ModalContext, ModalType } from '../../../../contexts/modal.context';
+import { NotificationContext } from '../../../../components/base/notification/notification-container/notification-container.component';
+import { NotificationType } from '../../../../components/base/notification/notification-body/notification-body.component';
+import ConfirmDeleteAccountModal from '../../../../components/modal/confirm-delete-account/confirm-delete-account.component';
 
 const AccountSettingsSection = () => {
 
   const { firstName, lastName, email, oldPassword, newPassword, city, image, handleSubmit, deleteAccount } = useAccountSettings()
+  const { setModalProps } = useContext(ModalContext);
+  const { pushNotification } = useContext(NotificationContext);
+
+  const confirmDelete = () => {
+    const modalProps: IModal = {
+      header: {
+        title: `تأكيد الأمر`,
+      },
+      modalType: ModalType.CONFIRM,
+      body: <ConfirmDeleteAccountModal />,
+      submit: async () => {
+        const response = await deleteAccount();
+        if (response.status != 200) {
+          pushNotification(NotificationType.Failed, 'حدث خطأ اثناء حذف الحساب')
+          return;
+        }
+        pushNotification(NotificationType.Success, 'تم حذف حسابك بنجاح')
+      }
+    }
+    setModalProps(modalProps)
+  }
 
 
   return <section className="contents account-settings">
@@ -43,7 +69,7 @@ const AccountSettingsSection = () => {
         <Input placeholder="********" type='password' controller={newPassword} label='كلمة المرور الجديدة'></Input>
       </div>
     </ContentContainer>
-    <ShowTimer timeout={50 + (50 * 2)}><Button onClick={deleteAccount}>حذف الحساب</Button></ShowTimer>
+    <ShowTimer timeout={50 + (50 * 2)}><Button className="delete-button" onClick={confirmDelete}>حذف الحساب</Button></ShowTimer>
   </section>
 }
 

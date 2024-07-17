@@ -8,7 +8,20 @@
   text-align: center !important;
 }
 
+<<<<<<< HEAD
 .users-table .ant-table-cell {
+=======
+.reports-table td p {
+  max-width: 400px;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.reports-table .ant-table-cell {
+>>>>>>> development
   padding: 10px !important;
 }
 

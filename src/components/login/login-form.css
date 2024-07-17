@@ -52,6 +52,18 @@
   transition: .3s all;
 }
 
+.login-form .n500 {
+  transform: translateX(-500%);
+}
+
+.login-form .n400 {
+  transform: translateX(-400%);
+}
+
+.login-form .n300 {
+  transform: translateX(-300%);
+}
+
 .login-form .n200 {
   transform: translateX(-200%);
 }
@@ -70,6 +82,18 @@
 
 .login-form .p200 {
   transform: translateX(200%);
+}
+
+.login-form .p300 {
+  transform: translateX(300%);
+}
+
+.login-form .p400 {
+  transform: translateX(400%);
+}
+
+.login-form .p500 {
+  transform: translateX(500%);
 }
 
 .login-form h1,

@@ -11,6 +11,7 @@ interface IProps {
   className?: string,
 }
 
+<<<<<<< HEAD
 const ReportsTable = ({ selectedUsers, reports, deleteUsers, className }: IProps) => {
   // const { columns, data, rowSelection } = useReports({ selectedUsers, reports, deleteUsers });
   // return (
@@ -22,6 +23,18 @@ const ReportsTable = ({ selectedUsers, reports, deleteUsers, className }: IProps
   //     pagination={{ position: [`bottomCenter`] }}
   //   />
   // );
+=======
+const ReportsTable = ({ reports, className }: IProps) => {
+  const { columns, data } = useReportsTable({ reports });
+  return (
+    <Table
+      className={`reports-table${className ? ` ${className}` : ''}`}
+      columns={columns}
+      dataSource={data}
+      pagination={{ position: [`bottomCenter`] }}
+    />
+  );
+>>>>>>> development
 }
 
 export default ReportsTable;

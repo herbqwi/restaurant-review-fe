@@ -1,7 +1,8 @@
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import './rating-card.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { IRestaurant } from '../../../../../interfaces/restaurant.interface';
+import { IRestaurant } from '../../../../../../interfaces/restaurant.interface';
+import StarsRating from '../../../../../common/stars-rating/stars-rating.component';
 
 interface IProps {
   emoji: string,
@@ -12,7 +13,7 @@ interface IProps {
   starRating: number,
 }
 
-const RatingCard = ({ emoji: emoji, customerName, restaurantName, company, description, starRating }: IProps) => {
+const RatingCard = ({ emoji, customerName, restaurantName, company, description, starRating }: IProps) => {
   return <div className="rating-card-container">
     <div className="rating-card">
       <div className="header">
@@ -29,13 +30,7 @@ const RatingCard = ({ emoji: emoji, customerName, restaurantName, company, descr
       </div>
 
       <div className="footer">
-        <div className='stars-list'>
-          <FontAwesomeIcon icon={faStar} fontSize={23} color="orange" />
-          <FontAwesomeIcon icon={faStar} fontSize={23} color="orange" />
-          <FontAwesomeIcon icon={faStar} fontSize={23} color="orange" />
-          <FontAwesomeIcon icon={faStar} fontSize={23} color="orange" />
-          <FontAwesomeIcon icon={faStar} fontSize={23} color="orange" />
-        </div>
+        <StarsRating rating={starRating}></StarsRating>
       </div>
     </div>
   </div>

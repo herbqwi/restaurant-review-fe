@@ -1,15 +1,20 @@
 import { useContext } from "react"
 import { UserContext } from "../../../contexts/user.context"
-import { Navigate, NavigateFunction } from "react-router";
+import { Navigate } from "react-router";
 
 
 interface IProps {
-  children: any,
+  element: React.ReactElement,
+  active?: boolean
 }
 
-const ProtectedRoute = ({ children }: IProps) => {
+const ProtectedRoute = (props: IProps) => {
   const { user } = useContext(UserContext);
-  return user.value ? children : <Navigate to="/login" replace />
+  return (
+    (user.value || !props.active)
+      ? props.element
+      : <Navigate to="/login" replace />
+  )
 }
 
 export default ProtectedRoute;

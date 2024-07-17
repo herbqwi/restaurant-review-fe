@@ -1,4 +1,7 @@
 .sections-nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   position: relative;
   border: 1px solid var(--outer-border);
   padding: 15px;
@@ -25,8 +28,35 @@
   height: 152px;
 }
 
+.sections-nav.very .secondary-menu .scrollable {
+  height: 200px;
+}
+
 .sections-nav .nav {
   transition: .2s all;
+}
+
+.sections-nav {
+  height: 205px;
+  transition: .2s all;
+}
+
+.sections-nav.owner {
+  height: 255px;
+  transition: .2s all;
+}
+
+.sections-nav.admin {
+  height: 305px;
+  transition: .2s all;
+}
+
+.sections-nav.extended {
+  height: 305px;
+}
+
+.sections-nav.extended.very {
+  height: 355px;
 }
 
 .sections-nav.extended .nav {
@@ -56,7 +86,6 @@
 
 .sections-nav hr {
   border-top: 1px solid var(--outer-border);
-  margin-top: 40px;
   width: 100%;
 }
 

@@ -10,7 +10,7 @@ interface IProps {
 }
 
 const DoubleIcon = ({ defaultIcon, activeIcon, active }: IProps) => {
-  return <div className={`icon-container ${active? `active` : ``}`}>
+  return <div className={`icon-container ${active? `active` : ''}`}>
     <FontAwesomeIcon className='tempelate' icon={defaultIcon}></FontAwesomeIcon>
     <FontAwesomeIcon className="selected" icon={defaultIcon}></FontAwesomeIcon>
     <FontAwesomeIcon icon={activeIcon}></FontAwesomeIcon>

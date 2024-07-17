@@ -5,7 +5,7 @@ import { Tag } from 'antd';
 import { IUser } from "../../../interfaces/user.interface";
 import { formatDate } from "../../../services/general.utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleDoubleDown, faAngleDoubleUp, faUserXmark } from "@fortawesome/free-solid-svg-icons";
+import { faAngleDoubleDown, faAngleDoubleUp, faMinus, faUserXmark } from "@fortawesome/free-solid-svg-icons";
 
 interface DataType {
   key: string,
@@ -48,7 +48,7 @@ const useUsersTable = ({ selectedUsers, users, deleteUsers }: IProps) => {
       title: 'الصورة',
       dataIndex: 'image',
       key: 'image',
-      render: (base64) => base64 != `` ? <img className="user-img" src={base64} /> : <svg className="user-img" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 512 512" fill="none">
+      render: (base64) => base64 != '' ? <img className="user-img" src={base64} /> : <svg className="user-img" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 512 512" fill="none">
         <g clip-path="url(#clip0_1765_7055)">
           <path d="M0 0H512V512H0V0Z" fill="#222D3A" />
           <path d="M330.085 110.955C311.299 90.672 285.059 79.5024 256.097 79.5024C226.981 79.5024 200.655 90.6044 181.955 110.762C163.053 131.141 153.843 158.838 156.005 188.746C160.292 247.751 205.192 295.75 256.097 295.75C307.003 295.75 351.826 247.76 356.18 188.765C358.371 159.128 349.103 131.489 330.085 110.955Z" fill="#B3BAC0" />
@@ -89,10 +89,12 @@ const useUsersTable = ({ selectedUsers, users, deleteUsers }: IProps) => {
       title: 'عملية',
       dataIndex: 'action',
       key: 'action',
-      render: (user) => <div className="actions">
+      render: (user: IUser.UserData) => <>{user.role != IUser.Role.ADMIN ? <div className="actions">
         <FontAwesomeIcon onClick={() => { updateUserRole(user) }} className="clickable" icon={user.role == IUser.Role.DEFAULT ? faAngleDoubleUp : faAngleDoubleDown} />
         <FontAwesomeIcon onClick={() => { deleteUsers([user._id]) }} className="clickable" icon={faUserXmark} />
-      </div>,
+      </div> : <>
+        <FontAwesomeIcon icon={faMinus} />
+      </>}</>,
     },
   ];
 

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .uploaded-image {
     width: 100px;
     height: 90px;
@@ -48,4 +49,61 @@
 .file-upload-label:hover{
     transform: translateY(-5px);
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+=======
+.uploaded-images {
+  display: flex;
+
+}
+
+.uploaded-images .img-master {
+  width: 77px;
+  height: 77px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgb(182, 182, 182);
+  border-radius: 5px;
+  transition: .3s all;
+  cursor: pointer;
+}
+
+.uploaded-images .file-upload-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 77px;
+  height: 77px;
+  border: 1px dashed rgb(182, 182, 182);
+  border-radius: 5px;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.uploaded-images:has(.img-master) .file-upload-label {
+  margin-right: 10px;
+}
+
+.uploaded-images .file-upload-label .svg-inline--fa {
+  transition: .3s all;
+}
+
+.uploaded-images .file-upload-label:hover .svg-inline--fa {
+  scale: 1.1;
+}
+
+.uploaded-images .img-master:hover {
+  transform: translateY(-2px);
+  filter: grayscale(.5)
+}
+
+.uploaded-images .img-master:not(:first-child) {
+  margin-right: 10px;
+}
+
+.uploaded-images .img-master img {
+  width: 75px;
+  height: 75px;
+  object-fit: cover;
+  border-radius: 5px;
+>>>>>>> development
 }

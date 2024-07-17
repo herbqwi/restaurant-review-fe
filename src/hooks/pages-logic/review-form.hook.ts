@@ -9,9 +9,9 @@ export const useReview = (restaurantId: string) => {
 
   const { user } = useContext(UserContext);
 
-  const [content, setContent] = useState(``);
-  const [positive, setPositive] = useState(``);
-  const [negative, setNegative] = useState(``);
+  const [content, setContent] = useState('');
+  const [positive, setPositive] = useState('');
+  const [negative, setNegative] = useState('');
   const [company, setCompany] = useState(IRestaurant.Company.FAMILY);
   const [isDetailed, toggleDetailed] = useToggle(false);
   const [starsReview, setStarsReview] = useState<number>(0);

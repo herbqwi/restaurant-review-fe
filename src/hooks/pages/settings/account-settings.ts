@@ -59,9 +59,8 @@ const useAccountSettings = () => {
   }
 
   const deleteAccount = async () => {
-    await userController.deleteOwnedAccount();
-    pushNotification(NotificationType.Success, 'تم حذف حسابك بنجاح')
     user.set(null);
+    return await userController.deleteOwnedAccount();
   }
 
   return {
